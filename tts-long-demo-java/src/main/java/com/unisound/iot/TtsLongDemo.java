@@ -17,10 +17,9 @@ public class TtsLongDemo {
     private static String userId = "unisound-long-text-demo";
 
     //your appkye
-    static String appkey = "*********************";
+    static String appkey = "jyve65pax7cnb4srrb2e7zq3ccstb6gphxgcwmqd";
     //your secret
-    static String secret = "*********************";
-
+    static String secret = "7409a837341262bdeac90ab35907d9c9";
 
     private static String format = "wav";
     private static String vcn = "kiyo-base";
