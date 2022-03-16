@@ -15,7 +15,6 @@ import java.util.Map;
 public class SystemUtils {
 	/**
 	 * 获取本机的IP地址
-	 *
 	 * @return
 	 */
 	public static String getLocalIp() {

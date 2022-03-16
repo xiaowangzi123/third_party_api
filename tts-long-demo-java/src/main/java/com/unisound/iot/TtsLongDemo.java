@@ -6,6 +6,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -26,7 +27,12 @@ public class TtsLongDemo {
     private static String vcn = "kiyo-base";
 
     public static void main(String[] args) throws IOException {
-        String text = FileUtils.readFileToString(new File("text/unisound.txt"), "utf-8");
+        String fileName = System.getProperty("user.dir");
+        System.out.println(fileName);
+        URL url = TtsLongDemo.class.getClassLoader().getResource("text/unisound.txt");
+
+        File file = new File("text/unisound.txt");
+        String text = FileUtils.readFileToString(file, "utf-8");
         testTTS(text);
     }
 
@@ -53,7 +59,7 @@ public class TtsLongDemo {
             //下载语音
             String audio_address = jo.getString("audio_address");
             byte[] bytes = SystemUtils.httpGet(audio_address, null, true);
-            FileUtils.writeByteArrayToFile(new File("audio/unisound.wav"),bytes);
+            FileUtils.writeByteArrayToFile(new File("audio/unisound.wav"), bytes);
             System.out.println("download audio success");
         } catch (IOException e) {
             e.printStackTrace();
