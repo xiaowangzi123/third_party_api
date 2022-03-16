@@ -21,13 +21,12 @@ public class TtsLongDemo {
     //your secret
     static String secret = "7409a837341262bdeac90ab35907d9c9";
 
+
     private static String format = "wav";
     private static String vcn = "kiyo-base";
 
     public static void main(String[] args) throws IOException {
-        String text = FileUtils.readFileToString(new File("classpath:text/unisound2.txt"), "utf-8");
-//        ClassPathResource classPathResource = new ClassPathResource("text/unisound2.txt");
-//        InputStream inputStream = classPathResource.getInputStream();
+        String text = FileUtils.readFileToString(new File("text/unisound.txt"), "utf-8");
         testTTS(text);
     }
 
@@ -54,11 +53,12 @@ public class TtsLongDemo {
             //下载语音
             String audio_address = jo.getString("audio_address");
             byte[] bytes = SystemUtils.httpGet(audio_address, null, true);
-            FileUtils.writeByteArrayToFile(new File("audio/unisound.wav"), bytes);
+            FileUtils.writeByteArrayToFile(new File("audio/unisound.wav"),bytes);
             System.out.println("download audio success");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return 1;
     }
 

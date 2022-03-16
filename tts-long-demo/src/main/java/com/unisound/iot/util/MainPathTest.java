@@ -1,4 +1,4 @@
-package com.unisound.iot;
+package com.unisound.iot.util;
 
 import java.net.URL;
 
@@ -10,7 +10,7 @@ import java.net.URL;
 public class MainPathTest {
     public static void main(String[] args) {
         MainPathTest obj = new MainPathTest();
-        URL fileURL = obj.getClass().getResource("classpath: text/unisound2.txt");
+        URL fileURL = obj.getClass().getResource("unisound2.txt");
         System.out.println("获取的地址为：" + fileURL.getFile());
 
     }
