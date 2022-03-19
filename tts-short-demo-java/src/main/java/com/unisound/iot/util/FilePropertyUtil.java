@@ -1,6 +1,6 @@
 package com.unisound.iot.util;
 
-
+import ws.schild.jave.EncoderException;
 import ws.schild.jave.MultimediaObject;
 import ws.schild.jave.info.MultimediaInfo;
 
@@ -23,32 +23,12 @@ public class FilePropertyUtil {
      *
      * @param file 音视频文件
      * @return 音视频时长（单位：秒）
-     * @throws EncoderException
      */
     public static String readVideoTime(File file) throws EncoderException {
-        Encoder encoder = new Encoder();
-
-        MultimediaInfo m = encoder.getInfo(file);
-        double time = new Long(m.getDuration()).doubleValue() / 1000;
+        MultimediaObject object = new MultimediaObject(file);
+        MultimediaInfo info = object.getInfo();
+        long time = info.getDuration() / 1000;
         return String.valueOf(time);
-    }
-
-    private static File getRemoteFile(String path) throws Exception {
-        URL url = new URL(path);
-        //链接url
-        URLConnection uc = url.openConnection();
-        InputStream in = uc.getInputStream();
-        String suffix = path.substring(path.lastIndexOf(".") + 1);
-        String prefix = "." + suffix;
-        File file = File.createTempFile(UUID.randomUUID().toString(), prefix);
-        OutputStream os = new FileOutputStream(file);
-        byte[] b = new byte[1024];
-        int readTmp;
-        while ((readTmp = in.read(b)) != -1) {
-            os.write(b, 0, readTmp);
-            os.flush();
-        }
-        return file;
     }
 
     /**
@@ -85,6 +65,27 @@ public class FilePropertyUtil {
         }
         return length;
     }
+
+
+    private static File getRemoteFile(String path) throws Exception {
+        URL url = new URL(path);
+        //链接url
+        URLConnection uc = url.openConnection();
+        InputStream in = uc.getInputStream();
+        String suffix = path.substring(path.lastIndexOf(".") + 1);
+        String prefix = "." + suffix;
+        File file = File.createTempFile(UUID.randomUUID().toString(), prefix);
+        OutputStream os = new FileOutputStream(file);
+        byte[] b = new byte[1024];
+        int readTmp;
+        while ((readTmp = in.read(b)) != -1) {
+            os.write(b, 0, readTmp);
+            os.flush();
+        }
+        return file;
+    }
+
+
 
     /**
      * 视频大小
