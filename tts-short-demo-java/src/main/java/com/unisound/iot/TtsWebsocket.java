@@ -16,9 +16,8 @@ import java.net.URI;
 public class TtsWebsocket {
 
     static String host = "wss://ws-stts.hivoice.cn/v1/tts?";
-
-    static String appkey = "******************";
-    static String secret = "******************";
+    static String appkey = "45gn7md5n44aak7a57rdjud3b5l4xdgv75saomys";
+    static String secret = "ba24a917a38e11e49c6fb82a72e0d896";
 
     public static void main(String[] args) throws Exception {
         String fileName = System.currentTimeMillis()+".mp3";
