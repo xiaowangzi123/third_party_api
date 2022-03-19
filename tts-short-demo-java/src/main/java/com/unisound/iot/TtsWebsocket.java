@@ -32,7 +32,7 @@ public class TtsWebsocket {
         param.append("appkey=").append(appkey).append("&")
                 .append("time=").append(time).append("&")
                 .append("sign=").append(sign);
-        String str = host + param.toString();
+        String str = host + param;
         System.out.println(str);
         URI uri = new URI(str);
 
