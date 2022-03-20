@@ -34,7 +34,7 @@ public enum VoiceEnum {
 
     public static String getVCN(int index) {
         for (VoiceEnum voice : VoiceEnum.values()) {
-            if (index == voice.getIndex()){
+            if (index == voice.getIndex()) {
                 return voice.vcn;
             }
         }
