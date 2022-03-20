@@ -14,6 +14,8 @@ public class VoiceEnumTest {
     
     @Test
     public void test1(){
-        System.out.println(VoiceEnum.getVCN(2));
+        System.out.println(VoiceEnum.getVCN(3));
+        
+        System.out.println(VoiceEnum.getDesc(3));
     }
 }

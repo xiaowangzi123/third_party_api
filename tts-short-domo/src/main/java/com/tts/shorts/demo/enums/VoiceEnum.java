@@ -38,7 +38,15 @@ public enum VoiceEnum {
                 return voice.vcn;
             }
         }
+        return null;
+    }
 
+    public static String getDesc(int index) {
+        for (VoiceEnum voice : VoiceEnum.values()) {
+            if (index == voice.getIndex()) {
+                return voice.desc;
+            }
+        }
         return null;
     }
 
