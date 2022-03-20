@@ -1,13 +1,21 @@
 package com.tts.shorts.demo.controller;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * @author :wyq
  * @date ：Created in 2022/3/17
  * @description :
  */
+@RestController
+@RequestMapping("/tts/short")
 public class TtsShortController {
-    public static void main(String[] args) {
-        String s1 = "https://www.aouj.joeklj.joj.aee.mp4";
-        System.out.println(s1.substring(s1.lastIndexOf(".")+1));
+
+    @PostMapping("/001")
+    public void test001(){
+
     }
+
 }
