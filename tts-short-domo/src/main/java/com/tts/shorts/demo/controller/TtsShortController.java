@@ -1,8 +1,13 @@
 package com.tts.shorts.demo.controller;
 
+import com.tts.shorts.demo.service.TtsWebsocketService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URISyntaxException;
 
 /**
  * @author :wyq
@@ -13,9 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/tts/short")
 public class TtsShortController {
 
-    @PostMapping("/001")
-    public void test001(){
+    @Autowired
+    private TtsWebsocketService ttsWebsocketService;
 
+    @GetMapping("/001")
+    public void test001() throws Exception {
+        ttsWebsocketService.ttsWebsocket();
     }
 
 }
