@@ -12,12 +12,10 @@ public class TtsClientEndpoint {
     private String fileName;
     private String text;
     private long start;
-
-    public TtsClientEndpoint(String fileName, String text) {
+    public TtsClientEndpoint(String fileName,String text){
         this.fileName = fileName;
         this.text = text;
     }
-
     @OnOpen
     public void onOpen(Session session) {
         start = System.currentTimeMillis();
@@ -47,12 +45,11 @@ public class TtsClientEndpoint {
     @OnMessage
     public void onMessgae(Session session, byte[] data) throws IOException {
 
-        System.out.println("====binary=====响应时间：" + (System.currentTimeMillis() - start) + ";返回字节大小=" + data.length);
+        System.out.println("====binary=====响应时间："+(System.currentTimeMillis() - start)+";返回字节大小=" +data.length);
         start = System.currentTimeMillis();
         File file = new File(fileName);
-        FileUtils.writeByteArrayToFile(file, data, true);
+        FileUtils.writeByteArrayToFile(file,data,true);
     }
-
     @OnMessage
     public void processMessage(Session session, String data) {
         System.out.println("=========" + data);
@@ -62,7 +59,6 @@ public class TtsClientEndpoint {
     public void processError(Throwable t) {
         t.printStackTrace();
     }
-
     @OnClose
     public void onClose(Session session) {
         System.out.println("->连接关闭");

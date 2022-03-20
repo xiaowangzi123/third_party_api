@@ -16,6 +16,7 @@ import java.net.URI;
 public class TtsWebsocket {
 
     static String host = "wss://ws-stts.hivoice.cn/v1/tts?";
+
     static String appkey = "45gn7md5n44aak7a57rdjud3b5l4xdgv75saomys";
     static String secret = "ba24a917a38e11e49c6fb82a72e0d896";
 
@@ -32,7 +33,7 @@ public class TtsWebsocket {
         param.append("appkey=").append(appkey).append("&")
                 .append("time=").append(time).append("&")
                 .append("sign=").append(sign);
-        String str = host + param;
+        String str = host + param.toString();
         System.out.println(str);
         URI uri = new URI(str);
 
