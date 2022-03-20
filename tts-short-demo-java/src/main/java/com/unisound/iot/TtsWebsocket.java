@@ -21,8 +21,12 @@ public class TtsWebsocket {
     static String secret = "ba24a917a38e11e49c6fb82a72e0d896";
 
     public static void main(String[] args) throws Exception {
-        String fileName = System.currentTimeMillis()+".mp3";
-        String text = "云知声专注于物联网人工智能服务，拥有完全自主知识产权，是世界领先的智能语音识别AI技术企业之一。公司成立于2012年6月29日，总部位于北京，在上海、深圳、厦门、合肥均设有分公司。";
+        String fileName = System.currentTimeMillis() + ".mp3";
+
+        String text = "刘先生，你好，你好你好，有什么事情我能帮到你。";
+//        String text = "我要说的是，你千万别害怕";
+//        String text = "刘先生，你好，你好你好，有什么事情我能帮到你。";
+//        String text = "刘先生，你好，你好你好，有什么事情我能帮到你。";
 
         long time = System.currentTimeMillis();
         StringBuilder paramBuilder = new StringBuilder();

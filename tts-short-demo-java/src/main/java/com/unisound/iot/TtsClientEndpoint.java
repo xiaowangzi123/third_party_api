@@ -52,7 +52,7 @@ public class TtsClientEndpoint {
     }
     @OnMessage
     public void processMessage(Session session, String data) {
-        System.out.println("=========" + data);
+        System.out.println("返回信息-->" + data);
     }
 
     @OnError
