@@ -1,4 +1,4 @@
-package com.tts.shorts.demo;
+package com.tts.shorts.demo.controller;
 
 /**
  * @author :wyq
