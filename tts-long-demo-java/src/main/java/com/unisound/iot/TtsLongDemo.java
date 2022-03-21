@@ -6,7 +6,6 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -17,21 +16,16 @@ public class TtsLongDemo {
     private static String host = "http://ltts.hivoice.cn";
     private static String userId = "unisound-long-text-demo";
 
-    //your appkye
-    static String appkey = "jyve65pax7cnb4srrb2e7zq3ccstb6gphxgcwmqd";
-    //your secret
-    static String secret = "7409a837341262bdeac90ab35907d9c9";
+    static String appkey = "45gn7md5n44aak7a57rdjud3b5l4xdgv75saomys";
+    static String secret = "ba24a917a38e11e49c6fb82a72e0d896";
 
 
-    private static String format = "wav";
+    //    private static String format = "wav";
+    private static String format = "mp3";
     private static String vcn = "kiyo-base";
 
     public static void main(String[] args) throws IOException {
-        String fileName = System.getProperty("user.dir");
-        System.out.println(fileName);
-        URL url = TtsLongDemo.class.getClassLoader().getResource("text/unisound.txt");
-
-        File file = new File("text/unisound.txt");
+        File file = new File("F:\\Github\\yun_zhi_sheng\\tts-long-demo-java\\text\\unisound.txt");
         String text = FileUtils.readFileToString(file, "utf-8");
         testTTS(text);
     }
@@ -47,32 +41,31 @@ public class TtsLongDemo {
         //获取合成状态
         String result = getProgress(host, taskId);
         System.out.println("status result: " + result);
-        JSONObject jo = JSON.parseObject(result);
+        JSONObject res = JSON.parseObject(result);
         //循环获取状态
-        while (!isEnd(jo)) {
+        while (!isEnd(res)) {
             SystemUtils.sleep(3000);
             result = getProgress(host, taskId);
             System.out.println("while status result: " + result);
-            jo = JSON.parseObject(result);
+            res = JSON.parseObject(result);
         }
         try {
             //下载语音
-            String audio_address = jo.getString("audio_address");
+            String audio_address = res.getString("audio_address");
             byte[] bytes = SystemUtils.httpGet(audio_address, null, true);
-            FileUtils.writeByteArrayToFile(new File("audio/unisound.wav"), bytes);
+            FileUtils.writeByteArrayToFile(new File("audio/unisound.mp3"), bytes);
             System.out.println("download audio success");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return 1;
     }
 
-    private static boolean isEnd(JSONObject jo) {
-        if (null == jo) {
+    private static boolean isEnd(JSONObject json) {
+        if (null == json) {
             return false;
         }
-        String status = jo.getString("task_status");
+        String status = json.getString("task_status");
 
         return "done".equals(status);
     }
@@ -111,7 +104,6 @@ public class TtsLongDemo {
             params.put(PARAM_NAME_VCN, vcn);
             params.put(PARAM_NAME_SAMPLE, 16000);
             params.put(PARAM_NAME_TEXT, text);
-
 
             byte[] data = SystemUtils.httpPost(url, JSON.toJSONBytes(params), null, true);
 
