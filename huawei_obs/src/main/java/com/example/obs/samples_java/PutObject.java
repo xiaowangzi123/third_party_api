@@ -1,6 +1,8 @@
 package com.example.obs.samples_java;
 
+import com.alibaba.fastjson2.JSON;
 import com.obs.services.ObsClient;
+import com.obs.services.model.PutObjectResult;
 
 import java.io.File;
 
@@ -22,9 +24,14 @@ public class PutObject {
 
     public static void main(String[] args) {
         // 创建ObsClient实例
-        ObsClient obsClient = new ObsClient(ak, sk, endPoint);
+        try (ObsClient obsClient = new ObsClient(ak, sk, endPoint)) {
+            // localfile为待上传的本地文件路径，需要指定到具体的文件名
+            PutObjectResult putObjectResult = obsClient.putObject("bucketname", "objectkey", new File("F:\\Pictures\\1647682760.png"));
+            System.out.println(JSON.toJSONString(putObjectResult));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        // localfile为待上传的本地文件路径，需要指定到具体的文件名
-        obsClient.putObject("bucketname", "objectkey", new File("F:\\Pictures\\1647682760.png"));
+
     }
 }
