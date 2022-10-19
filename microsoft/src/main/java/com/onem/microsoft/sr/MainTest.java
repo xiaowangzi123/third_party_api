@@ -1,6 +1,5 @@
 package com.onem.microsoft.sr;
 
-
 import com.alibaba.fastjson.JSON;
 import com.microsoft.cognitiveservices.speech.CancellationReason;
 import com.microsoft.cognitiveservices.speech.ResultReason;
@@ -21,12 +20,12 @@ import java.util.concurrent.Semaphore;
  * @desc 语音识别
  */
 public class MainTest {
-    private static final String SPEECH_SUBSCRIPTION_KEY = "ed7790c795eb47d3a7f1a272ecea684c";
-    //    private static final String SPEECH_SUBSCRIPTION_KEY = "a6bfa21a746648caaf84f977fb07f45f";
+//    private static final String SPEECH_SUBSCRIPTION_KEY = "ed7790c795eb47d3a7f1a272ecea684c";
+        private static final String SPEECH_SUBSCRIPTION_KEY = "a6bfa21a746648caaf84f977fb07f45f";
     private static final String SERVICE_REGION = "chinaeast2";
 
     public static void main(String[] args) {
-        String path = "F:\\Github\\third_party_api\\audio\\unisound.wav";
+        String path = "F:\\Github\\third_party_api\\srtest.wav";
         String lang = "zh-CN";
         speechRecognition(path, lang);
     }
@@ -64,7 +63,6 @@ public class MainTest {
                     segTimeDto.setOffset(e.getResult().getOffset().divide(BigInteger.valueOf(10000)).intValue());
                     parentSegTimeDtoList.add(segTimeDto);
                     System.out.println("Text=" + e.getResult().getText() + "  偏移量: " + e.getResult().getOffset().divide(BigInteger.valueOf(10000)) + "    持续时间：" + e.getResult().getDuration().divide(BigInteger.valueOf(10000)));
-
                 }
             } else if (e.getResult().getReason() == ResultReason.NoMatch) {
                 System.out.println("NOMATCH: Speech could not be recognized.");
