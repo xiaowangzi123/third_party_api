@@ -1,6 +1,7 @@
-package com.onem.microsoft;
+package com.onem.microsoft.sr;
 
 
+import com.onem.microsoft.sr.SegTimeDto;
 import lombok.Data;
 
 import java.util.List;

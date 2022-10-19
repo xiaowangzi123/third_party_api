@@ -1,4 +1,4 @@
-package com.onem.microsoft;
+package com.onem.microsoft.sr;
 
 import lombok.Data;
 
