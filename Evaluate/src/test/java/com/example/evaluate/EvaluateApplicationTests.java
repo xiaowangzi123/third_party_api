@@ -1,5 +1,6 @@
 package com.example.evaluate;
 
+import com.alibaba.fastjson.JSON;
 import com.example.evaluate.entity.AnswerInfoDto;
 import com.example.evaluate.entity.QuestionKey;
 import com.example.evaluate.entity.TransQltyEstResultDto;
@@ -34,7 +35,7 @@ public class EvaluateApplicationTests {
 
         dto.setQuestionKeyList(questionKeyList);
         TransQltyEstResultDto eval = queryQltyEstService.eval(dto);
-        System.out.println("评估结果："+eval);
+        System.out.println("评估结果："+ JSON.toJSONString(eval));
     }
 
 }
