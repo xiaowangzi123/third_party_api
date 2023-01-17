@@ -2,6 +2,8 @@ package com.example.evaluate.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author wyq
  * @date 2022/7/29
@@ -20,4 +22,6 @@ public class AnswerInfoDto {
      */
     private String hypothesis;
     private String reference;
+
+    List<QuestionKey> questionKeyList;
 }

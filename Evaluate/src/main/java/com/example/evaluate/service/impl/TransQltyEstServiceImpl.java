@@ -39,7 +39,7 @@ public class TransQltyEstServiceImpl implements TransQltyEstService {
         // 信息忠实度（有参考译文）
         // 根据答案ID获得所有参考译文
 //        List<QuestionKey> questionKeyList = questionKeyService.getByAnsID(dto.getAnsId());
-        List<QuestionKey> questionKeyList = new ArrayList<>();
+        List<QuestionKey> questionKeyList = dto.getQuestionKeyList();
         log.info("参考译文列表（有标点）：{}", JSON.toJSONString(questionKeyList));
 
         String lang = "";
