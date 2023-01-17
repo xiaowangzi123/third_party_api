@@ -13,7 +13,6 @@ import com.example.evaluate.utils.TokenizeUtils;
 import com.newtranx.eval.metrics.MetricUtil;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -24,8 +23,8 @@ import java.util.regex.Pattern;
 @Service
 public class TransQltyEstServiceImpl implements TransQltyEstService {
 
-    @Value("${iqe.temp.wordnet}")
-    private String wordnet;
+//    @Value("${iqe.temp.wordnet}")
+//    private String wordnet;
 
 //    @Autowired
 //    private QuestionKeyService questionKeyService;
@@ -60,7 +59,8 @@ public class TransQltyEstServiceImpl implements TransQltyEstService {
         List<QualityEstimationDto> qualityEstimationDtoList = new ArrayList<>();
         QualityEstimationDto qualityEstimationDto;
 
-        val wordnet = MetricUtil.buildWordnet(this.wordnet);
+//        val wordnet = MetricUtil.buildWordnet(this.wordnet);
+        val wordnet = MetricUtil.buildWordnet("C:\\dict");
         val bleu = MetricUtil.buildBleuMetric(lang);
         val ter = MetricUtil.buildTerMetric(true, true);
         val meteor = MetricUtil.buildMeteorMetric(wordnet, lang);
