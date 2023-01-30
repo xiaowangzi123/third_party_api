@@ -117,6 +117,7 @@ public class TransQltyEstServiceImpl implements TransQltyEstService {
                 e.printStackTrace();
             }
 
+
             try {
                 Double score = GTM.eval(TokenizeUtils.removePunctuation(dto.getHypothesis()), TokenizeUtils.removePunctuation(questionKey.getContent()));
                 if (isNumeric(score.toString())) {
