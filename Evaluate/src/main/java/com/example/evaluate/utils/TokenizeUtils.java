@@ -37,8 +37,13 @@ public class TokenizeUtils {
         return s.split("\\s+");
     }
 
+    /**
+     *
+     * @param str
+     * @return
+     */
     public static String removePunctuation(String str) {
-        String s = str.replaceAll("[\\.,\\?:;!\"\\(\\)]", "");
+        String s = str.replaceAll("[.,?:;!\"()]", "");
         s = s.replaceAll("\\s+", " ");
         return s;
     }

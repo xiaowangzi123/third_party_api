@@ -25,12 +25,13 @@ public class EvaluateApplicationTests {
     @Test
     public void test(){
         AnswerInfoDto dto = new AnswerInfoDto();
-        dto.setHypothesis("今年是全面贯彻党的十九大精神的开局之年，也是我国发展进程中极不平凡的一年。我国发展外部环境发生明显变化，经济已由高速增长阶段转向高质量发展阶段，发展不平衡不充分问题和各种周期性、结构性、体制性因素交织叠加在一起。面对错综复杂的国际环境，面对艰巨繁重的国内改革发展稳定任务，我们之所以能保持经济持续健康发展和社会大局稳定，迈出全面建成小康社会新步伐，关键就在于以习近平同志为核心的党中央坚强领导，关键就在于我们在实践中深化了对做好新形势下经济工作的规律性认识。");
+        dto.setHypothesis("我国发展外部环境发生明显变化，经济已由高速增长阶段转向高质量发展阶段，发展不平衡不充分问题。");
         dto.setLangCode("en-US");
 
         List<QuestionKey> questionKeyList = new ArrayList<>();
         QuestionKey questionKey = new QuestionKey();
-        questionKey.setContent("This year is the first year to fully implement the spirit of the 19th CPC National Congress, and it is also an extraordinary year in China's development process. The external environment for China's development has changed significantly. The economy has shifted from a stage of rapid growth to a stage of high-quality development. The problem of unbalanced and inadequate development is intertwined with various cyclical, structural and institutional factors.");
+        questionKey.setContent("Obvious changes have taken place in our external environment for development. Our economy has shifted from a phase of rapid growth to one of high quality, and development is unbalanced and inadequate." +
+                "The external environment of China's development has changed obviously, the economy has changed from the stage of rapid growth to the stage of high-quality development, and the problem of unbalanced and inadequate development.");
         questionKeyList.add(questionKey);
 
         dto.setQuestionKeyList(questionKeyList);

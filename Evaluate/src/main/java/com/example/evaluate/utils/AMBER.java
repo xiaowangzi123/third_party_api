@@ -64,13 +64,21 @@ public class AMBER {
             //ith word stored in tempC
             tempC = splitC[i];
             charCandLen = charCandLen + tempC.length();
-            if (tempC.length() < 4) shortwordT = shortwordT + 1;
-            if (tempC.length() > 3) longwordT = longwordT + 1;
+            if (tempC.length() < 4) {
+                shortwordT = shortwordT + 1;
+            }
+            if (tempC.length() > 3) {
+                longwordT = longwordT + 1;
+            }
             //loop traverses R1 word by word
             for (int j = 0; j < splitR1.length; j++) {
                 charRefLen = charRefLen + splitR1[j].length();
-                if (splitR1[j].length() < 4) shortwordR = shortwordR + 1;
-                if (splitR1[j].length() > 3) longwordR = longwordR + 1;
+                if (splitR1[j].length() < 4) {
+                    shortwordR = shortwordR + 1;
+                }
+                if (splitR1[j].length() > 3) {
+                    longwordR = longwordR + 1;
+                }
                 if (tempC.equalsIgnoreCase(splitR1[j])) {
                     p1++; //word found in R1
                     splitR1[j] = "";//empty the word in R1 to avoid matching it again
@@ -104,10 +112,11 @@ public class AMBER {
                     }
                 }//else ends
 
-            } //for for R1 ends
+            }
+            //for for R1 ends
 
-
-        } // ENDS - for loop traversing the candidate array for 1 gram precision
+        }
+        // ENDS - for loop traversing the candidate array for 1 gram precision
 
         //print the final calculated p1
         double unigram = p1 / noOfwordsIncandi;
