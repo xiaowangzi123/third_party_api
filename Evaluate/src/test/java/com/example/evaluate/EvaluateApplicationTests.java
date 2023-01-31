@@ -25,7 +25,8 @@ public class EvaluateApplicationTests {
     @Test
     public void test(){
         AnswerInfoDto dto = new AnswerInfoDto();
-        dto.setHypothesis("我国发展外部环境发生明显变化，经济已由高速增长阶段转向高质量发展阶段，发展不平衡不充分问题。");
+//        dto.setHypothesis("我国发展外部环境发生明显变化，经济已由高速增长阶段转向高质量发展阶段，发展不平衡不充分问题。");
+        dto.setHypothesis("Great changes have taken place in the external environment of China's development, with the economy changing from the stage of rapid growth to the stage of high-quality development, as well as the problem of unbalanced and inadequate development.");
         dto.setLangCode("en-US");
 
         List<QuestionKey> questionKeyList = new ArrayList<>();

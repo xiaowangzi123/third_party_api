@@ -106,13 +106,12 @@ public class TransQltyEstServiceImpl implements TransQltyEstService {
 
             try {
                 Double score = AMBER.eval(TokenizeUtils.removePunctuation(dto.getHypothesis()), TokenizeUtils.removePunctuation(questionKey.getContent()));
-                if (isNumeric(score.toString())) {
                     qualityEstimationDto = new QualityEstimationDto();
                     qualityEstimationDto.setMetric(MetricEnum.AMBER.getValue());
                     qualityEstimationDto.setScore(score * 100);
                     qualityEstimationDto.setReference(questionKey.getContent());
                     qualityEstimationDtoList.add(qualityEstimationDto);
-                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -140,6 +139,7 @@ public class TransQltyEstServiceImpl implements TransQltyEstService {
         if (optional.isPresent()) {
 
             QualityEstimationDto optimum = optional.get();
+            log.info("最高分：{}",optimum);
 
             // 求得最高分数。
             transQltyEstResultDto.setFidelityScore(optimum.getScore());
