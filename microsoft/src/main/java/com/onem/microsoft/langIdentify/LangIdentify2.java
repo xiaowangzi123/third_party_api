@@ -21,6 +21,7 @@ public class LangIdentify2 {
         String text = "中文语种检测";
 
         DetectedLanguage detectedLanguage = client.detectLanguage(text);
+        //{"confidenceScore":1.0,"iso6391Name":"zh_chs","name":"Chinese_Simplified","warnings":{}}
         System.out.printf("--->>>" + JSON.toJSONString(detectedLanguage));
 
     }
