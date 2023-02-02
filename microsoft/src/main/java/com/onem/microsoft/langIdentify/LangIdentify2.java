@@ -18,10 +18,14 @@ public class LangIdentify2 {
     public static void main(String[] args) {
         TextAnalyticsClient client = new TextAnalyticsClientBuilder()
                 .credential(new AzureKeyCredential(KEY)).endpoint(ENDPOINT).buildClient();
-        String text = "中文语种检测";
+//        String text = "中文语种检测";
+//        String text = "language detection test";
+        String text = "123 ";
 
         DetectedLanguage detectedLanguage = client.detectLanguage(text);
         //{"confidenceScore":1.0,"iso6391Name":"zh_chs","name":"Chinese_Simplified","warnings":{}}
+        //{"confidenceScore":0.74,"iso6391Name":"en","name":"English","warnings":{}}
+        //{"confidenceScore":0.0,"iso6391Name":"(Unknown)","name":"(Unknown)","warnings":{}}
         System.out.printf("--->>>" + JSON.toJSONString(detectedLanguage));
 
     }
