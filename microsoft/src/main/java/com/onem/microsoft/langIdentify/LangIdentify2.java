@@ -30,7 +30,6 @@ public class LangIdentify2 {
 
     }
 
-
     // Method to authenticate the client object with your key and endpoint
     static TextAnalyticsClient authenticateClient(String key, String endpoint) {
         return new TextAnalyticsClientBuilder()
