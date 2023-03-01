@@ -27,7 +27,6 @@ public class LangIdentify2 {
         //{"confidenceScore":0.74,"iso6391Name":"en","name":"English","warnings":{}}
         //{"confidenceScore":0.0,"iso6391Name":"(Unknown)","name":"(Unknown)","warnings":{}}
         System.out.printf("--->>>" + JSON.toJSONString(detectedLanguage));
-
     }
 
     // Method to authenticate the client object with your key and endpoint
