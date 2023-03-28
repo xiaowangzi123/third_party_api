@@ -20,7 +20,6 @@ public class PayPalCheckoutServiceImpl implements PayPalCheckoutService {
     private String receiverEmail;
 
 
-
     @Override
     public String callback(@SuppressWarnings("rawtypes") Map map) {
         log.info(map.toString());

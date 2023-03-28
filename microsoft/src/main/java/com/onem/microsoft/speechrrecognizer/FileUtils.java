@@ -1,3 +1,4 @@
+/*
 package com.microsoft.demo.speechrrecognizer;
 
 import com.alibaba.fastjson.JSON;
@@ -17,11 +18,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
+*/
 /**
  * @author wyq
  * @date 2022/4/11
  * @desc
- */
+ *//*
+
 public class FileUtils {
     public static long getByteSize(File file) {
         return file.length();
@@ -93,23 +96,28 @@ public class FileUtils {
 
 
     public static long getRemoteDuration(String url) {
-/*//        String url = "http://192.168.31.10:8888/dfs1/M00/00/02/wKgfCl6azIyAE4rXAABcIN-F5V4141.WAV";
+*/
+/*//*
+/        String url = "http://192.168.31.10:8888/dfs1/M00/00/02/wKgfCl6azIyAE4rXAABcIN-F5V4141.WAV";
         File mediaFile = new File(url);
         FFmpegFileInfo ffmpegFileInfo = new FFmpegFileInfo(mediaFile);
         MultimediaInfo multimediaInfo = null;
         multimediaInfo = ffmpegFileInfo.getInfo(url);
         long playTime = multimediaInfo.getDuration();
-        System.out.println(playTime);*/
+        System.out.println(playTime);*//*
+
         return 0;
     }
 
 
-    /**
+    */
+/**
      * 获取远程文件大小
      *
      * @param urlPath
      * @return
-     */
+     *//*
+
     public static int getRemoteSize(String urlPath) {
         int size;
         URL url = null;
@@ -193,9 +201,11 @@ public class FileUtils {
         }
     }
 
-    /**
+    */
+/**
      * 向文件中追加数据
-     */
+     *//*
+
     public static void appendSrtToFile(String path, String data) {
         File file = new File(path);
         try {
@@ -208,9 +218,11 @@ public class FileUtils {
         }
     }
 
-    /**
+    */
+/**
      * 判断文件是否存在，不存在就创建
-     */
+     *//*
+
     public static void createFile(File file) {
         try {
             //getParentFile() 获取上级目录(包含文件名时无法直接创建目录的)
@@ -243,9 +255,12 @@ public class FileUtils {
         System.out.println("audio--> " + JSON.toJSONString(audioInfo));
 
 //        videoConvertToAudio(srcPath,tgtPath,"mp3");
-       /* File file = new File(srcPath);
-        file.delete();*/
+       */
+/* File file = new File(srcPath);
+        file.delete();*//*
+
         System.out.println(getVideoDuration(srcPath));
 //        System.out.println(FileUtils.getDuration(new File("C:\\Users\\CloudTranslation\\Downloads\\faa9bc75-f4bb-4d76-a7b6-f3916d06cfb5.wav")));
     }
 }
+*/
