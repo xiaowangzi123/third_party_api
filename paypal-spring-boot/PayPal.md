@@ -1,27 +1,34 @@
-# Read Me First
+# SDK版本
 
-The following was discovered as part of building this project:
+PayPal有v1、v2两个版本的SDK，
+网上几乎都是针对v1 的文档，v2的几乎看不到。
 
-* The JVM level was changed from '1.8' to '17', review
-  the [JDK Version Range](https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Versions#jdk-version-range)
-  on the wiki for more details.
+本博客经过二次编辑，回调里面逻辑基本已经完善，无需大的改动。
 
-# Getting Started
+v1：rest-api-sdk
 
-### Reference Documentation
+		<dependency>
+			<groupId>com.paypal.sdk</groupId>
+			<artifactId>rest-api-sdk</artifactId>
+			<version>LATEST</version>
+		</dependency>
 
-For further reference, please consider the following sections:
+v2：checkout-sdk
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/3.0.5/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/3.0.5/maven-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/3.0.5/reference/htmlsingle/#web)
+		<dependency>
+			<groupId>com.paypal.sdk</groupId>
+			<artifactId>checkout-sdk</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 
-### Guides
+这两个版本的我都接入过，但由于官方不建议再使用v1，所以今天我只讲v2
 
-The following guides illustrate how to use some features concretely:
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
 
+
+
+
+
+# 参考链接
+
+https://blog.csdn.net/qq_36341832/article/details/106334844
