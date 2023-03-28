@@ -1,58 +1,15 @@
 package com.example.paypal.service.impl;
 
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import javax.annotation.Resource;
-
+import com.example.paypal.constant.PayPalCheckoutConstant;
+import com.example.paypal.service.PayPalCheckoutService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
-import com.paypal.http.HttpResponse;
-import com.paypal.http.exceptions.SerializeException;
-import com.paypal.http.serializer.Json;
-import com.paypal.orders.AddressPortable;
-import com.paypal.orders.AmountBreakdown;
-import com.paypal.orders.AmountWithBreakdown;
-import com.paypal.orders.ApplicationContext;
-import com.paypal.orders.Capture;
-import com.paypal.orders.Item;
-import com.paypal.orders.LinkDescription;
-import com.paypal.payments.Refund;
-import com.paypal.payments.RefundRequest;
-import com.paypal.payments.RefundsGetRequest;
-import com.paypal.orders.Money;
-import com.paypal.orders.Name;
-import com.paypal.orders.Order;
-import com.paypal.orders.OrderRequest;
-import com.paypal.orders.OrdersCaptureRequest;
-import com.paypal.orders.OrdersCreateRequest;
-import com.paypal.orders.OrdersGetRequest;
-import com.paypal.orders.Payer;
-import com.paypal.orders.PurchaseUnit;
-import com.paypal.orders.PurchaseUnitRequest;
-import com.paypal.orders.ShippingDetail;
-import com.paypal.payments.CapturesGetRequest;
-import com.paypal.payments.CapturesRefundRequest;
-import com.ratta.constants.PayPalCheckoutConstant;
-import com.ratta.pay.info.PayPalClient;
-import com.ratta.service.PayPalCheckoutService;
-
-import lombok.extern.slf4j.Slf4j;
+import java.util.Map;
 
 @Slf4j
 @Service
