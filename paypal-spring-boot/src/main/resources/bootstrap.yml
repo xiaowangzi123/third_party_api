@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: paypal
+  profiles:
+    active: dev
+  mail:
+    host: smtp.qq.com
+    username: 1103694415@qq.com
+    password: ucuwfyyrcqxagddb
+    default-encoding: UTF-8
+    #    properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
+          required: true
+

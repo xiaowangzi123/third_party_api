@@ -4,28 +4,22 @@ package com.microsoft.demo.console;
 // Licensed under the MIT license. See LICENSE.md file in the project root for full license information.
 //
 
+import com.microsoft.cognitiveservices.speech.CancellationReason;
+import com.microsoft.cognitiveservices.speech.ResultReason;
+import com.microsoft.cognitiveservices.speech.audio.AudioConfig;
+import com.microsoft.cognitiveservices.speech.audio.PullAudioInputStreamCallback;
+import com.microsoft.cognitiveservices.speech.translation.SpeechTranslationConfig;
+import com.microsoft.cognitiveservices.speech.translation.TranslationRecognizer;
+
+import javax.sound.sampled.*;
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Semaphore;
-
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-// <toplevel>
-import com.microsoft.cognitiveservices.speech.*;
-import com.microsoft.cognitiveservices.speech.audio.*;
-import com.microsoft.cognitiveservices.speech.translation.*;
 // </toplevel>
 
 @SuppressWarnings("resource") // scanner
@@ -244,7 +238,7 @@ public class TranslationSamples {
 
         // Create an audio stream from a wav file.
         // Replace with your own audio file name.
-        PullAudioInputStreamCallback callback = new WavStream(new FileInputStream("YourAudioFile.wav"));
+        PullAudioInputStreamCallback callback = new com.microsoft.demo.console.WavStream(new FileInputStream("YourAudioFile.wav"));
         AudioConfig audioInput = AudioConfig.fromStreamInput(callback);
 
         // Creates a translation recognizer using audio stream as input.
