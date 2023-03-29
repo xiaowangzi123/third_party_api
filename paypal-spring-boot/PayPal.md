@@ -1,3 +1,43 @@
+```
+wangyq@waitrans.com
+Wang0207
+
+440103199003072198
+```
+
+
+
+# 1. 配置账户
+
+## 注册商家账号
+
+网址：www.paypal.com/
+
+
+
+开发者网站
+
+网址：[developer.paypal.com/](https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.paypal.com%2F) ，并使用注册好的商家账号进行登录
+
+创建应用，并选择类型为sandbox，并记录ClientId和Secret
+
+
+
+
+
+```
+商户
+https://www.sandbox.paypal.com/mep/dashboard
+sb-zjktl15336097@business.example.com
+9N$paLA2
+
+消费用户
+
+
+```
+
+
+
 # SDK版本
 
 PayPal有v1、v2两个版本的SDK，

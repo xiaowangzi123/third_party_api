@@ -25,7 +25,8 @@ public class CreateOrder {
     /**
      * LOGIN。当客户单击PayPal Checkout时，客户将被重定向到页面以登录PayPal并批准付款。
      * BILLING。当客户单击PayPal Checkout时，客户将被重定向到一个页面，以输入信用卡或借记卡以及完成购买所需的其他相关账单信息
-     * NO_PREFERENCE。当客户单击“ PayPal Checkout”时，将根据其先前的交互方式将其重定向到页面以登录PayPal并批准付款，或重定向至页面以输入信用卡或借记卡以及完成购买所需的其他相关账单信息使用PayPal。
+     * NO_PREFERENCE。当客户单击“ PayPal Checkout”时，将根据其先前的交互方式将其重定向到页面以登录PayPal并批准付款，
+     * 或重定向至页面以输入信用卡或借记卡以及完成购买所需的其他相关账单信息使用PayPal。
      * 默认值：NO_PREFERENCE
      */
     public static final String LANDINGPAGE = "NO_PREFERENCE";
@@ -56,7 +57,7 @@ public class CreateOrder {
                 .shippingPreference(SHIPPINGPREFERENCE);
         orderRequest.applicationContext(applicationContext);
 
-        List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<PurchaseUnitRequest>();
+        List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<>();
         @SuppressWarnings("serial")
         PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest()
                 .description("新一代读写一体，智能电子笔记本")

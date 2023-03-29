@@ -42,23 +42,17 @@ public class PayPalCheckoutServiceImpl implements PayPalCheckoutService {
         }
         if("Completed".equals(paymentStatus)) {
             //进行数据库操作
-            //
-            //
             log.info("支付成功,状态为=COMPLETED");
             return "success";
         }
         if("Refunded".equals(paymentStatus)) {
             //进行数据库操作
-            //
-            //
             log.info("退款成功");
             return "success";
         }
         if("Pending".equals(paymentStatus) && StringUtils.isEmpty(parentPaymentId)) {
             String pendingReason = String.valueOf(map.get("pending_reason"));
             //进行数据库操作
-            //
-            //
             log.info("订单支付成功,状态为=PENDING，产生此状态的原因是 {}", pendingReason );
             return "success";
         }
