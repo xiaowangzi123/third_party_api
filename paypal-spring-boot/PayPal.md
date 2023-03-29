@@ -1,3 +1,11 @@
+
+
+# 1. 配置账户
+
+## 注册账号
+
+网址：https://www.paypal.com/
+
 ```
 wangyq@waitrans.com
 Wang0207
@@ -7,25 +15,18 @@ Wang0207
 
 
 
-# 1. 配置账户
+## 开发者网站
 
-## 注册商家账号
-
-网址：www.paypal.com/
+网址：https://developer.paypal.com ，并使用注册好的账号进行登录
 
 
-
-开发者网站
-
-网址：[developer.paypal.com/](https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.paypal.com%2F) ，并使用注册好的商家账号进行登录
 
 创建应用，并选择类型为sandbox，并记录ClientId和Secret
 
 
 
-
-
 ```
+https://www.sandbox.paypal.com/
 商户
 https://www.sandbox.paypal.com/mep/dashboard
 sb-zjktl15336097@business.example.com
@@ -65,7 +66,11 @@ v2：checkout-sdk
 
 
 
+# 注意：
 
+创建测试账号，卖家和买家不要一样，特别是不能都选择中国
+
+买家的余额要有
 
 
 
