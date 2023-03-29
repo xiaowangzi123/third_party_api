@@ -1,14 +1,14 @@
-package com.paypal;
+package com.example.paypal.example;
 
-import java.io.IOException;
-
-import org.json.JSONObject;
-
+import com.example.paypal.AuthorizeIntentExamples.CreateOrder;
+import com.example.paypal.client.PayPalClient;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.serializer.Json;
-import com.paypal.AuthorizeIntentExamples.CreateOrder;
 import com.paypal.orders.Order;
 import com.paypal.orders.OrdersGetRequest;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class GetOrder extends PayPalClient {
 

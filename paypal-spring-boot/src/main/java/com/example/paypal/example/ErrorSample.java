@@ -1,12 +1,13 @@
-package com.paypal;
+package com.example.paypal.example;
 
+import com.example.paypal.client.PayPalClient;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.exceptions.HttpException;
-import org.json.JSONObject;
-import java.io.IOException;
-import java.util.*;
-
 import com.paypal.orders.*;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class ErrorSample extends PayPalClient {
 

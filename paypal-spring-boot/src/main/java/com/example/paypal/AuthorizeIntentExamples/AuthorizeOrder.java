@@ -1,13 +1,15 @@
-package com.paypal.AuthorizeIntentExamples;
+package com.example.paypal.AuthorizeIntentExamples;
 
-import java.io.IOException;
-
-import com.paypal.orders.*;
-import org.json.JSONObject;
-
+import com.paypal.PayPalClient;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.serializer.Json;
-import com.paypal.PayPalClient;
+import com.paypal.orders.LinkDescription;
+import com.paypal.orders.Order;
+import com.paypal.orders.OrderRequest;
+import com.paypal.orders.OrdersAuthorizeRequest;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class AuthorizeOrder extends PayPalClient {
 

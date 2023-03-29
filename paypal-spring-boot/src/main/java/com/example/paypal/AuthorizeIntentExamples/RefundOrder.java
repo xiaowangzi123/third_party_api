@@ -1,17 +1,12 @@
-package com.paypal.AuthorizeIntentExamples;
+package com.example.paypal.AuthorizeIntentExamples;
 
-import java.io.IOException;
-
-import org.json.JSONObject;
-
+import com.paypal.PayPalClient;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.serializer.Json;
-import com.paypal.PayPalClient;
-import com.paypal.payments.CapturesRefundRequest;
-import com.paypal.payments.LinkDescription;
-import com.paypal.payments.Money;
-import com.paypal.payments.Refund;
-import com.paypal.payments.RefundRequest;
+import com.paypal.payments.*;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class RefundOrder extends PayPalClient {
 

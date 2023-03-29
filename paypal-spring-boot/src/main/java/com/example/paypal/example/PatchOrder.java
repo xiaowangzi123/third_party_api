@@ -1,22 +1,14 @@
-package com.paypal;
+package com.example.paypal.example;
+
+import com.example.paypal.AuthorizeIntentExamples.CreateOrder;
+import com.paypal.http.HttpResponse;
+import com.paypal.http.serializer.Json;
+import com.paypal.orders.*;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.json.JSONObject;
-
-import com.paypal.http.HttpResponse;
-import com.paypal.http.serializer.Json;
-import com.paypal.AuthorizeIntentExamples.CreateOrder;
-import com.paypal.orders.AmountBreakdown;
-import com.paypal.orders.AmountWithBreakdown;
-import com.paypal.orders.LinkDescription;
-import com.paypal.orders.Money;
-import com.paypal.orders.Order;
-import com.paypal.orders.OrdersGetRequest;
-import com.paypal.orders.OrdersPatchRequest;
-import com.paypal.orders.Patch;
 
 public class PatchOrder extends PayPalClient {
 	/**

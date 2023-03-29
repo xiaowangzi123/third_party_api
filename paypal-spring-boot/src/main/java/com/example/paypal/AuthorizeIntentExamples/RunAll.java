@@ -1,4 +1,4 @@
-package com.paypal.AuthorizeIntentExamples;
+package com.example.paypal.AuthorizeIntentExamples;
 import com.paypal.http.HttpResponse;
 import com.paypal.orders.LinkDescription;
 import com.paypal.orders.Order;

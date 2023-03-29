@@ -1,4 +1,4 @@
-package com.paypal;
+package com.example.paypal.example;
 
 import com.paypal.core.PayPalEnvironment;
 import com.paypal.core.PayPalHttpClient;
