@@ -1,27 +1,14 @@
-package com.paypal.CaptureIntentExamples;
+package com.example.paypal.CaptureIntentExamples;
+
+import com.paypal.PayPalClient;
+import com.paypal.http.HttpResponse;
+import com.paypal.http.serializer.Json;
+import com.paypal.orders.*;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.json.JSONObject;
-
-import com.paypal.http.HttpResponse;
-import com.paypal.http.serializer.Json;
-import com.paypal.PayPalClient;
-import com.paypal.orders.AddressPortable;
-import com.paypal.orders.AmountBreakdown;
-import com.paypal.orders.AmountWithBreakdown;
-import com.paypal.orders.ApplicationContext;
-import com.paypal.orders.Item;
-import com.paypal.orders.LinkDescription;
-import com.paypal.orders.Money;
-import com.paypal.orders.Name;
-import com.paypal.orders.Order;
-import com.paypal.orders.OrderRequest;
-import com.paypal.orders.OrdersCreateRequest;
-import com.paypal.orders.PurchaseUnitRequest;
-import com.paypal.orders.ShippingDetail;
 
 public class CreateOrder extends PayPalClient {
 

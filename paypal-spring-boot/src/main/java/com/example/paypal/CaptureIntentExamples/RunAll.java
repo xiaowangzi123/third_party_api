@@ -1,4 +1,4 @@
-package com.paypal.CaptureIntentExamples;
+package com.example.paypal.CaptureIntentExamples;
 import com.paypal.http.HttpResponse;
 import com.paypal.AuthorizeIntentExamples.RefundOrder;
 import com.paypal.orders.Capture;

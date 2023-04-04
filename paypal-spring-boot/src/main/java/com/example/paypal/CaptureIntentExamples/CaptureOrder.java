@@ -1,13 +1,12 @@
-package com.paypal.CaptureIntentExamples;
+package com.example.paypal.CaptureIntentExamples;
 
-import java.io.IOException;
-
+import com.paypal.PayPalClient;
+import com.paypal.http.HttpResponse;
+import com.paypal.http.serializer.Json;
 import com.paypal.orders.*;
 import org.json.JSONObject;
 
-import com.paypal.http.HttpResponse;
-import com.paypal.http.serializer.Json;
-import com.paypal.PayPalClient;
+import java.io.IOException;
 
 public class CaptureOrder extends PayPalClient {
 
