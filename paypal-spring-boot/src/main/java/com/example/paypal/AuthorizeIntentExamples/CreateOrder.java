@@ -1,3 +1,4 @@
+/*
 package com.example.paypal.AuthorizeIntentExamples;
 
 import com.paypal.PayPalClient;
@@ -12,11 +13,13 @@ import java.util.List;
 
 public class CreateOrder extends PayPalClient {
 
-	/**
+	*/
+/**
 	 * Method to create complete order body with <b>AUTHORIZE</b> intent
 	 *
 	 * @return OrderRequest with created order request
-	 */
+	 *//*
+
 	private OrderRequest buildCompleteRequestBody() {
 		OrderRequest orderRequest = new OrderRequest();
 		orderRequest.checkoutPaymentIntent("AUTHORIZE");
@@ -55,11 +58,13 @@ public class CreateOrder extends PayPalClient {
 		return orderRequest;
 	}
 
-	/**
+	*/
+/**
 	 * Method to create minimum required order body with <b>AUTHORIZE</b> intent
 	 *
 	 * @return OrderRequest with created order request
-	 */
+	 *//*
+
 	private OrderRequest buildMinimumRequestBody() {
 		OrderRequest orderRequest = new OrderRequest();
 		orderRequest.checkoutPaymentIntent("AUTHORIZE");
@@ -74,13 +79,15 @@ public class CreateOrder extends PayPalClient {
 		return orderRequest;
 	}
 
-	/**
+	*/
+/**
 	 * Method to create order with complete payload
 	 *
 	 * @param debug true = print response data
 	 * @return HttpResponse<Order> response received from API
 	 * @throws IOException Exceptions from API if any
-	 */
+	 *//*
+
 	public HttpResponse<Order> createOrder(boolean debug) throws IOException {
 		OrdersCreateRequest request = new OrdersCreateRequest();
 		request.header("prefer","return=representation");
@@ -106,13 +113,15 @@ public class CreateOrder extends PayPalClient {
 		return response;
 	}
 
-	/**
+	*/
+/**
 	 * Method to create order with minimum required payload
 	 *
 	 * @param debug true = print response data
 	 * @return HttpResponse<Order> response received from API
 	 * @throws IOException Exceptions from API if any
-	 */
+	 *//*
+
 	public HttpResponse<Order> createOrderWithMinimumPayload(boolean debug) throws IOException {
 		OrdersCreateRequest request = new OrdersCreateRequest();
 		request.header("prefer","return=representation");
@@ -138,10 +147,12 @@ public class CreateOrder extends PayPalClient {
 		return response;
 	}
 
-	/**
+	*/
+/**
 	 * This is the driver function which invokes the createOrder function to create
 	 * an sample order.
-	 */
+	 *//*
+
 	public static void main(String args[]) {
 		try {
 			new CreateOrder().createOrder(true);
@@ -153,3 +164,4 @@ public class CreateOrder extends PayPalClient {
 		}
 	}
 }
+*/

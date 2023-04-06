@@ -1,3 +1,4 @@
+/*
 package com.example.paypal.example;
 
 import com.example.paypal.AuthorizeIntentExamples.CreateOrder;
@@ -11,12 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PatchOrder extends PayPalClient {
-	/**
+	*/
+/**
 	 * Method to created body for patch order
 	 *
 	 * @return List<Patch> list of patches to be made
 	 * @throws IOException
-	 */
+	 *//*
+
 	private List<Patch> buildRequestBody() throws IOException {
 		List<Patch> patches = new ArrayList<>();
 		patches.add(new Patch().op("replace").path("/intent").value("CAPTURE"));
@@ -27,11 +30,13 @@ public class PatchOrder extends PayPalClient {
 		return patches;
 	}
 
-	/**
+	*/
+/**
 	 * Method to patch order
 	 *
 	 * @throws IOException Exceptions from API if any
-	 */
+	 *//*
+
 	public void patchOrder(String orderId) throws IOException {
 		OrdersPatchRequest request = new OrdersPatchRequest(orderId);
 		request.requestBody(buildRequestBody());
@@ -58,3 +63,4 @@ public class PatchOrder extends PayPalClient {
 		new PatchOrder().patchOrder(response.result().id());
 	}
 }
+*/

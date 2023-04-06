@@ -1,3 +1,4 @@
+/*
 package com.example.paypal.example;
 
 import com.example.paypal.client.PayPalClient;
@@ -11,9 +12,11 @@ import java.util.ArrayList;
 
 public class ErrorSample extends PayPalClient {
 
-    /**
+    */
+/**
      * Body has no required parameters (intent, purchase_units)
-     */
+     *//*
+
     public void createError1() {
         OrdersCreateRequest request = new OrdersCreateRequest();
         request.requestBody(new OrderRequest());
@@ -29,9 +32,11 @@ public class ErrorSample extends PayPalClient {
         }
     }
 
-    /**
+    */
+/**
      * Body has invalid parameter value for intent
-     */
+     *//*
+
     public void createError2() {
         OrdersCreateRequest request = new OrdersCreateRequest();
         request.requestBody(new OrderRequest()
@@ -62,3 +67,4 @@ public class ErrorSample extends PayPalClient {
 
     }
 }
+*/

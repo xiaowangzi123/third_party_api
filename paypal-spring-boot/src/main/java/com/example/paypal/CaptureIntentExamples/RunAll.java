@@ -1,3 +1,4 @@
+/*
 package com.example.paypal.CaptureIntentExamples;
 import com.paypal.http.HttpResponse;
 import com.paypal.AuthorizeIntentExamples.RefundOrder;
@@ -68,3 +69,4 @@ public class RunAll {
         }
     }
 }
+*/
