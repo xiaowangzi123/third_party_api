@@ -4,9 +4,10 @@ import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
 import opennlp.tools.util.Span;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * This class demonstrates how to use NameFinderME class to do Named Entity Recognition/Extraction tasks.
@@ -40,7 +41,7 @@ public class NameFinderExample {
 	 */
 	public void findName() throws IOException {
 		String name = "D:\\github\\third_party_api\\open-nlp\\src\\main\\resources\\static\\en-ner-person.bin";
-		InputStream is = new FileInputStream(name);
+		InputStream is = Files.newInputStream(Paths.get(name));
 
 		// load the model from file
 		TokenNameFinderModel model = new TokenNameFinderModel(is);
@@ -86,7 +87,8 @@ public class NameFinderExample {
 	 * @throws IOException
 	 */
 	public void findLocation() throws IOException {
-		InputStream is = new FileInputStream("en-ner-location.bin");
+		String name = "D:\\github\\third_party_api\\open-nlp\\src\\main\\resources\\static\\en-ner-person.bin";
+		InputStream is = Files.newInputStream(Paths.get(name));
 
 		// load the model from file
 		TokenNameFinderModel model = new TokenNameFinderModel(is);

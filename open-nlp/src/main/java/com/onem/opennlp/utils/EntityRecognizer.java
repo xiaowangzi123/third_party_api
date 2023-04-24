@@ -1,12 +1,12 @@
-/*
+
 package com.onem.opennlp.utils;
 
-*/
+
 /**
  * @author wyq
  * @date 2023/4/24
  * @desc
- *//*
+ */
 
 
 import opennlp.tools.namefind.NameFinderME;
@@ -74,4 +74,4 @@ public class EntityRecognizer {
     }
 
 }
-*/
+
