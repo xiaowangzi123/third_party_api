@@ -28,6 +28,11 @@ public class EntityRecognizer {
         System.out.println(Arrays.toString(obj.findEntities(split)));
     }
 
+    /**
+     * 人名识别不准确
+     * @param tokens
+     * @return
+     */
     public String[] findEntities(String[] tokens){
         try {
 //            InputStream modelIn = getClass().getResourceAsStream("/en-ner-person.bin");
