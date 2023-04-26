@@ -25,7 +25,20 @@
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
             <version>8.3.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>okhttp</artifactId>
+                    <groupId>com.squareup.okhttp3</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.9.3</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.commons</groupId>
