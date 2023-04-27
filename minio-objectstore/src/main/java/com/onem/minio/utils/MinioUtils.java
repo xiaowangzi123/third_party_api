@@ -1,16 +1,17 @@
 package com.onem.minio.utils;
 
 import com.onem.minio.config.MinioConfig;
-import io.minio.BucketExistsArgs;
-import io.minio.MakeBucketArgs;
-import io.minio.MinioClient;
-import io.minio.RemoveBucketArgs;
+import io.minio.*;
+import io.minio.http.Method;
 import io.minio.messages.Bucket;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author wyq
@@ -29,6 +30,7 @@ public class MinioUtils {
 
     /**
      * 查看存储bucket是否存在
+     *
      * @return boolean
      */
     public Boolean bucketExist(String bucketName) {
@@ -44,6 +46,7 @@ public class MinioUtils {
 
     /**
      * 创建存储bucket
+     *
      * @return Boolean
      */
     public Boolean makeBucket(String bucketName) {
@@ -57,8 +60,10 @@ public class MinioUtils {
         }
         return true;
     }
+
     /**
      * 删除存储bucket
+     *
      * @return Boolean
      */
     public Boolean removeBucket(String bucketName) {
@@ -72,6 +77,7 @@ public class MinioUtils {
         }
         return true;
     }
+
     /**
      * 获取全部bucket
      */
@@ -86,22 +92,21 @@ public class MinioUtils {
     }
 
 
-
     /**
      * 文件上传
      *
      * @param file 文件
      * @return Boolean
      */
-    /*public String upload(MultipartFile file) {
+    public String upload(MultipartFile file) {
         String originalFilename = file.getOriginalFilename();
-        if (StringUtils.isBlank(originalFilename)){
+        if (StringUtils.isBlank(originalFilename)) {
             throw new RuntimeException();
         }
         String fileName = UUID.randomUUID() + originalFilename.substring(originalFilename.lastIndexOf("."));
         String objectName = UUID.randomUUID() + "/" + fileName;
         try {
-            PutObjectArgs objectArgs = PutObjectArgs.builder().bucket(prop.getBucketName()).object(objectName)
+            PutObjectArgs objectArgs = PutObjectArgs.builder().bucket(prop.bucketName).object(objectName)
                     .stream(file.getInputStream(), file.getSize(), -1).contentType(file.getContentType()).build();
             //文件名称相同会覆盖
             minioClient.putObject(objectArgs);
@@ -111,23 +116,23 @@ public class MinioUtils {
         }
         return objectName;
     }
-*/
+
     /**
      * 预览图片
+     *
      * @param fileName
      * @return
      */
-    /*public String preview(String fileName){
+    public String preview(String fileName) {
         // 查看文件地址
-        GetPresignedObjectUrlArgs build = new GetPresignedObjectUrlArgs().builder().bucket(prop.getBucketName()).object(fileName).method(Method.GET).build();
+        GetPresignedObjectUrlArgs build = GetPresignedObjectUrlArgs.builder().bucket(prop.bucketName).object(fileName).method(Method.GET).build();
         try {
-            String url = minioClient.getPresignedObjectUrl(build);
-            return url;
+            return minioClient.getPresignedObjectUrl(build);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
-    }*/
+    }
 
     /**
      * 文件下载
@@ -182,18 +187,19 @@ public class MinioUtils {
 
     /**
      * 删除
+     *
      * @param fileName
      * @return
      * @throws Exception
      */
-    /*public boolean remove(String fileName){
+    public boolean remove(String fileName) {
         try {
-            minioClient.removeObject( RemoveObjectArgs.builder().bucket(prop.getBucketName()).object(fileName).build());
-        }catch (Exception e){
+            minioClient.removeObject(RemoveObjectArgs.builder().bucket(prop.bucketName).object(fileName).build());
+        } catch (Exception e) {
             return false;
         }
         return true;
-    }*/
+    }
 
 }
 

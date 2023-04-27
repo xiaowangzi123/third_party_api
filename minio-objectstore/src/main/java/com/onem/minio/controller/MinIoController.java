@@ -3,7 +3,11 @@ package com.onem.minio.controller;
 import com.onem.minio.utils.MinioUtils;
 import io.minio.messages.Bucket;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -43,11 +47,35 @@ public class MinIoController {
         return "成功";
     }
 
-
     @PostMapping("/bucket/list")
     public String bucketList() {
         List<Bucket> allBuckets = minioUtils.getAllBuckets();
-        log.info("是否删除成功：{}",JSON.toJSONString(allBuckets));
+        log.info("桶数量：{}",allBuckets.size());
+        allBuckets.forEach(bucket -> {
+            System.out.println(bucket.name());
+        });
         return "成功";
+    }
+
+    @PostMapping("/upload/file")
+    public String uploadFile(@RequestParam("file") MultipartFile file) {
+        String upload = minioUtils.upload(file);
+        log.info("路径：{}", upload);
+        return upload;
+    }
+
+    @PostMapping("/file/preview")
+    public String uploadFile(@RequestParam("fileName") String fileName) {
+        String upload = minioUtils.preview(fileName);
+        log.info("路径地址：{}", upload);
+        return upload;
+    }
+
+
+    @PostMapping("/delete")
+    public boolean deleteFile(@RequestParam("fileName") String fileName) {
+        boolean upload = minioUtils.remove(fileName);
+        log.info("路径地址：{}", upload);
+        return upload;
     }
 }
