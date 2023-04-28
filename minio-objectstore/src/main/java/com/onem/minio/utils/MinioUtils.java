@@ -4,12 +4,14 @@ import com.onem.minio.config.MinioConfig;
 import io.minio.*;
 import io.minio.http.Method;
 import io.minio.messages.Bucket;
+import io.minio.messages.Item;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -170,9 +172,9 @@ public class MinioUtils {
      * 查看文件对象
      * @return 存储bucket内文件对象信息
      */
-    /*public List<Item> listObjects() {
+    public List<Item> listObjects() {
         Iterable<Result<Item>> results = minioClient.listObjects(
-                ListObjectsArgs.builder().bucket(prop.getBucketName()).build());
+                ListObjectsArgs.builder().bucket(prop.bucketName).build());
         List<Item> items = new ArrayList<>();
         try {
             for (Result<Item> result : results) {
@@ -183,7 +185,7 @@ public class MinioUtils {
             return null;
         }
         return items;
-    }*/
+    }
 
     /**
      * 删除
