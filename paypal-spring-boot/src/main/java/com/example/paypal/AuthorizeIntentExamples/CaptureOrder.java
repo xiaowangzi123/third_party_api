@@ -1,3 +1,4 @@
+/*
 package com.example.paypal.AuthorizeIntentExamples;
 
 import com.paypal.PayPalClient;
@@ -13,23 +14,27 @@ import java.io.IOException;
 
 public class CaptureOrder extends PayPalClient {
 
-	/**
+	*/
+/**
 	 * Creating empty body for capture request
 	 *
 	 * @return OrderRequest request with empty body
-	 */
+	 *//*
+
 	public OrderRequest buildRequestBody() {
 		return new OrderRequest();
 	}
 
-	/**
+	*/
+/**
 	 * Method to capture order after authorization
 	 *
 	 * @param authId Authorization ID from authorizeOrder response
 	 * @param debug  true = print response data
 	 * @return HttpResponse<Capture> response received from API
 	 * @throws IOException Exceptions from API if any
-	 */
+	 *//*
+
 	public HttpResponse<Capture> captureOrder(String authId, boolean debug) throws IOException {
 		AuthorizationsCaptureRequest request = new AuthorizationsCaptureRequest(authId);
 		request.requestBody(buildRequestBody());
@@ -48,13 +53,15 @@ public class CaptureOrder extends PayPalClient {
 		return response;
 	}
 
-	/**
+	*/
+/**
 	 * This is the driver function which invokes the captureOrder function to
 	 * perform capture on authorization. Authorization Id should be replaced with
 	 * the valid authorization id.
 	 *
 	 * @param args
-	 */
+	 *//*
+
 	public static void main(String[] args) {
 		try {
 			new CaptureOrder().captureOrder("<<REPLACE-WITH-VALID-AUTHORIZATION-ID>>", true);
@@ -64,3 +71,4 @@ public class CaptureOrder extends PayPalClient {
 	}
 
 }
+*/

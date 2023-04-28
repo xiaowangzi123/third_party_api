@@ -1,3 +1,4 @@
+/*
 package com.example.paypal.AuthorizeIntentExamples;
 import com.paypal.http.HttpResponse;
 import com.paypal.orders.LinkDescription;
@@ -66,3 +67,4 @@ public class RunAll {
         }
     }
 }
+*/

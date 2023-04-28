@@ -1,3 +1,4 @@
+/*
 package com.example.paypal.CaptureIntentExamples;
 
 import com.paypal.PayPalClient;
@@ -10,17 +11,20 @@ import java.io.IOException;
 
 public class CaptureOrder extends PayPalClient {
 
-	/**
+	*/
+/**
 	 * Creating empty body for capture request. We can set the payment source if
 	 * required.
 	 *
 	 * @return OrderRequest request with empty body
-	 */
+	 *//*
+
 	public OrderRequest buildRequestBody() {
 		return new OrderRequest();
 	}
 
-	/**
+	*/
+/**
 	 * Method to capture order after creation. Valid approved order Id should be
 	 * passed an argument to this method.
 	 *
@@ -28,7 +32,8 @@ public class CaptureOrder extends PayPalClient {
 	 * @param debug   true = print response data
 	 * @return HttpResponse<Order> response received from API
 	 * @throws IOException Exceptions from API if any
-	 */
+	 *//*
+
 	public HttpResponse<Order> captureOrder(String orderId, boolean debug) throws IOException {
 		OrdersCaptureRequest request = new OrdersCaptureRequest(orderId);
 		request.requestBody(buildRequestBody());
@@ -57,12 +62,14 @@ public class CaptureOrder extends PayPalClient {
 		return response;
 	}
 
-	/**
+	*/
+/**
 	 * Driver Function to invoke capture payment on order. Order Id should be
 	 * replaced with the valid approved order id.
 	 *
 	 * @param args
-	 */
+	 *//*
+
 	public static void main(String[] args) {
 		try {
 			new CaptureOrder().captureOrder("<<REPLACE-WITH-APPROVED-ORDER-ID>>", true);
@@ -72,3 +79,4 @@ public class CaptureOrder extends PayPalClient {
 	}
 
 }
+*/

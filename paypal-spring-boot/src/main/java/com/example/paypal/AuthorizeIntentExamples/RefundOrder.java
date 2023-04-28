@@ -1,3 +1,4 @@
+/*
 package com.example.paypal.AuthorizeIntentExamples;
 
 import com.paypal.PayPalClient;
@@ -10,12 +11,14 @@ import java.io.IOException;
 
 public class RefundOrder extends PayPalClient {
 
-	/**
+	*/
+/**
 	 * Creating empty body for Refund request. This request body can be created with
 	 * correct values as per the need.
 	 *
 	 * @return OrderRequest request with empty body
-	 */
+	 *//*
+
 	public RefundRequest buildRequestBody() {
 		RefundRequest refundRequest = new RefundRequest();
 		Money money = new Money();
@@ -25,14 +28,16 @@ public class RefundOrder extends PayPalClient {
 		return refundRequest;
 	}
 
-	/**
+	*/
+/**
 	 * Method to Refund the Capture. valid capture Id should be passed.
 	 *
 	 * @param captureId Capture ID from authorizeOrder response
 	 * @param debug     true = print response data
 	 * @return HttpResponse<Capture> response received from API
 	 * @throws IOException Exceptions from API if any
-	 */
+	 *//*
+
 	public HttpResponse<Refund> refundOrder(String captureId, boolean debug) throws IOException {
 		CapturesRefundRequest request = new CapturesRefundRequest(captureId);
 		request.prefer("return=representation");
@@ -52,13 +57,15 @@ public class RefundOrder extends PayPalClient {
 		return response;
 	}
 
-	/**
+	*/
+/**
 	 * This is the driver function which initiates capture refund.
 	 *
 	 * Capture Id should be replaced with an valid capture id.
 	 *
 	 * @param args
-	 */
+	 *//*
+
 	public static void main(String[] args) {
 		try {
 			new RefundOrder().refundOrder("<<REPLACE-WITH-VALID-CAPTURE-ID>>", true);
@@ -68,3 +75,4 @@ public class RefundOrder extends PayPalClient {
 	}
 
 }
+*/

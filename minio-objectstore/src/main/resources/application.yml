@@ -1,0 +1,15 @@
+server:
+  port: 8912
+spring:
+  servlet:
+    multipart:
+      max-file-size: 4096MB
+      max-request-size: 4096MB
+  application:
+    name: minio
+
+minio:
+  endpoint: http://192.168.2.217:9000/
+  bucketName: tqe-dev
+  accessKey: bVvz8ZgUyZ4GBrQV
+  secretKey: yfkxFzvSVpFMXiBJPEQrvf3E45XrH7os

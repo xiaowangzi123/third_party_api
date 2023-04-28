@@ -1,3 +1,4 @@
+/*
 package com.example.paypal.CaptureIntentExamples;
 
 import com.paypal.PayPalClient;
@@ -12,11 +13,13 @@ import java.util.List;
 
 public class CreateOrder extends PayPalClient {
 
-	/**
+	*/
+/**
 	 * Method to generate sample create order body with <b>CAPTURE</b> intent
 	 *
 	 * @return OrderRequest with created order request
-	 */
+	 *//*
+
 	private OrderRequest buildRequestBody() {
 		OrderRequest orderRequest = new OrderRequest();
 		orderRequest.checkoutPaymentIntent("CAPTURE");
@@ -55,13 +58,15 @@ public class CreateOrder extends PayPalClient {
 		return orderRequest;
 	}
 
-	/**
+	*/
+/**
 	 * Method to create order
 	 *
 	 * @param debug true = print response data
 	 * @return HttpResponse<Order> response received from API
 	 * @throws IOException Exceptions from API if any
-	 */
+	 *//*
+
 	public HttpResponse<Order> createOrder(boolean debug) throws IOException {
 		OrdersCreateRequest request = new OrdersCreateRequest();
 		request.header("prefer","return=representation");
@@ -86,10 +91,12 @@ public class CreateOrder extends PayPalClient {
 		return response;
 	}
 
-	/**
+	*/
+/**
 	 * This is the driver function which invokes the createOrder function to create
 	 * an sample order.
-	 */
+	 *//*
+
 	public static void main(String args[]) {
 		try {
 			new CreateOrder().createOrder(true);
@@ -100,3 +107,4 @@ public class CreateOrder extends PayPalClient {
 		}
 	}
 }
+*/
