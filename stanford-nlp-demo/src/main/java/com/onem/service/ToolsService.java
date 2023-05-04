@@ -18,7 +18,9 @@ public interface ToolsService {
     /**
      * 句法标注格式：_
      */
-    String syntaxTag(String content) ;
+    String syntaxTag(String content);
+
+    String syntaxTag2(String content);
 
     /**
      * 词性标注格式:_

@@ -1,9 +1,6 @@
-package com.onem.service;
+package com.onem.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
-import com.cloudtranslation.dat.constants.DownConstants;
-import com.cloudtranslation.dat.enums.EntityEnum;
-import com.cloudtranslation.dat.util.datahandle.DataHandleUtils;
+import com.onem.service.ToolsService;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
@@ -11,18 +8,14 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations;
-import edu.stanford.nlp.trees.TypedDependency;
-import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalStructure;
 import edu.stanford.nlp.util.CoreMap;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 
 
@@ -36,13 +29,7 @@ public class ToolsServiceImpl implements ToolsService {
 
     private static final String TAIWAN_STR = "Taiwan";
 
-    @Resource
-    private RestTemplate restTemplate;
 
-    @Value("${seg.split.url}")
-    private String contentSplitUrl;
-
-    private static final String SUCCESS_CODE = "20000";
 
     @Override
     public String entityTag(String content) {
@@ -66,7 +53,6 @@ public class ToolsServiceImpl implements ToolsService {
 
     @Override
     public String syntaxTag(String content) {
-        //去掉p标签
         long t1 = System.currentTimeMillis();
         Annotation document = new Annotation(content);
         stanfordCoreNLP.annotate(document);
@@ -75,41 +61,13 @@ public class ToolsServiceImpl implements ToolsService {
         StringBuilder tagContent = new StringBuilder();
         for (CoreMap sentence : sentences) {
             Tree tree = lexicalizedParser.parse(sentence.toString());
-            ChineseGrammaticalStructure gs = new ChineseGrammaticalStructure(tree);
-            Collection<TypedDependency> tdl = gs.typedDependenciesCollapsed();
-            //获取标注后词语
-            for (TypedDependency typedDependency : tdl) {
-                //句法分析后的词语
-                String participleWord = typedDependency.dep().toString();
-                String type = typedDependency.reln().toString();
-                //单词
-                String word = participleWord.split("/")[0];
-//                        String type = participleWord.split("/")[1];
-                tagContent.append(word + "_" + type + " ");
-            }
+
             tagContent.append("\n\r");
         }
         log.info("句法标注耗时:{}", System.currentTimeMillis() - t1);
         return tagContent.toString();
     }
 
-    public BFNode convertToBFSTree(Tree coreNLPTree) {
-        String label = coreNLPTree.label().toString();
-        BFRule rule = BFRule.fromLabel(label);
-        BFNode node = new BFNode(rule);
-
-        List<Tree> children = coreNLPTree.childrenAsList();
-        if (!children.isEmpty()) {
-            List<BFNode> childNodes = new ArrayList<>();
-            for (Tree child : children) {
-                BFNode childNode = convertToBFSTree(child);
-                childNodes.add(childNode);
-            }
-            node.setChildren(childNodes);
-        }
-
-        return node;
-    }
 
     public String syntaxTag2(String content) {
         //去掉p标签

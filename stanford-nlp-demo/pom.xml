@@ -27,12 +27,6 @@
             <version>4.5.2</version>
         </dependency>
 
-        <dependency>
-            <groupId>cn.edu.bfsu</groupId>
-            <artifactId>nlp</artifactId>
-            <version>2.1</version>
-        </dependency>
-
 
         <dependency>
             <groupId>org.projectlombok</groupId>
