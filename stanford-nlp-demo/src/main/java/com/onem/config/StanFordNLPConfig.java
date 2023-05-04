@@ -1,3 +1,4 @@
+/*
 package com.onem.config;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
@@ -10,10 +11,12 @@ import java.util.Properties;
 @Component
 public class StanFordNLPConfig {
 
-   /* @Bean
+  */
+/* @Bean
     public LexicalizedParser getLexicalizedParser(){
        return LexicalizedParser.loadModel("edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz");
-    }*/
+    }*//*
+
 
     @Bean
     public StanfordCoreNLP getStanfordCoreNLP(){
@@ -22,3 +25,4 @@ public class StanFordNLPConfig {
         return new StanfordCoreNLP(props);
     }
 }
+*/
