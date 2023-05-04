@@ -1,4 +1,3 @@
-/*
 package com.onem.config;
 
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
@@ -25,4 +24,3 @@ public class StanFordNLPConfig {
         return new StanfordCoreNLP(props);
     }
 }
-*/

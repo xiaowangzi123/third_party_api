@@ -34,7 +34,8 @@ public class ConstituentExample {
         // get tree
         Tree tree = annotation.get(CoreAnnotations.SentencesAnnotation.class).get(0)
                 .get(TreeCoreAnnotations.TreeAnnotation.class);
-        System.out.println(tree);
+        String s = tree.toString();
+        System.out.println("句法--->"+s);
         Set<Constituent> treeConstituents = tree.constituents(new LabeledScoredConstituentFactory());
         for (Constituent constituent : treeConstituents) {
             if (constituent.label() != null
