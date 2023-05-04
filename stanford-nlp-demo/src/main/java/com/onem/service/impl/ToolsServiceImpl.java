@@ -1,3 +1,4 @@
+/*
 package com.onem.service.impl;
 
 import com.onem.service.ToolsService;
@@ -123,3 +124,4 @@ public class ToolsServiceImpl implements ToolsService {
 
 
 }
+*/
