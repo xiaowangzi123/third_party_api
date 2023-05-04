@@ -22,7 +22,7 @@ public class ConstituentExample {
         // set up pipeline properties
         Properties props = new Properties();
         props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse");
-        props.setProperty("pos.model", "edu/stanford/nlp/models/pos-tagger/english-left3words-distsim.tagger");
+//        props.setProperty("pos.model", "edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz");
         // set up Stanford CoreNLP pipeline
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         // build annotation for a review
