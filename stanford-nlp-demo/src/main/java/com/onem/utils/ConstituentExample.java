@@ -22,6 +22,8 @@ public class ConstituentExample {
         // set up pipeline properties
         Properties props = new Properties();
         props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse");
+//        props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse,sentiment");
+
 //        props.setProperty("pos.model", "edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz");
         // set up Stanford CoreNLP pipeline
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
@@ -32,7 +34,8 @@ public class ConstituentExample {
         // get tree
         Tree tree = annotation.get(CoreAnnotations.SentencesAnnotation.class).get(0)
                 .get(TreeCoreAnnotations.TreeAnnotation.class);
-        System.out.println(tree);
+        String s = tree.toString();
+        System.out.println("句法--->"+s);
         Set<Constituent> treeConstituents = tree.constituents(new LabeledScoredConstituentFactory());
         for (Constituent constituent : treeConstituents) {
             if (constituent.label() != null
