@@ -13,7 +13,10 @@ import edu.stanford.nlp.trees.TreeCoreAnnotations;
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 /**
@@ -60,10 +63,13 @@ public class ConstituentExample2 {
         List<String> l1 = JSON.parseArray(s, String.class);
 
         List<List> l2 = JSONArray.parseArray(s2,List.class);
+        List<List<String>> l3 = JSON.parseObject(s2, new com.alibaba.fastjson.TypeReference<List<List<String>>>(){});
         System.out.println(l1);
         System.out.println(l2);
         List<String> list = l2.get(0);
         System.out.println(list);
+        System.out.println("----------");
+        System.out.println(l3);
 
 
     }
