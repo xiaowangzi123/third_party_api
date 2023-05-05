@@ -16,7 +16,6 @@ public class StanFordNLPConfig {
         return LexicalizedParser.loadModel("edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz");
     }
 
-
     @Bean
     public StanfordCoreNLP getStanfordCoreNLP() {
         Properties props = new Properties();

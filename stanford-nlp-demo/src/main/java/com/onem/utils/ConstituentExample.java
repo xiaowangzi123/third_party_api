@@ -22,7 +22,7 @@ public class ConstituentExample {
         // set up pipeline properties
         Properties props = new Properties();
         props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse");
-        props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse,sentiment");
+//        props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse,sentiment");
 
 //        props.setProperty("pos.model", "edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz");
         // set up Stanford CoreNLP pipeline
