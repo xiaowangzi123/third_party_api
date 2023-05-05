@@ -1,13 +1,13 @@
 package com.onem.utils;
 
+import com.onem.Constants;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import edu.stanford.nlp.trees.Constituent;
-import edu.stanford.nlp.trees.LabeledScoredConstituentFactory;
-import edu.stanford.nlp.trees.Tree;
-import edu.stanford.nlp.trees.TreeCoreAnnotations;
+import edu.stanford.nlp.trees.*;
+import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalStructure;
 
+import java.util.Collection;
 import java.util.Properties;
 import java.util.Set;
 
@@ -28,14 +28,36 @@ public class ConstituentExample {
         // set up Stanford CoreNLP pipeline
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         // build annotation for a review
-        Annotation annotation = new Annotation("The small red car turned very quickly around the corner.");
+//        Annotation annotation = new Annotation("The small red car turned very quickly around the corner.");
+        Annotation annotation = new Annotation(Constants.CONTENT01);
         // annotate
         pipeline.annotate(annotation);
+
+
         // get tree
         Tree tree = annotation.get(CoreAnnotations.SentencesAnnotation.class).get(0)
                 .get(TreeCoreAnnotations.TreeAnnotation.class);
         String s = tree.toString();
-        System.out.println("句法--->"+s);
+        System.out.println("句法--->" + s);
+
+        //句法分析树
+        String s1 = tree.pennString();
+        System.out.println("句法分析树--->");
+        System.out.println(s1);
+
+//        tree.pennPrint();
+
+        ChineseGrammaticalStructure gs = new ChineseGrammaticalStructure(tree);
+        Collection<TypedDependency> tdl = gs.typedDependenciesCollapsed();
+
+        System.out.println("中文依存句法分析--->");
+        System.out.println(tdl.toString());
+
+        EnglishGrammaticalStructure egs = new EnglishGrammaticalStructure(tree);
+        Collection<TypedDependency> td = egs.typedDependenciesCollapsed();
+        System.out.println("英语依存句法分析--->");
+        System.out.println(td.toString());
+
         Set<Constituent> treeConstituents = tree.constituents(new LabeledScoredConstituentFactory());
         for (Constituent constituent : treeConstituents) {
             if (constituent.label() != null
