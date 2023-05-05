@@ -1,5 +1,6 @@
 package com.onem.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.onem.Constants;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
@@ -8,8 +9,10 @@ import edu.stanford.nlp.trees.*;
 import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalStructure;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author wyq
@@ -44,6 +47,7 @@ public class ConstituentExample {
         String s1 = tree.pennString();
         System.out.println("句法分析树--->");
         System.out.println(s1);
+        System.out.println(JSON.toJSONString(s1));
 
 //        tree.pennPrint();
 
@@ -56,7 +60,15 @@ public class ConstituentExample {
         EnglishGrammaticalStructure egs = new EnglishGrammaticalStructure(tree);
         Collection<TypedDependency> td = egs.typedDependenciesCollapsed();
         System.out.println("英语依存句法分析--->");
-        System.out.println(td.toString());
+        String s2 = td.toString();
+        System.out.println(s2);
+        System.out.println(JSON.toJSONString(s2));
+        List<String> collect = td.stream().map(Object::toString).collect(Collectors.toList());
+
+        System.out.println(collect);
+        for (TypedDependency t : td) {
+            System.out.println(t.toString());
+        }
 
         Set<Constituent> treeConstituents = tree.constituents(new LabeledScoredConstituentFactory());
         for (Constituent constituent : treeConstituents) {
