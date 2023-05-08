@@ -2,7 +2,7 @@ package com.onem.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.onem.Constants;
+import com.onem.constant.ContentConstants;
 import com.onem.entity.SyntaxResultDto;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
@@ -37,7 +37,7 @@ public class ConstituentExample2 {
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         // build annotation for a review
 //        Annotation annotation = new Annotation("The small red car turned very quickly around the corner.");
-        Annotation annotation = new Annotation(Constants.CONTENT01);
+        Annotation annotation = new Annotation(ContentConstants.CONTENT01);
         // annotate
         pipeline.annotate(annotation);
 

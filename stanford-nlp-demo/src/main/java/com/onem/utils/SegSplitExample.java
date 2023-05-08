@@ -1,6 +1,7 @@
 package com.onem.utils;
 
-import com.onem.Constants;
+import com.alibaba.fastjson.JSON;
+import com.onem.constant.ContentConstants;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
@@ -9,6 +10,7 @@ import edu.stanford.nlp.util.CoreMap;
 
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * @author wyq
@@ -28,12 +30,16 @@ public class SegSplitExample {
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         // build annotation for a review
 //        Annotation annotation = new Annotation("The small red car turned very quickly around the corner.");
-        Annotation annotation = new Annotation(Constants.CONTENT01);
+//        Annotation annotation = new Annotation(ContentConstants.CONTENT01);
+        Annotation annotation = new Annotation(ContentConstants.CONTENT02);
         // annotate
         pipeline.annotate(annotation);
 
 
         List<CoreMap> coreMaps = annotation.get(CoreAnnotations.SentencesAnnotation.class);
+        List<String> collect = annotation.get(CoreAnnotations.SentencesAnnotation.class).stream().map(a -> a.get(CoreAnnotations.TextAnnotation.class)).collect(Collectors.toList());
+        System.out.println(JSON.toJSONString(collect));
+
         for (CoreMap map : coreMaps) {
             System.out.println(map.keySet());
             String s = map.get(CoreAnnotations.TextAnnotation.class);

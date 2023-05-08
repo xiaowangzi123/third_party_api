@@ -1,7 +1,7 @@
 package com.onem.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.onem.Constants;
+import com.onem.constant.ContentConstants;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
@@ -32,7 +32,7 @@ public class ConstituentExample {
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         // build annotation for a review
 //        Annotation annotation = new Annotation("The small red car turned very quickly around the corner.");
-        Annotation annotation = new Annotation(Constants.CONTENT01);
+        Annotation annotation = new Annotation(ContentConstants.CONTENT01);
         // annotate
         pipeline.annotate(annotation);
 
