@@ -25,18 +25,23 @@ public class SegSplitExample {
         props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse");
 //        props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse,sentiment");
 
+//         StanfordCoreNLP pipeline = new StanfordCoreNLP(
+//        PropertiesUtils.asProperties(
+//            "annotators", "tokenize,ssplit",
+//            "tokenize.language", "en"));
 //        props.setProperty("pos.model", "edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz");
         // set up Stanford CoreNLP pipeline
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         // build annotation for a review
 //        Annotation annotation = new Annotation("The small red car turned very quickly around the corner.");
-//        Annotation annotation = new Annotation(ContentConstants.CONTENT01);
-        Annotation annotation = new Annotation(ContentConstants.CONTENT02);
+        Annotation annotation = new Annotation(ContentConstants.CONTENT01);
+//        Annotation annotation = new Annotation(ContentConstants.CONTENT02);
         // annotate
         pipeline.annotate(annotation);
 
 
         List<CoreMap> coreMaps = annotation.get(CoreAnnotations.SentencesAnnotation.class);
+        //获取分句
         List<String> collect = annotation.get(CoreAnnotations.SentencesAnnotation.class).stream().map(a -> a.get(CoreAnnotations.TextAnnotation.class)).collect(Collectors.toList());
         System.out.println(JSON.toJSONString(collect));
 
