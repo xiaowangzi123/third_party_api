@@ -17,7 +17,6 @@ public class Test {
         SyntaxResultDto dto = new SyntaxResultDto();
 
         List<String> a1 = new ArrayList<String>();
-        a1.add();
         List<List<String>> dependencyList=new ArrayList<>();
 
 
