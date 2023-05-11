@@ -39,6 +39,9 @@ target/
 out/
 test-output
 .gradletasknamecache
+*.mvn/
+mvnw/
+
 
 # Eclipse
 .classpath
