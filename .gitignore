@@ -41,7 +41,8 @@ test-output
 .gradletasknamecache
 *.mvn/
 mvnw/
-
+mvnw
+mvnw.cmd
 
 # Eclipse
 .classpath
