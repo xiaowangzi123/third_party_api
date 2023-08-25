@@ -1,18 +1,22 @@
 package com.onem.demo.trans;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import java.io.IOException;
+
 /**
  * @author wyq
  * @date 2022/10/27
  * @desc
  */
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import okhttp3.*;
-
-import java.io.IOException;
 
 public class TranslatorText {
     private static String key = "548c2913c38e4bbe840380c9067a5282";
@@ -32,11 +36,11 @@ public class TranslatorText {
         RequestBody body = RequestBody.create(mediaType,
                 "[{\"Text\": \"I would really like to drive your car around the block a few times!\"}]");
         Request request = new Request.Builder()
-                .url("https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=fr&to=zu")
+                .url("https://api.translator.azure.cn/translate?api-version=3.0&from=en&to=fr&to=zu")
                 .post(body)
-                .addHeader("Ocp-Apim-Subscription-Key", "548c2913c38e4bbe840380c9067a5282")
+                .addHeader("Ocp-Apim-Subscription-Key", key)
                 // location required if you're using a multi-service or regional (not global) resource.
-                .addHeader("Ocp-Apim-Subscription-Region", "chinaeast2")
+                .addHeader("Ocp-Apim-Subscription-Region", location)
                 .addHeader("Content-type", "application/json")
                 .build();
         Response response = client.newCall(request).execute();

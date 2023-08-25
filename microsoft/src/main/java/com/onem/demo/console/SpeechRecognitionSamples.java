@@ -1,3 +1,4 @@
+/*
 package com.onem.demo.console;
 
 import com.microsoft.cognitiveservices.speech.*;
@@ -859,14 +860,16 @@ public class SpeechRecognitionSamples {
 
         // Subscribes to events.
 
-        /* Uncomment this to see intermediate recognition results. Since this is verbose and the WAV file is long, it is commented out by default in this sample.
+        */
+/* Uncomment this to see intermediate recognition results. Since this is verbose and the WAV file is long, it is commented out by default in this sample.
         speechRecognizer.recognizing.addEventListener((s, e) -> {
             AutoDetectSourceLanguageResult autoDetectSourceLanguageResult = AutoDetectSourceLanguageResult.fromResult(e.getResult());
             String language = autoDetectSourceLanguageResult.getLanguage();
             System.out.println(" RECOGNIZING: Text = " + e.getResult().getText());
             System.out.println(" RECOGNIZING: Language = " + language);
         });
-        */
+        *//*
+
 
         speechRecognizer.recognized.addEventListener((s, e) -> {
             AutoDetectSourceLanguageResult autoDetectSourceLanguageResult = AutoDetectSourceLanguageResult.fromResult(e.getResult());
@@ -1455,3 +1458,4 @@ public class SpeechRecognitionSamples {
         recognizer.close();
     }
 }
+*/

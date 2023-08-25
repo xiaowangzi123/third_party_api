@@ -1,9 +1,11 @@
+/*
 package com.onem.demo.trans;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import okhttp3.OkHttpClient;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.apache.tomcat.util.http.parser.MediaType;
@@ -12,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.io.IOException;
 
 public class Translate {
-    /*  Configure the local environment:
+    */
+/*  Configure the local environment:
      * Set the TRANSLATOR_TEXT_RESOURCE_KEY,TRANSLATOR_TEXT_REGION and TRANSLATOR_TEXT_ENDPOINT environment
      * variables on your local machine using the appropriate method for your
      * preferred shell (Bash, PowerShell, Command Prompt, etc.).
@@ -23,7 +26,8 @@ public class Translate {
      * If the environment variable is created after the application is launched
      * in a console or with Visual Studio, the shell (or Visual Studio) needs to be
      * closed and reloaded to take the environment variable into account.
-     */
+     *//*
+
 
 //    private static String key = "96a2ae701e6d43aaab86f50ee57f51e8";
 //    private static String location = "chinaeast2";
@@ -71,4 +75,4 @@ public class Translate {
             System.out.println(e);
         }
     }
-}
+}*/

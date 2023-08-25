@@ -1,3 +1,4 @@
+/*
 package com.onem.demo.console;
 import com.microsoft.cognitiveservices.speech.*;
 import org.apache.commons.pool2.PooledObject;
@@ -58,9 +59,11 @@ public class SpeechSynthesisScenarioSamples {
         }
     }
 
-    /**
+    */
+/**
      * A synthesizer class to handle concurrent request
-     */
+     *//*
+
     public static class SpeechSynthesisService {
 
         // Update the SSML pattern to control the synthesis voice, style and rate.
@@ -82,12 +85,14 @@ public class SpeechSynthesisScenarioSamples {
                     poolConfig);
         }
 
-        /**
+        */
+/**
          * A thread-safe method to synthesize content
          * @param content The text to synthesize
          * @param voice The voice name, e.g. en-US-JennyNeural
          * @return The first byte latency and processing time, in millisecond.
-         */
+         *//*
+
         public long[] synthesis(String content, String voice) {
             long[] latency = new long[2];
             try {
@@ -185,3 +190,4 @@ public class SpeechSynthesisScenarioSamples {
         );
     }
 }
+*/

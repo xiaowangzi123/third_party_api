@@ -1,3 +1,4 @@
+/*
 package com.onem.demo.quickstart;
 
 import com.alibaba.fastjson.JSON;
@@ -16,10 +17,12 @@ import java.util.Date;
 import java.util.Scanner;
 
 
+*/
 /**
  * Quickstart: synthesize speech using the Speech SDK for Java.
  * 微软语音生成
- */
+ *//*
+
 public class MainTest {
     private static final String SPEECH_SUBSCRIPTION_KEY = "ed7790c795eb47d3a7f1a272ecea684c";
 //    private static final String SPEECH_SUBSCRIPTION_KEY = "a6bfa21a746648caaf84f977fb07f45f";
@@ -34,16 +37,20 @@ public class MainTest {
 //        outputSpeaker();
 //        textToSpeech();
 //
-       /* for (int i = 0; i < 10; i++) {
-        }*/
+       */
+/* for (int i = 0; i < 10; i++) {
+        }*//*
+
         XmlToSpeech();
 
 
     }
 
-    /**
+    */
+/**
      * 输出到扬声器
-     */
+     *//*
+
     public static void outputSpeaker() {
         SpeechConfig speechConfig = SpeechConfig.fromSubscription(SPEECH_SUBSCRIPTION_KEY, SERVICE_REGION);
         AudioConfig audioConfig = AudioConfig.fromDefaultSpeakerOutput();
@@ -153,3 +160,4 @@ public class MainTest {
 
 }
 
+*/
