@@ -1,3 +1,4 @@
+/*
 package com.onem.demo.console;
 import java.util.Scanner;
 
@@ -214,3 +215,4 @@ public class Main {
         }
     }
 }
+*/

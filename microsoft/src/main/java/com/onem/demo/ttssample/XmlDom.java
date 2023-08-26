@@ -1,10 +1,13 @@
+/*
 package com.onem.demo.ttssample;
 
+*/
 /**
  * @author wyq
  * @date 2022/4/24
  * @desc
- */
+ *//*
+
 
 import com.microsoft.demo.entity.SpeakDom;
 import org.w3c.dom.Document;
@@ -132,3 +135,4 @@ public class XmlDom {
         }
     }
 }
+*/

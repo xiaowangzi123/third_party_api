@@ -1,20 +1,22 @@
 package com.onem.demo.trans;
 
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.*;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.*;
-import org.apache.commons.lang3.time.DateUtils;
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import org.springframework.util.CollectionUtils;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 public class TranslatorText3 {
@@ -33,7 +35,7 @@ public class TranslatorText3 {
         HttpUrl httpUrl = new HttpUrl.Builder()
                 .scheme("https")
                 .host("api.translator.azure.cn")
-                .addPathSegment("/translate")
+                .addPathSegment("translate")
                 .addQueryParameter("api-version", "3.0")
                 .addQueryParameter("from", "en")
 //                .addQueryParameter("from", "en_US")
