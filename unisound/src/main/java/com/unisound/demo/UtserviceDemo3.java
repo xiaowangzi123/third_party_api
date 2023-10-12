@@ -38,6 +38,7 @@ public class UtserviceDemo3 {
 //    static String secret = "3babad6e0507b1a86ec7037c09c56e1b";
     public static final String PARAM_NAME_ERROR_CODE = "error_code";
 
+    //直接调用厦门语音识别引擎
     static String appkey = "45gn7md5n44aak7a57rdjud3b5l4xdgv75saomys";
     static String secret = "ba24a917a38e11e49c6fb82a72e0d896";
 

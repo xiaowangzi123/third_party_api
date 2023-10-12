@@ -1,6 +1,6 @@
 package com.unisound.demo.service.impl;
 
-import com.unisound.iot.afasr.demo.service.UnisoundTranscriptionService;
+import com.unisound.demo.service.UnisoundTranscriptionService;
 
 import java.util.List;
 import java.util.Map;

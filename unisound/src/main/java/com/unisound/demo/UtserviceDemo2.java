@@ -2,7 +2,7 @@ package com.unisound.demo;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.unisound.iot.afasr.demo.entity.Result;
+import com.unisound.demo.entity.Result;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
