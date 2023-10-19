@@ -9,6 +9,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -16,6 +17,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.net.URI;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author wyq
@@ -62,6 +67,42 @@ public class SpeechMaticsServiceImpl implements SpeechMaticsService {
             JSONObject object = JSONObject.parseObject(responseEntity.getBody());
             return object.getString("id");
         }
+        return null;
+    }
+
+    @Override
+    public List<String> jobIdList() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(apiKey);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        RequestEntity<Void> requestEntity = new RequestEntity<>(headers, HttpMethod.GET, URI.create(url + "v2/jobs"));
+        ResponseEntity<String> responseEntity = restTemplate.exchange(requestEntity, String.class);
+        String response = responseEntity.getBody();
+        log.info("{}", response);
+        return null;
+    }
+
+    @Override
+    public Objects getSubtitles(String taskId) {
+        // 设置请求头
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.add("Authorization", "Bearer HDQGKgwNjMta4YzZSxUsqQ6prFr0skTF");
+
+        // 创建请求体（如果需要传递请求参数）
+        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+        requestBody.add("format", "srt");
+
+        // 创建RequestEntity
+        String queryUrl = String.format("%sv2/jobs/%s/transcript", url, taskId);
+        RequestEntity<?> requestEntity = new RequestEntity<>(requestBody, headers, HttpMethod.GET, URI.create(queryUrl));
+
+        // 发送请求
+        ResponseEntity<String> responseEntity = restTemplate.exchange(requestEntity, String.class);
+
+        // 获取响应数据
+        String response = responseEntity.getBody();
+        System.out.println(response);
         return null;
     }
 

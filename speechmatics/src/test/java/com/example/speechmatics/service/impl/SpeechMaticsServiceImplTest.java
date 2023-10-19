@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 @Slf4j
@@ -23,6 +24,19 @@ public class SpeechMaticsServiceImplTest {
     public void test01() {
         String filePath = "D:\\TestAudioVideo\\20Eng.wav";
         String langCode = "en";
-        speechMaticsService.createNewJob(filePath, langCode);
+        String newJob = speechMaticsService.createNewJob(filePath, langCode);
+        System.out.println(newJob);
     }
+
+    @Test
+    public void listAllJobs() {
+        List<String> list = speechMaticsService.jobIdList();
+        System.out.println(list);
+    }
+
+    @Test
+    public void getTest() {
+        speechMaticsService.getSubtitles("91zzzpcs0m");
+    }
+
 }

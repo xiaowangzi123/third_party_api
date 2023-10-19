@@ -1,5 +1,8 @@
 package com.example.speechmatics.service;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
  * @author wyq
  * @date 2023/10/19
@@ -11,4 +14,7 @@ public interface SpeechMaticsService {
 
     String createNewJob(String filePath,String langCode);
 
+    List<String> jobIdList();
+
+    Objects getSubtitles(String taskId);
 }
