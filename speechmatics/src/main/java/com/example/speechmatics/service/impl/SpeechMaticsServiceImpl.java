@@ -51,8 +51,15 @@ public class SpeechMaticsServiceImpl implements SpeechMaticsService {
         transcription_config.put("operating_point", "enhanced");
         transcription_config.put("language", "en");
         config.put("transcription_config", transcription_config);
-//        bodyMap.add("config", "{\"type\":\"transcription\",\"transcription_config\":{\"operating_point\":\"enhanced\",\"language\":\"en\"}}");
+        JSONObject output_config = new JSONObject();
+        JSONObject srt_overrides = new JSONObject();
+        srt_overrides.put("max_line_length", 100);
+        srt_overrides.put("max_lines", 1);
+        output_config.put("srt_overrides", srt_overrides);
+        config.put("output_config", output_config);
+
         bodyMap.add("config", config.toJSONString());
+//        bodyMap.add("config", "{\"type\":\"transcription\",\"transcription_config\":{\"operating_point\":\"enhanced\",\"language\":\"en\"}}");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -79,8 +86,41 @@ public class SpeechMaticsServiceImpl implements SpeechMaticsService {
         ResponseEntity<String> responseEntity = restTemplate.exchange(requestEntity, String.class);
         String response = responseEntity.getBody();
         log.info("{}", response);
+
+
         return null;
     }
+
+    @Override
+    public void jobProgress(String taskId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(apiKey);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        RequestEntity<Void> requestEntity = new RequestEntity<>(headers, HttpMethod.GET, URI.create(url + "v2/jobs/"+taskId));
+        boolean flag = true;
+        while (flag){
+            ResponseEntity<String> responseEntity = restTemplate.exchange(requestEntity, String.class);
+            System.out.println("result:--->"+responseEntity);
+            if (responseEntity.getStatusCode().is2xxSuccessful()){
+                JSONObject jobJson = JSONObject.parseObject(responseEntity.getBody());
+                String string = jobJson.getJSONObject("job").getString("status");
+                if ("done".equals(string)){
+                    flag = false;
+                }else {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }else {
+                flag = false;
+            }
+
+
+        }
+    }
+
 
     @Override
     public Objects getSubtitles(String taskId) {
@@ -92,9 +132,11 @@ public class SpeechMaticsServiceImpl implements SpeechMaticsService {
         // 创建请求体（如果需要传递请求参数）
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
         requestBody.add("format", "srt");
+        //没有起作用
+//        requestBody.add("segmentation", "true");
 
         // 创建RequestEntity
-        String queryUrl = String.format("%sv2/jobs/%s/transcript", url, taskId);
+        String queryUrl = String.format("%sv2/jobs/%s/transcript?format=srt", url, taskId);
         RequestEntity<?> requestEntity = new RequestEntity<>(requestBody, headers, HttpMethod.GET, URI.create(queryUrl));
 
         // 发送请求
@@ -113,6 +155,16 @@ public class SpeechMaticsServiceImpl implements SpeechMaticsService {
         transcription_config.put("operating_point", "enhanced");
         transcription_config.put("language", "en");
         config.put("transcription_config", transcription_config);
+        JSONObject output_config = new JSONObject();
+        JSONObject srt_overrides = new JSONObject();
+        srt_overrides.put("max_line_length", 100);
+        srt_overrides.put("max_lines", 1);
+        output_config.put("output_config", srt_overrides);
+        config.put("output_config", output_config);
+
         System.out.println(config.toJSONString());
+
+        System.out.println("of weakness,".length());
+        System.out.println("And like most people in my community, I had the misconception that depression was a sign".length());
     }
 }

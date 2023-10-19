@@ -16,5 +16,7 @@ public interface SpeechMaticsService {
 
     List<String> jobIdList();
 
+    void jobProgress(String taskId);
+
     Objects getSubtitles(String taskId);
 }

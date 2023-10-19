@@ -1,5 +1,6 @@
 package com.example.speechmatics.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.example.speechmatics.service.SpeechMaticsService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -22,10 +23,15 @@ public class SpeechMaticsServiceImplTest {
 
     @Test
     public void test01() {
-        String filePath = "D:\\TestAudioVideo\\20Eng.wav";
+//        String filePath = "D:\\TestAudioVideo\\20Eng.wav";
+        String filePath = "D:\\TestAudioVideo\\7_49En.mp4";
         String langCode = "en";
         String newJob = speechMaticsService.createNewJob(filePath, langCode);
-        System.out.println(newJob);
+        System.out.println("taskId--->" + newJob);
+        if (StrUtil.isNotBlank(newJob)){
+            speechMaticsService.jobProgress(newJob);
+        }
+
     }
 
     @Test
@@ -36,7 +42,7 @@ public class SpeechMaticsServiceImplTest {
 
     @Test
     public void getTest() {
-        speechMaticsService.getSubtitles("91zzzpcs0m");
+        speechMaticsService.getSubtitles("808mq47t8f");
     }
 
 }
