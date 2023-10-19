@@ -1,7 +1,10 @@
 package com.example.speechmatics.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSONObject;
+import com.example.speechmatics.entity.Subtitle;
 import com.example.speechmatics.service.SpeechMaticsService;
+import com.example.speechmatics.utils.TimeConvertUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -18,9 +21,12 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @author wyq
@@ -31,6 +37,8 @@ import java.util.Objects;
 @Slf4j
 @Service
 public class SpeechMaticsServiceImpl implements SpeechMaticsService {
+    private final Pattern PATTERN = Pattern.compile("(\\d{2}):(\\d{2}):(\\d{2}),(\\d{3})");
+
     @Value("${speech.matics.url}")
     private String url;
     @Value("${speech.matics.apiKey}")
@@ -123,7 +131,7 @@ public class SpeechMaticsServiceImpl implements SpeechMaticsService {
 
 
     @Override
-    public Objects getSubtitles(String taskId) {
+    public List<Subtitle> getSubtitles(String taskId) {
         // 设置请求头
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -144,8 +152,36 @@ public class SpeechMaticsServiceImpl implements SpeechMaticsService {
 
         // 获取响应数据
         String response = responseEntity.getBody();
+        if (StrUtil.isNotBlank(response)){
+            String[] split = response.split("\n");
+            List<String> collect = Arrays.stream(split).filter(StrUtil::isNotBlank).collect(Collectors.toList());
+            List<Subtitle> subtitles = dataConvert(collect);
+            return subtitles;
+        }
         System.out.println(response);
         return null;
+    }
+
+    public List<Subtitle> dataConvert(List<String> list){
+        List<Subtitle> res = new ArrayList<>();
+        for (int i = 0; i < list.size() - 1; i++) {
+            String line = list.get(i);
+            if (PATTERN.matcher(line).find()) {
+                Subtitle subtitle = new Subtitle();
+                String[] times = line.split(" --> ");
+                if (times.length != 2 || !PATTERN.matcher(times[0]).find() || !PATTERN.matcher(times[1]).find()) {
+//                    throw new ServiceException("srt文件时间格式有误，错误在" + strs[i] + " 附近，请检查");
+                }
+
+                subtitle.setStartTime(TimeConvertUtil.dateParseRegExp(times[0].replace(",", ".")));
+                subtitle.setEndTime(TimeConvertUtil.dateParseRegExp(times[1].replace(",", ".")));
+                subtitle.setText(list.get(i + 1));
+
+                res.add(subtitle);
+                i++;
+            }
+        }
+        return res;
     }
 
     public static void main(String[] args) {

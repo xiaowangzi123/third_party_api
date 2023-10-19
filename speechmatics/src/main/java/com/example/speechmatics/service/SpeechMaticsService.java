@@ -1,7 +1,8 @@
 package com.example.speechmatics.service;
 
+import com.example.speechmatics.entity.Subtitle;
+
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author wyq
@@ -18,5 +19,5 @@ public interface SpeechMaticsService {
 
     void jobProgress(String taskId);
 
-    Objects getSubtitles(String taskId);
+    List<Subtitle> getSubtitles(String taskId);
 }

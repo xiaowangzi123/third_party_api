@@ -1,6 +1,7 @@
 package com.example.speechmatics.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.example.speechmatics.entity.Subtitle;
 import com.example.speechmatics.service.SpeechMaticsService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class SpeechMaticsServiceImplTest {
         String langCode = "en";
         String newJob = speechMaticsService.createNewJob(filePath, langCode);
         System.out.println("taskId--->" + newJob);
-        if (StrUtil.isNotBlank(newJob)){
+        if (StrUtil.isNotBlank(newJob)) {
             speechMaticsService.jobProgress(newJob);
         }
 
@@ -42,7 +43,9 @@ public class SpeechMaticsServiceImplTest {
 
     @Test
     public void getTest() {
-        speechMaticsService.getSubtitles("808mq47t8f");
+        List<Subtitle> list = speechMaticsService.getSubtitles("808mq47t8f");
+//        List<Subtitle> list = speechMaticsService.getSubtitles("syrz9towco");
+        System.out.println(list);
     }
 
 }
