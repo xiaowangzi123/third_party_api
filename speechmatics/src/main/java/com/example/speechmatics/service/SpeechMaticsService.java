@@ -5,9 +5,7 @@ import com.example.speechmatics.entity.Subtitle;
 import java.util.List;
 
 /**
- * @author wyq
- * @date 2023/10/19
- * @desc
+ * SpeechMatics语音识别
  */
 
 
