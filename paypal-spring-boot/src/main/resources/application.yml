@@ -1,3 +1,5 @@
+server:
+  port: 8041
 spring:
   application:
     name: paypal
@@ -15,4 +17,3 @@ spring:
         starttls:
           enable: true
           required: true
-
