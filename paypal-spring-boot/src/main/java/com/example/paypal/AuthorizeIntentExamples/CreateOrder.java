@@ -1,5 +1,6 @@
 package com.example.paypal.AuthorizeIntentExamples;
 
+import com.example.paypal.enums.ItemCategoryEnum;
 import com.example.paypal.example.PayPalClient;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.serializer.Json;
@@ -25,7 +26,13 @@ import java.util.List;
 public class CreateOrder extends PayPalClient {
 
 
-
+	/**
+	 * 金额规则：
+	 * 总金额=商品总价+运费+handling+税总金额-运费折扣
+	 * 商品总价=各（商品单价x数量）的累加
+	 * 税总金额=各（商品税x数量）的累加
+	 * 如不满足会报错
+	 */
 	private OrderRequest buildCompleteRequestBody() {
 		OrderRequest orderRequest = new OrderRequest();
 		orderRequest.checkoutPaymentIntent("AUTHORIZE");
@@ -39,23 +46,26 @@ public class CreateOrder extends PayPalClient {
 
 		List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<>();
 		PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest().referenceId("PUHF")
-				.description("Sporting Goods").customId("CUST-HighFashions").softDescriptor("HighFashions")
-				.amountWithBreakdown(new AmountWithBreakdown().currencyCode("USD").value("30.00")
-						.amountBreakdown(new AmountBreakdown().itemTotal(new Money().currencyCode("USD").value("10.00"))
-								.shipping(new Money().currencyCode("USD").value("20.00"))
-								.handling(new Money().currencyCode("USD").value("10.00"))
-								.taxTotal(new Money().currencyCode("USD").value("20.00"))
-								.shippingDiscount(new Money().currencyCode("USD").value("30.00"))))
+				.description("Sporting Goods")
+				.customId("CUST-HighFashions")
+				.softDescriptor("HighFashions")
+				.amountWithBreakdown(new AmountWithBreakdown().currencyCode("USD").value("3.00")
+						.amountBreakdown(new AmountBreakdown()
+								.itemTotal(new Money().currencyCode("USD").value("1.00"))
+								.shipping(new Money().currencyCode("USD").value("2.00"))
+								.handling(new Money().currencyCode("USD").value("1.00"))
+								.taxTotal(new Money().currencyCode("USD").value("2.00"))
+								.shippingDiscount(new Money().currencyCode("USD").value("3.00"))))
 				.items(new ArrayList<Item>() {
 					{
-						add(new Item().name("转写视频01.mp4").description("Green XL").sku("sku01")
-								.unitAmount(new Money().currencyCode("USD").value("90.00"))
-								.tax(new Money().currencyCode("USD").value("10.00")).quantity("1")
-								.category("PHYSICAL_GOODS"));
-						add(new Item().name("转写视频02.mp4").description("Running, Size 10.5").sku("sku02")
-								.unitAmount(new Money().currencyCode("USD").value("45.00"))
-								.tax(new Money().currencyCode("USD").value("5.00")).quantity("2")
-								.category("PHYSICAL_GOODS"));
+						add(new Item().name("转写视频01.mp4").description("视频转写").sku("sku01")
+								.unitAmount(new Money().currencyCode("USD").value("9.00"))
+								.tax(new Money().currencyCode("USD").value("1.00")).quantity("1")
+								.category(ItemCategoryEnum.DIGITAL_GOODS.name()));
+						add(new Item().name("转写视频01.mp4").description("视频转写").sku("sku02")
+								.unitAmount(new Money().currencyCode("USD").value("4.0"))
+								.tax(new Money().currencyCode("USD").value("5.0")).quantity("1")
+								.category(ItemCategoryEnum.DIGITAL_GOODS.name()));
 					}
 				})
 				.shippingDetail(new ShippingDetail().name(new Name().fullName("John Doe"))

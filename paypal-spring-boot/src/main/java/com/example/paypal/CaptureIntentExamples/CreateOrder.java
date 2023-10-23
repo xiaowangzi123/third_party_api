@@ -49,12 +49,12 @@ public class CreateOrder extends PayPalClient {
                 .items(new ArrayList<Item>() {
                     {
                         add(new Item().name("转写视频01.mp4").description("视频转写").sku("sku01")
-                                .unitAmount(new Money().currencyCode("USD").value("9.00"))
+                                .unitAmount(new Money().currencyCode("USD").value("1.00"))
                                 .tax(new Money().currencyCode("USD").value("1.00")).quantity("1")
                                 .category(ItemCategoryEnum.DIGITAL_GOODS.name()));
                         add(new Item().name("转写视频01.mp4").description("视频转写").sku("sku02")
-                                .unitAmount(new Money().currencyCode("USD").value("4.0"))
-                                .tax(new Money().currencyCode("USD").value("5.0")).quantity("1")
+                                .unitAmount(new Money().currencyCode("USD").value("1.0"))
+                                .tax(new Money().currencyCode("USD").value("1.0")).quantity("1")
                                 .category(ItemCategoryEnum.DIGITAL_GOODS.name()));
                     }
                 })
