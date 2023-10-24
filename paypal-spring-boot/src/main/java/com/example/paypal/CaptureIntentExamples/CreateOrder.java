@@ -41,10 +41,11 @@ public class CreateOrder extends PayPalClient {
         PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest().referenceId("PUHF")
                 .description("Sporting Goods").customId("CUST-HighFashions").softDescriptor("HighFashions")
                 .amountWithBreakdown(new AmountWithBreakdown().currencyCode("USD").value("22.00")
-                        .amountBreakdown(new AmountBreakdown().itemTotal(new Money().currencyCode("USD").value("18.00"))
-                                .shipping(new Money().currencyCode("USD").value("2.00"))
+                        .amountBreakdown(new AmountBreakdown()
+                                .itemTotal(new Money().currencyCode("USD").value("1.00"))
+                                .shipping(new Money().currencyCode("USD").value("0.00"))
                                 .handling(new Money().currencyCode("USD").value("1.00"))
-                                .taxTotal(new Money().currencyCode("USD").value("2.00"))
+                                .taxTotal(new Money().currencyCode("USD").value("1.00"))
                                 .shippingDiscount(new Money().currencyCode("USD").value("1.00"))))
                 .items(new ArrayList<Item>() {
                     {
