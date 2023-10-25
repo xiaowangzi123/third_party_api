@@ -2,6 +2,7 @@ package com.onem.paypal.controller;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.sun.management.OperatingSystemMXBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +11,6 @@ import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 
 import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -72,17 +72,29 @@ public class TestController {
         final long GB = 1024 * 1024 * 1024;
         int count = 0;
         while (count < 10) {
-            OperatingSystemMXBean operatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean();
+            OperatingSystemMXBean operatingSystemMXBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 
             String osJson = JSON.toJSONString(operatingSystemMXBean);
             JSONObject jsonObject = JSON.parseObject(osJson);
             double processCpuLoad = jsonObject.getDouble("processCpuLoad") * 100;
             double systemCpuLoad = jsonObject.getDouble("systemCpuLoad") * 100;
+            Long totalSwapSpaceSize = jsonObject.getLong("totalSwapSpaceSize");
+            log.info("totalSwapSpaceSize:{}", twoDecimal(totalSwapSpaceSize * 1.0 / GB));
             Long totalPhysicalMemorySize = jsonObject.getLong("totalPhysicalMemorySize");
+            log.info("totalPhysicalMemorySize:{}", twoDecimal(totalPhysicalMemorySize * 1.0 / GB));
+
+            Long committedVirtualMemorySize = jsonObject.getLong("committedVirtualMemorySize");
+            log.info("committedVirtualMemorySize:{}", twoDecimal(committedVirtualMemorySize * 1.0 / GB));
+
             Long freePhysicalMemorySize = jsonObject.getLong("freePhysicalMemorySize");
+            log.info("freePhysicalMemorySize:{}", twoDecimal(freePhysicalMemorySize * 1.0 / GB));
+
             Long freeSwapSpaceSize = jsonObject.getLong("freeSwapSpaceSize");
             log.info("freeSwapSpaceSize:{}", twoDecimal(freeSwapSpaceSize * 1.0 / GB));
 
+            Runtime runtime = Runtime.getRuntime();
+            long availableMemory = runtime.freeMemory();
+            log.info("availableMemory:{}", twoDecimal(availableMemory * 1.0 / GB));
 
             double totalMemory = 1.0 * totalPhysicalMemorySize / GB;
             double freeMemory = 1.0 * freePhysicalMemorySize / GB;
@@ -90,13 +102,8 @@ public class TestController {
 
             result.append("系统CPU占用率: ")
                     .append(twoDecimal(systemCpuLoad))
-                    .append("%，内存占用率：")
-                    .append(twoDecimal(memoryUseRatio))
-                    .append("%，系统总内存：")
-                    .append(twoDecimal(totalMemory))
-                    .append("GB，系统剩余内存：")
-                    .append(twoDecimal(freeMemory))
-                    .append("GB，该进程占用CPU：")
+                    .append("%，")
+                    .append("该进程占用CPU：")
                     .append(twoDecimal(processCpuLoad))
                     .append("%");
             System.out.println(result);
