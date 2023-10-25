@@ -17,6 +17,15 @@
 		<java.version>1.8</java.version>
 		<spring-cloud.version>2021.0.8</spring-cloud.version>
 	</properties>
+
+
+	<repositories>
+		<repository>
+			<id>central</id>
+			<url>https://repo.maven.apache.org/maven2</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -46,6 +55,9 @@
 			<artifactId>oshi-core</artifactId>
 			<version>3.5.0</version>
 		</dependency>
+
+
+
 
 
 		<dependency>
@@ -83,5 +95,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

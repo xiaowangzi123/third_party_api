@@ -1,5 +1,7 @@
 package com.onem.paypal.controller;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +26,14 @@ public class TestController {
 
     @PostMapping("/01")
     public String test01() {
-        log.info("----------test-----");
+        log.info("----------test 01-----");
         return "success";
     }
 
     @PostMapping("/02")
     public String test02() throws Exception {
+        log.info("----------test 02-----");
+
         List<Double> res = new ArrayList<>();
         int conut = 0;
         while (conut < 10) {
@@ -54,5 +62,57 @@ public class TestController {
         }
 
         return "CPU利用率" + res.stream().filter(a -> !Objects.isNull(a)).mapToDouble(Double::doubleValue).average().orElse(0.0);
+    }
+
+    @PostMapping("/03")
+    public String systemInfo() {
+        log.info("----------test 03-----");
+        StringBuilder result = new StringBuilder();
+
+        final long GB = 1024 * 1024 * 1024;
+        int count = 0;
+        while (count < 10) {
+            OperatingSystemMXBean operatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean();
+
+            String osJson = JSON.toJSONString(operatingSystemMXBean);
+            JSONObject jsonObject = JSON.parseObject(osJson);
+            double processCpuLoad = jsonObject.getDouble("processCpuLoad") * 100;
+            double systemCpuLoad = jsonObject.getDouble("systemCpuLoad") * 100;
+            Long totalPhysicalMemorySize = jsonObject.getLong("totalPhysicalMemorySize");
+            Long freePhysicalMemorySize = jsonObject.getLong("freePhysicalMemorySize");
+            Long freeSwapSpaceSize = jsonObject.getLong("freeSwapSpaceSize");
+            log.info("freeSwapSpaceSize:{}", twoDecimal(freeSwapSpaceSize * 1.0 / GB));
+
+
+            double totalMemory = 1.0 * totalPhysicalMemorySize / GB;
+            double freeMemory = 1.0 * freePhysicalMemorySize / GB;
+            double memoryUseRatio = 1.0 * (totalPhysicalMemorySize - freePhysicalMemorySize) / totalPhysicalMemorySize * 100;
+
+            result.append("系统CPU占用率: ")
+                    .append(twoDecimal(systemCpuLoad))
+                    .append("%，内存占用率：")
+                    .append(twoDecimal(memoryUseRatio))
+                    .append("%，系统总内存：")
+                    .append(twoDecimal(totalMemory))
+                    .append("GB，系统剩余内存：")
+                    .append(twoDecimal(freeMemory))
+                    .append("GB，该进程占用CPU：")
+                    .append(twoDecimal(processCpuLoad))
+                    .append("%");
+            System.out.println(result);
+
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            count++;
+        }
+        return result.toString();
+    }
+
+    public static double twoDecimal(double doubleValue) {
+        BigDecimal bigDecimal = new BigDecimal(doubleValue).setScale(2, RoundingMode.HALF_UP);
+        return bigDecimal.doubleValue();
     }
 }
