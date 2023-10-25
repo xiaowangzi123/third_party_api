@@ -76,7 +76,7 @@ public class TestController {
 
             String osJson = JSON.toJSONString(operatingSystemMXBean);
             JSONObject jsonObject = JSON.parseObject(osJson);
-            
+
             double processCpuLoad = jsonObject.getDouble("processCpuLoad") * 100;
             double systemCpuLoad = jsonObject.getDouble("systemCpuLoad") * 100;
             Long totalSwapSpaceSize = jsonObject.getLong("totalSwapSpaceSize");
@@ -123,4 +123,6 @@ public class TestController {
         BigDecimal bigDecimal = new BigDecimal(doubleValue).setScale(2, RoundingMode.HALF_UP);
         return bigDecimal.doubleValue();
     }
+
+
 }
