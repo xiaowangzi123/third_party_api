@@ -19,13 +19,13 @@ import java.util.Objects;
 public class TestController {
 
     @PostMapping("/01")
-    public String test01(){
+    public String test01() {
         log.info("----------test-----");
         return "success";
     }
 
     @PostMapping("/02")
-    public String test02() throws Exception{
+    public String test02() throws Exception {
         List<Double> res = new ArrayList<>();
         int conut = 0;
         while (conut < 10) {
@@ -43,16 +43,16 @@ public class TestController {
             long idle = ticks[CentralProcessor.TickType.IDLE.getIndex()] - prevTicks[CentralProcessor.TickType.IDLE.getIndex()];
             long totalCpu = user + nice + cSys + idle + iowait + irq + softirq + steal;
 
-            System.out.println("输出结果");
-            double v = 1.0 - (idle * 1.0 / totalCpu);
+            double v = 1.0 - (Math.max(0, idle) * 1.0 / Math.max(1, totalCpu));
+            System.out.println("输出结果-->" + v);
             String rate = new DecimalFormat("#.##%").format(v);
 
             log.info("CPU数量 = {},CPU利用率 ={}", processor.getLogicalProcessorCount(), rate);
-            Thread.sleep(1000);
+//            Thread.sleep(1000);
             conut++;
             res.add(v);
         }
 
-        return "CPU利用率"+res.stream().filter(a-> !Objects.isNull(a)).mapToDouble(Double::doubleValue).average().orElse(0.0);
+        return "CPU利用率" + res.stream().filter(a -> !Objects.isNull(a)).mapToDouble(Double::doubleValue).average().orElse(0.0);
     }
 }
