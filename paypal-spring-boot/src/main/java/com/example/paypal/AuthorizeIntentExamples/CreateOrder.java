@@ -1,10 +1,22 @@
-/*
 package com.example.paypal.AuthorizeIntentExamples;
 
-import com.paypal.PayPalClient;
+import com.example.paypal.enums.ItemCategoryEnum;
+import com.example.paypal.example.PayPalClient;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.serializer.Json;
-import com.paypal.orders.*;
+import com.paypal.orders.AddressPortable;
+import com.paypal.orders.AmountBreakdown;
+import com.paypal.orders.AmountWithBreakdown;
+import com.paypal.orders.ApplicationContext;
+import com.paypal.orders.Item;
+import com.paypal.orders.LinkDescription;
+import com.paypal.orders.Money;
+import com.paypal.orders.Name;
+import com.paypal.orders.Order;
+import com.paypal.orders.OrderRequest;
+import com.paypal.orders.OrdersCreateRequest;
+import com.paypal.orders.PurchaseUnitRequest;
+import com.paypal.orders.ShippingDetail;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -13,41 +25,47 @@ import java.util.List;
 
 public class CreateOrder extends PayPalClient {
 
-	*/
-/**
-	 * Method to create complete order body with <b>AUTHORIZE</b> intent
-	 *
-	 * @return OrderRequest with created order request
-	 *//*
 
+	/**
+	 * 金额规则：
+	 * 总金额=商品总价+运费+handling+税总金额-运费折扣
+	 * 商品总价=各（商品单价x数量）的累加
+	 * 税总金额=各（商品税x数量）的累加
+	 * 如不满足会报错
+	 */
 	private OrderRequest buildCompleteRequestBody() {
 		OrderRequest orderRequest = new OrderRequest();
 		orderRequest.checkoutPaymentIntent("AUTHORIZE");
 
-		ApplicationContext applicationContext = new ApplicationContext().brandName("EXAMPLE INC").landingPage("BILLING")
-				.cancelUrl("https://www.example.com").returnUrl("https://www.example.com").userAction("CONTINUE")
+		ApplicationContext applicationContext = new ApplicationContext().brandName("TransWai").landingPage("BILLING")
+				.cancelUrl("https://www.example.com")
+				.returnUrl("https://www.example.com")
+				.userAction("CONTINUE")
 				.shippingPreference("SET_PROVIDED_ADDRESS");
 		orderRequest.applicationContext(applicationContext);
 
 		List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<>();
 		PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest().referenceId("PUHF")
-				.description("Sporting Goods").customId("CUST-HighFashions").softDescriptor("HighFashions")
-				.amountWithBreakdown(new AmountWithBreakdown().currencyCode("USD").value("220.00")
-						.amountBreakdown(new AmountBreakdown().itemTotal(new Money().currencyCode("USD").value("180.00"))
-								.shipping(new Money().currencyCode("USD").value("20.00"))
-								.handling(new Money().currencyCode("USD").value("10.00"))
-								.taxTotal(new Money().currencyCode("USD").value("20.00"))
-								.shippingDiscount(new Money().currencyCode("USD").value("10.00"))))
+				.description("Sporting Goods")
+				.customId("CUST-HighFashions")
+				.softDescriptor("HighFashions")
+				.amountWithBreakdown(new AmountWithBreakdown().currencyCode("USD").value("3.00")
+						.amountBreakdown(new AmountBreakdown()
+								.itemTotal(new Money().currencyCode("USD").value("1.00"))
+								.shipping(new Money().currencyCode("USD").value("2.00"))
+								.handling(new Money().currencyCode("USD").value("1.00"))
+								.taxTotal(new Money().currencyCode("USD").value("2.00"))
+								.shippingDiscount(new Money().currencyCode("USD").value("3.00"))))
 				.items(new ArrayList<Item>() {
 					{
-						add(new Item().name("T-shirt").description("Green XL").sku("sku01")
-								.unitAmount(new Money().currencyCode("USD").value("90.00"))
-								.tax(new Money().currencyCode("USD").value("10.00")).quantity("1")
-								.category("PHYSICAL_GOODS"));
-						add(new Item().name("Shoes").description("Running, Size 10.5").sku("sku02")
-								.unitAmount(new Money().currencyCode("USD").value("45.00"))
-								.tax(new Money().currencyCode("USD").value("5.00")).quantity("2")
-								.category("PHYSICAL_GOODS"));
+						add(new Item().name("转写视频01.mp4").description("视频转写").sku("sku01")
+								.unitAmount(new Money().currencyCode("USD").value("9.00"))
+								.tax(new Money().currencyCode("USD").value("1.00")).quantity("1")
+								.category(ItemCategoryEnum.DIGITAL_GOODS.name()));
+						add(new Item().name("转写视频01.mp4").description("视频转写").sku("sku02")
+								.unitAmount(new Money().currencyCode("USD").value("4.0"))
+								.tax(new Money().currencyCode("USD").value("5.0")).quantity("1")
+								.category(ItemCategoryEnum.DIGITAL_GOODS.name()));
 					}
 				})
 				.shippingDetail(new ShippingDetail().name(new Name().fullName("John Doe"))
@@ -58,12 +76,8 @@ public class CreateOrder extends PayPalClient {
 		return orderRequest;
 	}
 
-	*/
-/**
-	 * Method to create minimum required order body with <b>AUTHORIZE</b> intent
-	 *
-	 * @return OrderRequest with created order request
-	 *//*
+
+
 
 	private OrderRequest buildMinimumRequestBody() {
 		OrderRequest orderRequest = new OrderRequest();
@@ -79,14 +93,7 @@ public class CreateOrder extends PayPalClient {
 		return orderRequest;
 	}
 
-	*/
-/**
-	 * Method to create order with complete payload
-	 *
-	 * @param debug true = print response data
-	 * @return HttpResponse<Order> response received from API
-	 * @throws IOException Exceptions from API if any
-	 *//*
+
 
 	public HttpResponse<Order> createOrder(boolean debug) throws IOException {
 		OrdersCreateRequest request = new OrdersCreateRequest();
@@ -113,14 +120,8 @@ public class CreateOrder extends PayPalClient {
 		return response;
 	}
 
-	*/
-/**
-	 * Method to create order with minimum required payload
-	 *
-	 * @param debug true = print response data
-	 * @return HttpResponse<Order> response received from API
-	 * @throws IOException Exceptions from API if any
-	 *//*
+
+
 
 	public HttpResponse<Order> createOrderWithMinimumPayload(boolean debug) throws IOException {
 		OrdersCreateRequest request = new OrdersCreateRequest();
@@ -147,11 +148,7 @@ public class CreateOrder extends PayPalClient {
 		return response;
 	}
 
-	*/
-/**
-	 * This is the driver function which invokes the createOrder function to create
-	 * an sample order.
-	 *//*
+
 
 	public static void main(String args[]) {
 		try {
@@ -164,4 +161,3 @@ public class CreateOrder extends PayPalClient {
 		}
 	}
 }
-*/

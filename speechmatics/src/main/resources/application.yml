@@ -1,0 +1,8 @@
+server:
+  port: 9005
+
+
+speech:
+  matics:
+    url: https://asr.api.speechmatics.com/
+    apiKey: HDQGKgwNjMta4YzZSxUsqQ6prFr0skTF

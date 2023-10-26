@@ -16,7 +16,7 @@ import java.util.Map;
 @RefreshScope
 public class PayPalCheckoutServiceImpl implements PayPalCheckoutService {
 
-    @Value("${paypal.receiver.email}")
+    @Value("${paypal.receiver.email:wangyq@waitrans.com}")
     private String receiverEmail;
 
 
