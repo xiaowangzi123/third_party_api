@@ -1,7 +1,7 @@
 package com.onem.paypal.CaptureIntentExamples;
 
-import com.example.paypal.enums.ItemCategoryEnum;
-import com.example.paypal.example.PayPalClient;
+import com.onem.paypal.enums.ItemCategoryEnum;
+import com.onem.paypal.example.PayPalClient;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.serializer.Json;
 import com.paypal.orders.AddressPortable;

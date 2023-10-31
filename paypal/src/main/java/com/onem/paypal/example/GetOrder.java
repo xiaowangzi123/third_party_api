@@ -1,6 +1,6 @@
 package com.onem.paypal.example;
 
-import com.example.paypal.AuthorizeIntentExamples.CreateOrder;
+import com.onem.paypal.CaptureIntentExamples.CreateOrder;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.serializer.Json;
 import com.paypal.orders.Order;
