@@ -20,7 +20,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -129,7 +134,9 @@ public class SpeechMaticsServiceImpl implements SpeechMaticsService {
         }
     }
 
-
+    /**
+     * 服务器上中文、韩文乱码，使用doGet(String transUrl, String apiKey)
+     */
     @Override
     public List<Subtitle> getSubtitles(String taskId) {
         // 设置请求头
@@ -160,6 +167,37 @@ public class SpeechMaticsServiceImpl implements SpeechMaticsService {
         }
         System.out.println(response);
         return null;
+    }
+
+    public static String doGet(String transUrl, String apiKey) {
+        String msg = "";
+        log.info("调用：{}", transUrl);
+        try {
+//            String postData = "src=" + java.net.URLEncoder.encode(srcText, "UTF-8");
+            URL url = new URL(transUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("charset", "utf-8");
+            conn.setRequestProperty("Authorization", "Bearer " + apiKey);
+            conn.setDoOutput(true);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+            StringBuilder response = new StringBuilder();
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine).append(System.lineSeparator());
+            }
+            in.close();
+
+            msg = response.toString();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        log.info("获取speechmatics的识别结果：{}", msg);
+        return msg;
     }
 
     public List<Subtitle> dataConvert(List<String> list){
