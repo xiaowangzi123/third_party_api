@@ -30,19 +30,20 @@ public class CreateOrder extends PayPalClient {
         OrderRequest orderRequest = new OrderRequest();
         orderRequest.checkoutPaymentIntent("CAPTURE");
 
-        ApplicationContext applicationContext = new ApplicationContext().brandName("EXAMPLE INC").landingPage("BILLING")
-                .cancelUrl("https://www.example.com")
-                .returnUrl("https://www.example.com")
+        ApplicationContext applicationContext = new ApplicationContext()
+                .brandName("EXAMPLE INC").landingPage("BILLING")
+                .cancelUrl("http://www.transwai.com/")
+                .returnUrl("http://59.36.211.29:8081/paypal/payment/callback")
                 .userAction("CONTINUE")
                 .shippingPreference("SET_PROVIDED_ADDRESS");
         orderRequest.applicationContext(applicationContext);
 
-        List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<PurchaseUnitRequest>();
+        List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<>();
         PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest().referenceId("PUHF")
                 .description("Sporting Goods").customId("CUST-HighFashions").softDescriptor("HighFashions")
                 .amountWithBreakdown(new AmountWithBreakdown().currencyCode("USD").value("2.00")
                         .amountBreakdown(new AmountBreakdown()
-                                .itemTotal(new Money().currencyCode("USD").value("1.00"))
+                                .itemTotal(new Money().currencyCode("USD").value("2.00"))
                                 .shipping(new Money().currencyCode("USD").value("0.00"))
                                 .handling(new Money().currencyCode("USD").value("0.00"))
                                 .taxTotal(new Money().currencyCode("USD").value("0.00"))
@@ -73,7 +74,7 @@ public class CreateOrder extends PayPalClient {
         request.header("prefer", "return=representation");
         request.requestBody(buildRequestBody());
         HttpResponse<Order> response = client().execute(request);
-        System.out.println("创建订单返回--->" + response);
+        System.out.println("创建订单返回--->" + com.alibaba.fastjson2.JSONObject.toJSONString(response));
         if (response.statusCode() == 201) {
             System.out.println("Status Code: " + response.statusCode());
             System.out.println("Status: " + response.result().status());
