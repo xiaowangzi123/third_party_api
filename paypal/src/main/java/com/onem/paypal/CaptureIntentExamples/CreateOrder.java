@@ -40,22 +40,22 @@ public class CreateOrder extends PayPalClient {
         List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<PurchaseUnitRequest>();
         PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest().referenceId("PUHF")
                 .description("Sporting Goods").customId("CUST-HighFashions").softDescriptor("HighFashions")
-                .amountWithBreakdown(new AmountWithBreakdown().currencyCode("USD").value("22.00")
+                .amountWithBreakdown(new AmountWithBreakdown().currencyCode("USD").value("2.00")
                         .amountBreakdown(new AmountBreakdown()
                                 .itemTotal(new Money().currencyCode("USD").value("1.00"))
                                 .shipping(new Money().currencyCode("USD").value("0.00"))
-                                .handling(new Money().currencyCode("USD").value("1.00"))
-                                .taxTotal(new Money().currencyCode("USD").value("1.00"))
-                                .shippingDiscount(new Money().currencyCode("USD").value("1.00"))))
+                                .handling(new Money().currencyCode("USD").value("0.00"))
+                                .taxTotal(new Money().currencyCode("USD").value("0.00"))
+                                .shippingDiscount(new Money().currencyCode("USD").value("0.00"))))
                 .items(new ArrayList<Item>() {
                     {
                         add(new Item().name("转写视频01.mp4").description("视频转写").sku("sku01")
                                 .unitAmount(new Money().currencyCode("USD").value("1.00"))
-                                .tax(new Money().currencyCode("USD").value("1.00")).quantity("1")
+                                .tax(new Money().currencyCode("USD").value("0.00")).quantity("1")
                                 .category(ItemCategoryEnum.DIGITAL_GOODS.name()));
                         add(new Item().name("转写视频01.mp4").description("视频转写").sku("sku02")
                                 .unitAmount(new Money().currencyCode("USD").value("1.0"))
-                                .tax(new Money().currencyCode("USD").value("1.0")).quantity("1")
+                                .tax(new Money().currencyCode("USD").value("0.0")).quantity("1")
                                 .category(ItemCategoryEnum.DIGITAL_GOODS.name()));
                     }
                 })
