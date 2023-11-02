@@ -1,6 +1,5 @@
 package com.onem.paypal.example;
 
-import com.onem.paypal.CaptureIntentExamples.CreateOrder;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.serializer.Json;
 import com.paypal.orders.Order;
@@ -23,7 +22,10 @@ public class GetOrder extends PayPalClient {
 
 
 	public static void main(String[] args) throws IOException {
-		HttpResponse<Order> response = new CreateOrder().createOrder(false);
-		new GetOrder().getOrder(response.result().id());
+		//创建订单，直接查看订餐状态
+//		HttpResponse<Order> response = new CreateOrder().createOrder(false);
+//		new GetOrder().getOrder(response.result().id());
+
+		new GetOrder().getOrder("525720529P808800M");
 	}
 }

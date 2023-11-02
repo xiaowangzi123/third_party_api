@@ -32,15 +32,19 @@ public class CreateOrder extends PayPalClient {
 
         ApplicationContext applicationContext = new ApplicationContext()
                 .brandName("EXAMPLE INC").landingPage("BILLING")
-                .cancelUrl("http://www.transwai.com/")
-                .returnUrl("http://59.36.211.29:8081/paypal/payment/callback")
+//                .cancelUrl("http://59.36.211.29:8081/paypal/cancel/callback")
+                .cancelUrl("http://192.168.2.85:8041/paypal/cancel/callback")
+//                .returnUrl("http://59.36.211.29:8081/paypal/payment/callback")
+                .returnUrl("http://192.168.2.85:8041/paypal/payment/callback")
                 .userAction("CONTINUE")
                 .shippingPreference("SET_PROVIDED_ADDRESS");
         orderRequest.applicationContext(applicationContext);
 
         List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<>();
         PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest().referenceId("PUHF")
-                .description("Sporting Goods").customId("CUST-HighFashions").softDescriptor("HighFashions")
+                .description(ItemCategoryEnum.DIGITAL_GOODS.name())
+                .customId("CUST-HighFashions")
+                .softDescriptor("HighFashions")
                 .amountWithBreakdown(new AmountWithBreakdown().currencyCode("USD").value("2.00")
                         .amountBreakdown(new AmountBreakdown()
                                 .itemTotal(new Money().currencyCode("USD").value("2.00"))
