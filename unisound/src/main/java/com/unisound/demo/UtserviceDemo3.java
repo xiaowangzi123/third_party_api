@@ -45,7 +45,7 @@ public class UtserviceDemo3 {
     // 待转写文件路径
 //	static  String file = "audio/";
 //    static String file = "D:\\gitee\\asr-file-transfer-master\\asr-audio-file-demo-java\\audio\\unisound.wav";
-    static String file = "D:\\TestAudioVideo\\a0002.wav";
+    static String file = "D:\\TestAudioVideo\\20Eng.wav";
 //    static String file = "D:\\TestAudioVideo\\20Eng.wav";
 //    public static final String domain = "law";
 //    public static final String domain = "finance";

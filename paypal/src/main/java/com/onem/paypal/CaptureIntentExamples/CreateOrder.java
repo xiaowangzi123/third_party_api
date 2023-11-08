@@ -1,7 +1,7 @@
 package com.onem.paypal.CaptureIntentExamples;
 
-import com.example.paypal.enums.ItemCategoryEnum;
-import com.example.paypal.example.PayPalClient;
+import com.onem.paypal.enums.ItemCategoryEnum;
+import com.onem.paypal.example.PayPalClient;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.serializer.Json;
 import com.paypal.orders.AddressPortable;
@@ -30,32 +30,37 @@ public class CreateOrder extends PayPalClient {
         OrderRequest orderRequest = new OrderRequest();
         orderRequest.checkoutPaymentIntent("CAPTURE");
 
-        ApplicationContext applicationContext = new ApplicationContext().brandName("EXAMPLE INC").landingPage("BILLING")
-                .cancelUrl("https://www.example.com")
-                .returnUrl("https://www.example.com")
+        ApplicationContext applicationContext = new ApplicationContext()
+                .brandName("EXAMPLE INC").landingPage("BILLING")
+//                .cancelUrl("http://59.36.211.29:8081/paypal/cancel/callback")
+                .cancelUrl("http://192.168.2.85:8041/paypal/cancel/callback")
+//                .returnUrl("http://59.36.211.29:8081/paypal/payment/callback")
+                .returnUrl("http://192.168.2.85:8041/paypal/payment/callback")
                 .userAction("CONTINUE")
                 .shippingPreference("SET_PROVIDED_ADDRESS");
         orderRequest.applicationContext(applicationContext);
 
-        List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<PurchaseUnitRequest>();
+        List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<>();
         PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest().referenceId("PUHF")
-                .description("Sporting Goods").customId("CUST-HighFashions").softDescriptor("HighFashions")
-                .amountWithBreakdown(new AmountWithBreakdown().currencyCode("USD").value("22.00")
+                .description(ItemCategoryEnum.DIGITAL_GOODS.name())
+                .customId("CUST-HighFashions")
+                .softDescriptor("HighFashions")
+                .amountWithBreakdown(new AmountWithBreakdown().currencyCode("USD").value("2.00")
                         .amountBreakdown(new AmountBreakdown()
-                                .itemTotal(new Money().currencyCode("USD").value("1.00"))
+                                .itemTotal(new Money().currencyCode("USD").value("2.00"))
                                 .shipping(new Money().currencyCode("USD").value("0.00"))
-                                .handling(new Money().currencyCode("USD").value("1.00"))
-                                .taxTotal(new Money().currencyCode("USD").value("1.00"))
-                                .shippingDiscount(new Money().currencyCode("USD").value("1.00"))))
+                                .handling(new Money().currencyCode("USD").value("0.00"))
+                                .taxTotal(new Money().currencyCode("USD").value("0.00"))
+                                .shippingDiscount(new Money().currencyCode("USD").value("0.00"))))
                 .items(new ArrayList<Item>() {
                     {
                         add(new Item().name("转写视频01.mp4").description("视频转写").sku("sku01")
                                 .unitAmount(new Money().currencyCode("USD").value("1.00"))
-                                .tax(new Money().currencyCode("USD").value("1.00")).quantity("1")
+                                .tax(new Money().currencyCode("USD").value("0.00")).quantity("1")
                                 .category(ItemCategoryEnum.DIGITAL_GOODS.name()));
                         add(new Item().name("转写视频01.mp4").description("视频转写").sku("sku02")
                                 .unitAmount(new Money().currencyCode("USD").value("1.0"))
-                                .tax(new Money().currencyCode("USD").value("1.0")).quantity("1")
+                                .tax(new Money().currencyCode("USD").value("0.0")).quantity("1")
                                 .category(ItemCategoryEnum.DIGITAL_GOODS.name()));
                     }
                 })
@@ -73,7 +78,7 @@ public class CreateOrder extends PayPalClient {
         request.header("prefer", "return=representation");
         request.requestBody(buildRequestBody());
         HttpResponse<Order> response = client().execute(request);
-        System.out.println("创建订单返回--->" + response);
+        System.out.println("创建订单返回--->" + com.alibaba.fastjson2.JSONObject.toJSONString(response));
         if (response.statusCode() == 201) {
             System.out.println("Status Code: " + response.statusCode());
             System.out.println("Status: " + response.result().status());

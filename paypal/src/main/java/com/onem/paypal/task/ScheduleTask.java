@@ -3,6 +3,7 @@ package com.onem.paypal.task;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Data
 @Slf4j
 @Component
-//@PropertySource("classpath:/task-config.ini")
+@PropertySource("classpath:/task-config.ini")
 public class ScheduleTask implements SchedulingConfigurer {
 
     @Value("${printTime.cron}")
