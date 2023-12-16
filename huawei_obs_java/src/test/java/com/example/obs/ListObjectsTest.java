@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ListTest {
+public class ListObjectsTest {
 
 
     @Test
@@ -29,27 +29,26 @@ public class ListTest {
         String ak = "2CNBVV3R4B1H2JZ6AHAT";
         String sk = "g9nMiK6vFqTwxGQfUkUyE9J5DO2gaqhJT8vh4HqX";
         List<String> dateList = new ArrayList<>();
+        List<String> objectList = new ArrayList<>();
         try (final ObsClient obsClient = new ObsClient(ak, sk, endPoint);) {
-
-
-//            ListObjectsRequest request = new ListObjectsRequest("transwai-prod");
-
             ListObjectsRequest request = new ListObjectsRequest("cloudtranslation");
-            request.setDelimiter("/");
             request.setMaxKeys(1000);
+            request.setDelimiter("/");
             ObjectListing result;
+
             do {
                 result = obsClient.listObjects(request);
                 for (ObsObject obsObject : result.getObjects()) {
-                    System.out.println("\t" + obsObject.getObjectKey());
-                    System.out.println("\t" + obsObject.getOwner());
-                    Date lastModified = obsObject.getMetadata().getLastModified();
-                    dateList.add(formatDate(lastModified));
-                    listObjectsByPrefix(obsClient, request, result);
+                    if (obsObject.getObjectKey().contains("/")){
+                        System.out.println("---->"+obsObject.getObjectKey());
+                    }
+                    objectList.add(obsObject.getObjectKey());
+                    dateList.add(formatDate(obsObject.getMetadata().getLastModified()));
+//                    listObjectsByPrefix(obsClient, request, result);
                 }
-
-                request.setMarker(result.getNextMarker());
             } while (result.isTruncated());
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,6 +56,7 @@ public class ListTest {
         System.out.println("--------------------------------");
         dateList = dateList.stream().sorted().collect(Collectors.toList());
         System.out.println(dateList);
+        System.out.println(objectList);
     }
 
 
