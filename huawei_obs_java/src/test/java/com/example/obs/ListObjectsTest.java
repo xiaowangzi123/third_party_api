@@ -49,7 +49,10 @@ public class ListObjectsTest {
                     objectList.add(obsObject.getObjectKey());
                     dateList.add(formatDate(obsObject.getMetadata().getLastModified()));
 //                    listObjectsByPrefix(obsClient, request, result);
+
                 }
+                request.setMarker(result.getNextMarker());
+
             } while (result.isTruncated());
 
 
