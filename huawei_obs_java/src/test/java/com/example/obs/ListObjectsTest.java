@@ -22,6 +22,10 @@ import java.util.stream.Collectors;
 public class ListObjectsTest {
 
 
+    /**
+     * 列举所有对象
+     * 有文件的，包含文件夹下的子文件，objectKey包含文件夹路径
+     */
     @Test
     public void Test() {
         // Endpoint以北京四为例，其他地区请按实际情况填写。
@@ -32,8 +36,8 @@ public class ListObjectsTest {
         List<String> objectList = new ArrayList<>();
         try (final ObsClient obsClient = new ObsClient(ak, sk, endPoint);) {
             ListObjectsRequest request = new ListObjectsRequest("cloudtranslation");
+//            ListObjectsRequest request = new ListObjectsRequest("tqe-cloudtranslation-test");
             request.setMaxKeys(1000);
-            request.setDelimiter("/");
             ObjectListing result;
 
             do {
