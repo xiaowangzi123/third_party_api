@@ -36,7 +36,8 @@ public class ListObjectsTest {
         List<String> objectList = new ArrayList<>();
         try (final ObsClient obsClient = new ObsClient(ak, sk, endPoint);) {
 //            ListObjectsRequest request = new ListObjectsRequest("cloudtranslation");
-            ListObjectsRequest request = new ListObjectsRequest("tqe-cloudtranslation-dev");
+            ListObjectsRequest request = new ListObjectsRequest("transwai-prod");
+//            ListObjectsRequest request = new ListObjectsRequest("tqe-cloudtranslation-dev");
 //            ListObjectsRequest request = new ListObjectsRequest("tqe-cloudtranslation-test");
 //            ListObjectsRequest request = new ListObjectsRequest("tqe-cloudtranslation-prod");
             request.setMaxKeys(1000);
