@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.newtranx.eval.metrics.IEvaluate;
 import com.newtranx.eval.metrics.MetricUtil;
 import com.newtranx.eval.metrics.Score;
+import lombok.val;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,8 +48,16 @@ public class BlueScoreUtils {
     }
 
     public static void getTerScore(String langCode, String trans, List<String> referenceList) {
-        IEvaluate evaluate = MetricUtil.buildTerMetric();
-//        IEvaluate evaluate = MetricUtil.buildNistMetric(true);
+//        IEvaluate evaluate = MetricUtil.buildTerMetric();
+        IEvaluate evaluate = MetricUtil.buildTerMetric(true);
+        Score score = evaluate.sentenceScore(trans, referenceList);
+        System.out.println(JSON.toJSONString(score, true));
+    }
+
+    public static void getMeteorScore(String langCode, String trans, List<String> referenceList) {
+//        IEvaluate evaluate = MetricUtil.buildTerMetric();
+        val wordnet = MetricUtil.buildWordnet("getDictPath()");
+        IEvaluate evaluate = MetricUtil.buildMeteorMetric(wordnet, langCode);
         Score score = evaluate.sentenceScore(trans, referenceList);
         System.out.println(JSON.toJSONString(score, true));
     }
