@@ -22,23 +22,34 @@ public class BlueScoreUtils {
 //        String lang = "zh";
         String lang = "en";
         String trans = "Going to play basketball in the afternoon ?";
-        List<String> referenceList = new ArrayList<>(Arrays.asList("Going to play basketball this afternoon ?"
-                , "Going to play basketball afternoon ?"));
+        /*List<String> referenceList = new ArrayList<>(
+                Arrays.asList("Going to play basketball this afternoon ?", "Going to play basketball afternoon ?"));
+*/
+        List<String> referenceList = new ArrayList<>(
+                Arrays.asList("Going to play basketball in the afternoon abc ded?"));
 
         getBlueScore(lang, trans, referenceList);
-        getBaseScore(lang,trans,referenceList);
+        getNistScore(lang, trans, referenceList);
+        getTerScore(lang, trans, referenceList);
     }
 
     public static void getBlueScore(String langCode, String trans, List<String> referenceList) {
         IEvaluate evaluate = MetricUtil.buildBleuMetric(langCode);
         Score score = evaluate.sentenceScore(trans, referenceList);
-        System.out.println(score);
+        System.out.println(JSON.toJSONString(score, true));
     }
 
-    public static void getBaseScore(String langCode, String trans, List<String> referenceList) {
-//        IEvaluate evaluate = MetricUtil.buildNistMetric();
-        IEvaluate evaluate = MetricUtil.buildNistMetric(true);
+    public static void getNistScore(String langCode, String trans, List<String> referenceList) {
+        IEvaluate evaluate = MetricUtil.buildNistMetric();
+//        IEvaluate evaluate = MetricUtil.buildNistMetric(true);
         Score score = evaluate.sentenceScore(trans, referenceList);
-        System.out.println(JSON.toJSONString(score,true));
+        System.out.println(JSON.toJSONString(score, true));
+    }
+
+    public static void getTerScore(String langCode, String trans, List<String> referenceList) {
+        IEvaluate evaluate = MetricUtil.buildTerMetric();
+//        IEvaluate evaluate = MetricUtil.buildNistMetric(true);
+        Score score = evaluate.sentenceScore(trans, referenceList);
+        System.out.println(JSON.toJSONString(score, true));
     }
 }
