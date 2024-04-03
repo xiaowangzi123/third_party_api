@@ -1,5 +1,6 @@
 package com.example.evaluate.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.newtranx.eval.metrics.IEvaluate;
 import com.newtranx.eval.metrics.MetricUtil;
 import com.newtranx.eval.metrics.Score;
@@ -24,12 +25,20 @@ public class BlueScoreUtils {
         List<String> referenceList = new ArrayList<>(Arrays.asList("Going to play basketball this afternoon ?"
                 , "Going to play basketball afternoon ?"));
 
-        getScore(lang, trans, referenceList);
+        getBlueScore(lang, trans, referenceList);
+        getBaseScore(lang,trans,referenceList);
     }
 
-    public static void getScore(String langCode, String trans, List<String> referenceList) {
+    public static void getBlueScore(String langCode, String trans, List<String> referenceList) {
         IEvaluate evaluate = MetricUtil.buildBleuMetric(langCode);
         Score score = evaluate.sentenceScore(trans, referenceList);
         System.out.println(score);
+    }
+
+    public static void getBaseScore(String langCode, String trans, List<String> referenceList) {
+//        IEvaluate evaluate = MetricUtil.buildNistMetric();
+        IEvaluate evaluate = MetricUtil.buildNistMetric(true);
+        Score score = evaluate.sentenceScore(trans, referenceList);
+        System.out.println(JSON.toJSONString(score,true));
     }
 }
