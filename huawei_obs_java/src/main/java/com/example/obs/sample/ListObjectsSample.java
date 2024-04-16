@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This sample demonstrates how to list objects under a specified folder of a bucket
@@ -43,11 +44,10 @@ public class ListObjectsSample {
                 result = obsClient.listObjects(request);
                 allList.addAll(result.getObjects());
                 for (ObsObject obsObject : result.getObjects()) {
-                    System.out.println("listObjects successfully");
-                    System.out.println("ObjectKey:" + obsObject.getObjectKey());
-                    System.out.println(obsObject.toString());
+//                    System.out.println("ObjectKey:" + obsObject.getObjectKey());
+                    System.out.println(obsObject);
                     Date lastModified = obsObject.getMetadata().getLastModified();
-                    System.out.println(lastModified);
+                    System.out.println("最后修改时间："+lastModified);
                 }
                 request.setMarker(result.getNextMarker());
             } while (result.isTruncated());
@@ -59,6 +59,12 @@ public class ListObjectsSample {
 
         System.out.println("---------------------------------------------");
         System.out.println(allList.size());
+        System.out.println("---------------------------------------------");
+        List<ObsObject> collect = allList.stream().filter(a -> {
+            String objectKey = a.getObjectKey();
+            return objectKey.endsWith("20zh.mp4");
+        }).collect(Collectors.toList());
+        System.out.println(collect.size());
         System.out.println("---------------------------------------------");
     }
 
