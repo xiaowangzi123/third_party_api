@@ -28,7 +28,7 @@ import java.util.List;
  * This sample demonstrates how to list objects under a specified folder of a bucket
  * from OBS using the OBS SDK for Java.
  */
-public class ListObjectsInFolderSample {
+public class ListObjectsSample {
     private static final String endPoint = "obs.cn-south-1.myhuaweicloud.com";
     private static final String ak = "2CNBVV3R4B1H2JZ6AHAT";
     private static final String sk = "g9nMiK6vFqTwxGQfUkUyE9J5DO2gaqhJT8vh4HqX";
