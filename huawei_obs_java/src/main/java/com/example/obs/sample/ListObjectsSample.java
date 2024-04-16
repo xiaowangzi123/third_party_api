@@ -7,7 +7,9 @@ import com.obs.services.model.ObjectListing;
 import com.obs.services.model.ObsObject;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +49,7 @@ public class ListObjectsSample {
 //                    System.out.println("ObjectKey:" + obsObject.getObjectKey());
                     System.out.println(obsObject);
                     Date lastModified = obsObject.getMetadata().getLastModified();
-                    System.out.println("最后修改时间："+lastModified);
+                    System.out.println("最后修改时间：" + lastModified);
                 }
                 request.setMarker(result.getNextMarker());
             } while (result.isTruncated());
@@ -60,11 +62,34 @@ public class ListObjectsSample {
         System.out.println("---------------------------------------------");
         System.out.println(allList.size());
         System.out.println("---------------------------------------------");
+        Date currentDate = new Date();
         List<ObsObject> collect = allList.stream().filter(a -> {
-            String objectKey = a.getObjectKey();
-            return objectKey.endsWith("20zh.mp4");
+            Date lastModified = a.getMetadata().getLastModified();
+            long timeDifference = currentDate.getTime() - lastModified.getTime();
+            //再大有越界风险
+            long oneYearInMillis = 365 * 24 * 60 * 60 * 1000L;
+//            long oneYearInMillis = 2 * 365 * 24 * 60 * 60 * 1000L;
+            return timeDifference > oneYearInMillis;
         }).collect(Collectors.toList());
         System.out.println(collect.size());
+        System.out.println("---------------------------------------------");
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.YEAR, -1);
+        Date y = c.getTime();
+        String year = format.format(y);
+        System.out.println("过去一年：" + year);
+
+        System.out.println(y.compareTo(currentDate));
+
+        List<ObsObject> collect2 = allList.stream().filter(a -> {
+            Date lastModified = a.getMetadata().getLastModified();
+            return y.compareTo(lastModified) > 0;
+        }).collect(Collectors.toList());
+
+        System.out.println(collect2.size());
         System.out.println("---------------------------------------------");
     }
 
