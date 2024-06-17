@@ -23,21 +23,22 @@ import java.util.concurrent.Semaphore;
  */
 @Slf4j
 public class SpeechMain {
-    public static void main(String[] args) throws InterruptedException, ExecutionException {
-        SpeechConfig speechConfig = SpeechConfig.fromSubscription("510b12c9d6374bc386786b4ac31f6c80", "chinaeast2");
-        fromFile(speechConfig);
+    public static void main(String[] args) {
+        String wavPath = "C:\\temp\\temp\\184d45e0-2347-4a1b-b1b3-d19dff7b4129.wav";
+        String langCode = "zh-CN";
+        fromFile(langCode,wavPath);
     }
 
-    public static void fromFile(SpeechConfig speechConfig)  {
-        String wavPath = "C:\\temp\\temp\\184d45e0-2347-4a1b-b1b3-d19dff7b4129.wav";
+    public static void fromFile(String langCode, String wavPath)  {
+        SpeechConfig speechConfig = SpeechConfig.fromSubscription("510b12c9d6374bc386786b4ac31f6c80", "chinaeast2");
+        // 识别语言编码
+        speechConfig.setSpeechRecognitionLanguage(langCode);
+        // 识别的偏移量和持续时间
+        speechConfig.requestWordLevelTimestamps();
         AudioConfig audioConfig = AudioConfig.fromWavFileInput(wavPath);
         SpeechRecognizer recognizer = new SpeechRecognizer(speechConfig, audioConfig);
         Semaphore stopTranslationWithFileSemaphore = new Semaphore(0);
-        // 识别语言编码
-        speechConfig.setSpeechRecognitionLanguage("zh-CN");
 
-        // 识别的偏移量和持续时间
-        speechConfig.requestWordLevelTimestamps();
 
         List<SegTimeDto> sequencesList = new ArrayList<>();
         List<SegTimeDto> segTimeDtoList = new ArrayList<>();
