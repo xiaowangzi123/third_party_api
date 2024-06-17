@@ -26,10 +26,11 @@ public class SpeechMain {
     public static void main(String[] args) {
         String wavPath = "C:\\temp\\temp\\184d45e0-2347-4a1b-b1b3-d19dff7b4129.wav";
         String langCode = "zh-CN";
-        fromFile(langCode,wavPath);
+        fromFile(langCode, wavPath);
     }
 
-    public static void fromFile(String langCode, String wavPath)  {
+    public static void fromFile(String langCode, String wavPath) {
+        long t1 = System.currentTimeMillis();
         SpeechConfig speechConfig = SpeechConfig.fromSubscription("510b12c9d6374bc386786b4ac31f6c80", "chinaeast2");
         // 识别语言编码
         speechConfig.setSpeechRecognitionLanguage(langCode);
@@ -48,7 +49,7 @@ public class SpeechMain {
             segTimeDto.setDuration(e.getResult().getDuration().divide(BigInteger.valueOf(10000)).intValue());
             segTimeDto.setOffset(e.getResult().getOffset().divide(BigInteger.valueOf(10000)).intValue());
             segTimeDtoList.add(segTimeDto);
-            log.info("RECOGNIZING: 偏移量：{}, 持续时间:{},  Text={}", e.getResult().getOffset().divide(BigInteger.valueOf(10000)), e.getResult().getDuration().divide(BigInteger.valueOf(10000)), e.getResult().getText());
+//            log.info("RECOGNIZING: 偏移量：{}, 持续时间:{},  Text={}", e.getResult().getOffset().divide(BigInteger.valueOf(10000)), e.getResult().getDuration().divide(BigInteger.valueOf(10000)), e.getResult().getText());
         });
 
         recognizer.recognized.addEventListener((s, e) -> {
@@ -95,6 +96,9 @@ public class SpeechMain {
             e.printStackTrace();
         }
 
+
+        log.info("--------------------------------------");
+        log.info("识别耗时：{}", (System.currentTimeMillis() - t1) / 1000);
         log.info("--------------------------------------");
         log.info("{}", JSON.toJSONString(sequencesList));
         log.info("--------------------------------------");
