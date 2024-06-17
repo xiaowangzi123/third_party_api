@@ -19,7 +19,7 @@ import java.util.concurrent.Semaphore;
 /**
  * @author wyq
  * @date 2024/6/17
- * @desc
+ * @desc 录音文件转写为文字
  */
 @Slf4j
 public class SpeechMain {
@@ -28,11 +28,16 @@ public class SpeechMain {
         fromFile(speechConfig);
     }
 
-    public static void fromFile(SpeechConfig speechConfig) throws InterruptedException, ExecutionException {
+    public static void fromFile(SpeechConfig speechConfig)  {
         String wavPath = "C:\\temp\\temp\\184d45e0-2347-4a1b-b1b3-d19dff7b4129.wav";
         AudioConfig audioConfig = AudioConfig.fromWavFileInput(wavPath);
         SpeechRecognizer recognizer = new SpeechRecognizer(speechConfig, audioConfig);
         Semaphore stopTranslationWithFileSemaphore = new Semaphore(0);
+        // 识别语言编码
+        speechConfig.setSpeechRecognitionLanguage("zh-CN");
+
+        // 识别的偏移量和持续时间
+        speechConfig.requestWordLevelTimestamps();
 
         List<SegTimeDto> sequencesList = new ArrayList<>();
         List<SegTimeDto> segTimeDtoList = new ArrayList<>();
