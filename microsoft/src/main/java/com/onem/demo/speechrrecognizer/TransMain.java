@@ -24,11 +24,12 @@ public class TransMain {
     private static final String SPEECH_SUBSCRIPTION_KEY = "ed7790c795eb47d3a7f1a272ecea684c";
     //    private static final String SPEECH_SUBSCRIPTION_KEY = "a6bfa21a746648caaf84f977fb07f45f";
     private static final String SERVICE_REGION = "chinaeast2";
+
     public static void main(String[] args) {
 
     }
 
-    private void fromMic( String audioFilePath,String srcLangCode) throws ExecutionException, InterruptedException {
+    private void fromMic(String audioFilePath, String srcLangCode) throws ExecutionException, InterruptedException {
 
         SpeechConfig speechConfig = SpeechConfig.fromSubscription(SPEECH_SUBSCRIPTION_KEY, SERVICE_REGION);
         AudioConfig audioConfig = AudioConfig.fromWavFileInput(audioFilePath);
