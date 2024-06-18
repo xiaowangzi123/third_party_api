@@ -92,9 +92,16 @@ public class SpeechMain {
             recognizer.startContinuousRecognitionAsync().get();
             // Waits for completion.
             stopTranslationWithFileSemaphore.acquire();
+
+            recognizer.stopContinuousRecognitionAsync().get();
+
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+
+        speechConfig.close();
+        audioConfig.close();
+        recognizer.close();
 
 
         log.info("--------------------------------------");
@@ -103,5 +110,14 @@ public class SpeechMain {
         log.info("{}", JSON.toJSONString(sequencesList));
         log.info("--------------------------------------");
         log.info("{}", JSON.toJSONString(segTimeDtoList));
+        log.info("--------------------------------------");
+        for (SegTimeDto dto : segTimeDtoList) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println(JSON.toJSONString(dto, true));
+        }
     }
 }
