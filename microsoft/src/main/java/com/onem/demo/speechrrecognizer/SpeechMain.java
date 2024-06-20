@@ -111,13 +111,14 @@ public class SpeechMain {
         log.info("--------------------------------------");
         log.info("{}", JSON.toJSONString(segTimeDtoList));
         log.info("--------------------------------------");
-        for (SegTimeDto dto : segTimeDtoList) {
+        /*for (SegTimeDto dto : segTimeDtoList) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             System.out.println(JSON.toJSONString(dto, true));
-        }
+        }*/
+
     }
 }
