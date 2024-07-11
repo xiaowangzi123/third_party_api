@@ -5,7 +5,7 @@ import com.example.huiyan.huiyan.entity.DownVideoSegVo;
 import com.example.huiyan.huiyan.entity.FfmpegRes;
 import com.example.huiyan.huiyan.entity.PauseTimeDto;
 import com.example.huiyan.huiyan.service.FfmpegService;
-import com.example.huiyan.huiyan.service.path.FilePathService;
+import com.example.huiyan.huiyan.service.FilePathService;
 import com.example.huiyan.huiyan.utils.TimeConvertUtil;
 import com.example.huiyan.huiyan.utils.VideoUtils;
 import com.example.huiyan.huiyan.utils.ffmpeg.AudioSegDto;

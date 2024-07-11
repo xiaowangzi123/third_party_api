@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.huiyan.huiyan.demos.web;
+package com.example.huiyan.huiyan.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;

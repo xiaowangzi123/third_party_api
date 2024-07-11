@@ -1,6 +1,6 @@
-package com.example.huiyan.huiyan.service.path.impl;
+package com.example.huiyan.huiyan.service.impl;
 
-import com.example.huiyan.huiyan.service.path.FilePathService;
+import com.example.huiyan.huiyan.service.FilePathService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

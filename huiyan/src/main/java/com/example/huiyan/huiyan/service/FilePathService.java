@@ -1,4 +1,4 @@
-package com.example.huiyan.huiyan.service.path;
+package com.example.huiyan.huiyan.service;
 
 public interface FilePathService {
 

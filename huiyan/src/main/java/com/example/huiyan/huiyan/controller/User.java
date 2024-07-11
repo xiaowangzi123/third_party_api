@@ -1,4 +1,4 @@
-package com.example.huiyan.huiyan.demos.web;
+package com.example.huiyan.huiyan.controller;
 
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
