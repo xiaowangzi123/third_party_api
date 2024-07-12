@@ -8,6 +8,7 @@ import com.example.huiyan.huiyan.service.CutWavService;
 import com.example.huiyan.huiyan.service.HuiyanAsrService;
 import com.example.huiyan.huiyan.service.SrcLangSegService;
 import com.example.huiyan.huiyan.service.TextCompareService;
+import com.example.huiyan.huiyan.utils.StringTools;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,7 @@ public class CompareServiceImpl implements CompareService {
             textCompare.setJobId(jobId);
             textCompare.setStartTimecode(seg.getStartTimecode());
             textCompare.setEndTimecode(seg.getEndTimecode());
-            textCompare.setMicroSrcText(seg.getTranscribedSrcText());
+            textCompare.setMicroSrcText(StringTools.formatSrt(seg.getTranscribedSrcText()));
             textCompareList.add(textCompare);
         }
         textCompareService.saveOrUpdateBatch(textCompareList);

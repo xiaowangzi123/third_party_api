@@ -101,7 +101,7 @@ public class HuiyanAsrServiceImpl implements HuiyanAsrService {
     public void deleteTask(String taskId) {
         log.info("删除任务ID：{}", taskId);
         if (StringUtils.isBlank(taskId)) {
-            return "taskId不存在，无法删除任务";
+            log.info("taskId不存在，无法删除任务");
         }
         // 设置请求头
         HttpHeaders headers = new HttpHeaders();
@@ -122,9 +122,9 @@ public class HuiyanAsrServiceImpl implements HuiyanAsrService {
         // 获取响应数据
         log.info("删除任务返回：{}", responseEntity);
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            return "删除成功：" + taskId;
+            log.info( "删除成功：" + taskId);
         } else {
-            return "调用接口失败";
+            log.info( "调用接口失败");
         }
     }
 
