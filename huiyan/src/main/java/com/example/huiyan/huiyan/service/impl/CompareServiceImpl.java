@@ -8,10 +8,13 @@ import com.example.huiyan.huiyan.service.CutWavService;
 import com.example.huiyan.huiyan.service.HuiyanAsrService;
 import com.example.huiyan.huiyan.service.SrcLangSegService;
 import com.example.huiyan.huiyan.service.TextCompareService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,7 @@ import java.util.List;
  * @desc
  */
 
+@Slf4j
 @Service
 public class CompareServiceImpl implements CompareService {
     @Resource
@@ -56,7 +60,18 @@ public class CompareServiceImpl implements CompareService {
 
     @Override
     public String cutAudioSlice(String jobId) {
-        cutWavService.cutWav(jobId);
+        List<SrcLangSeg> segList = srcLangSegService.list(new LambdaQueryWrapper<SrcLangSeg>()
+                .eq(SrcLangSeg::getJobId, jobId).orderByAsc(SrcLangSeg::getStartTimecode));
+        if (CollectionUtils.isEmpty(segList)) {
+            return "句段不存在";
+        }
+        String srcWavPath = "D:\\ru_compare\\" + jobId + ".wav";
+        if (!new File(srcWavPath).exists()) {
+            log.info("源文件不存在:{}", srcWavPath);
+        }
+        for (SrcLangSeg seg : segList) {
+            cutWavService.cutWav(jobId, srcWavPath, seg);
+        }
         return "操作成功";
     }
 
@@ -68,8 +83,11 @@ public class CompareServiceImpl implements CompareService {
         }
 
         for (TextCompare compare : compareList) {
+            if (StringUtils.isNotBlank(compare.getMicroSrcText()) && StringUtils.isNotBlank(compare.getHuiyanSrcText())) {
+                continue;
+            }
             String wavPath = "D:\\ru_compare\\" + jobId + "\\" + compare.getId() + ".wav";
-            textCompareService.saveAsrResult(wavPath,compare);
+            textCompareService.saveAsrResult(wavPath, compare);
         }
 
         return "操作成功";
