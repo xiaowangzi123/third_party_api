@@ -31,7 +31,7 @@ public class CutWavServiceImpl implements CutWavService {
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
-        int i = ffmpegService.cutAudio(srcWavPath, tgtPath, seg.getStartTimecode() - 10, seg.getStartTimecode() + 10);
+        int i = ffmpegService.cutAudio(srcWavPath, tgtPath, seg.getStartTimecode() - 10, seg.getEndTimecode() + 10);
         log.info("音频文件切分：{}，切分结果：{}", seg, i);
     }
 }
