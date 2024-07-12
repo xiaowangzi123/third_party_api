@@ -9,5 +9,6 @@ import com.example.huiyan.huiyan.entity.table.SrcLangSeg;
 public interface SrcLangSegService extends IService<SrcLangSeg> {
 
 
+    void asyncTest();
 }
 

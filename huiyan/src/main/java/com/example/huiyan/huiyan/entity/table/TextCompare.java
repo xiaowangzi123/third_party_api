@@ -50,4 +50,7 @@ public class TextCompare implements Serializable {
     @TableField(value = "huiyan_src_text")
     private String huiyanSrcText;
 
+    @TableField(value = "same")
+    private Boolean same;
+
 }

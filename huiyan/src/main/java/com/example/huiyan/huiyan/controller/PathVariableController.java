@@ -2,9 +2,9 @@ package com.example.huiyan.huiyan.controller;
 
 import com.example.huiyan.huiyan.entity.table.SrcLangSeg;
 import com.example.huiyan.huiyan.service.SrcLangSegService;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,10 +26,13 @@ public class PathVariableController {
         return "size : " + list.size();
     }
 
-    // http://127.0.0.1:8080/javabeat/somewords
-    @RequestMapping(value = "/javabeat/{regexp1:[a-z-]+}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/async/test", method = RequestMethod.GET)
     @ResponseBody
-    public String getRegExp(@PathVariable("regexp1") String regexp1) {
-        return "URI Part : " + regexp1;
+    public String getRegExp(@RequestParam("times") Integer times) {
+        for (int i = 0; i < times; i++) {
+            srcLangSegService.asyncTest();
+        }
+        return "success";
     }
 }

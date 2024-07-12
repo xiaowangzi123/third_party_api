@@ -2,6 +2,8 @@
 server.port:
   9090
 spring:
+  application:
+    name: huiyancompare
   datasource:
     url: jdbc:mysql://192.168.2.241:3306/compare-speech-recognition?autoreconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai&tinyInt1isBit=false
     username: root
@@ -14,6 +16,7 @@ spring:
       idle-timeout: 60000
       login-timeout: 5
       max-lifetime: 600000
+
 
 huiyan:
   asr:
