@@ -23,7 +23,8 @@ public class CutWavServiceImpl implements CutWavService {
     @Resource
     private FfmpegService ffmpegService;
 
-    @Async("production")
+//    @Async("production")
+    @Async("huiyanasr")
     @Override
     public void cutWav(String jobId, String srcWavPath, TextCompare seg) {
         String tgtPath = "D:\\ru_compare\\" + jobId + File.separator+ seg.getId() + ".wav";
@@ -34,4 +35,30 @@ public class CutWavServiceImpl implements CutWavService {
         int i = ffmpegService.cutAudio(srcWavPath, tgtPath, seg.getStartTimecode() - 10, seg.getEndTimecode() + 10);
         log.info("音频文件切分：{}，切分结果：{}", seg, i);
     }
+
+    @Async("production")
+    @Override
+    public void asyncTest() {
+        log.info("asyncTest开始：{}",Thread.currentThread().getName());
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        log.info("asyncTest结束：{}",Thread.currentThread().getName());
+    }
+
+    @Async("huiyanasr")
+    @Override
+    public void asyncTest2() {
+        log.info("asyncTest2开始：{}",Thread.currentThread().getName());
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        log.info("asyncTest2结束：{}",Thread.currentThread().getName());
+    }
+
+
 }

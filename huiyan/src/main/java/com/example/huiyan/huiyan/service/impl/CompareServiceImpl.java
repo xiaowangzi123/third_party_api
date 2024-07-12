@@ -66,7 +66,7 @@ public class CompareServiceImpl implements CompareService {
         if (CollectionUtils.isEmpty(segList)) {
             return "句段不存在";
         }
-        String srcWavPath = "D:\\ru_compare\\" + jobId + ".wav";
+        String srcWavPath = "D:\\ru_compare\\src_video\\" + jobId + ".wav";
         if (!new File(srcWavPath).exists()) {
             log.info("源文件不存在:{}", srcWavPath);
         }
