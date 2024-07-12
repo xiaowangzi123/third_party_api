@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -95,8 +96,9 @@ public class HuiyanAsrServiceImpl implements HuiyanAsrService {
         return result;
     }
 
+    @Async
     @Override
-    public String deleteTask(String taskId) {
+    public void deleteTask(String taskId) {
         log.info("删除任务ID：{}", taskId);
         if (StringUtils.isBlank(taskId)) {
             return "taskId不存在，无法删除任务";

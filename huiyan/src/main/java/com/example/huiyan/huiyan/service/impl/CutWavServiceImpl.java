@@ -1,6 +1,6 @@
 package com.example.huiyan.huiyan.service.impl;
 
-import com.example.huiyan.huiyan.entity.table.SrcLangSeg;
+import com.example.huiyan.huiyan.entity.table.TextCompare;
 import com.example.huiyan.huiyan.service.CutWavService;
 import com.example.huiyan.huiyan.service.FfmpegService;
 import com.example.huiyan.huiyan.service.SrcLangSegService;
@@ -25,7 +25,7 @@ public class CutWavServiceImpl implements CutWavService {
 
     @Async("production")
     @Override
-    public void cutWav(String jobId, String srcWavPath, SrcLangSeg seg) {
+    public void cutWav(String jobId, String srcWavPath, TextCompare seg) {
         String tgtPath = "D:\\ru_compare\\" + jobId + File.separator+ seg.getId() + ".wav";
         File file = new File(tgtPath);
         if (!file.getParentFile().exists()) {

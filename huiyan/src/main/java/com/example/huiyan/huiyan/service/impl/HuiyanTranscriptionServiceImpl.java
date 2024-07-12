@@ -109,6 +109,7 @@ public class HuiyanTranscriptionServiceImpl implements HuiyanTranscriptionServic
                 }
             }
             log.info("[{}]-慧言字幕转写结束", name);
+            huiyanAsrService.deleteTask(taskId);
 
             return asrResult.getSrtList().stream().map(SpeechSubtitle::getText).collect(Collectors.joining());
         } catch (Exception e) {

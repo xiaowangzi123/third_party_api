@@ -125,7 +125,7 @@ public class FfmpegServiceImpl implements FfmpegService {
 
     @Override
     public int cutAudio(String srcPath, String targetPath, int start, int end) {
-        String cmdFfmpeg = " -i " + srcPath + " -acodec copy -ss " + TimeConvertUtil.timeConvert(start) + " -to " + TimeConvertUtil.timeConvert(end) + " " + targetPath;
+        String cmdFfmpeg = " -i " + srcPath + " -acodec copy -ss " + TimeConvertUtil.timeConvert(start) + " -to " + TimeConvertUtil.timeConvert(end) + " -y " + targetPath;
         return FFMPEGUtil.cmdExecut(cmdFfmpeg);
     }
 

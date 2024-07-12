@@ -8,5 +8,5 @@ public interface HuiyanAsrService {
 
     HuiyanAsrResult getSubtitles(String taskId);
 
-    String deleteTask(String taskId);
+    void deleteTask(String taskId);
 }

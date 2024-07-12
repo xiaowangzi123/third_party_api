@@ -29,3 +29,8 @@ translation:
     path: /data/waitrans/asr/
   subtitle:
     path: /data/waitrans/subtitle/
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

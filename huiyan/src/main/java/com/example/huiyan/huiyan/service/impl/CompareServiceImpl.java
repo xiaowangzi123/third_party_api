@@ -60,8 +60,8 @@ public class CompareServiceImpl implements CompareService {
 
     @Override
     public String cutAudioSlice(String jobId) {
-        List<SrcLangSeg> segList = srcLangSegService.list(new LambdaQueryWrapper<SrcLangSeg>()
-                .eq(SrcLangSeg::getJobId, jobId).orderByAsc(SrcLangSeg::getStartTimecode));
+        List<TextCompare> segList = textCompareService.list(new LambdaQueryWrapper<TextCompare>()
+                .eq(TextCompare::getJobId, jobId).orderByAsc(TextCompare::getStartTimecode));
         if (CollectionUtils.isEmpty(segList)) {
             return "句段不存在";
         }
@@ -69,7 +69,7 @@ public class CompareServiceImpl implements CompareService {
         if (!new File(srcWavPath).exists()) {
             log.info("源文件不存在:{}", srcWavPath);
         }
-        for (SrcLangSeg seg : segList) {
+        for (TextCompare seg : segList) {
             cutWavService.cutWav(jobId, srcWavPath, seg);
         }
         return "操作成功";
@@ -77,7 +77,8 @@ public class CompareServiceImpl implements CompareService {
 
     @Override
     public String huiyanAsr(String jobId) {
-        List<TextCompare> compareList = textCompareService.list(new LambdaQueryWrapper<TextCompare>().eq(TextCompare::getId, jobId));
+        List<TextCompare> compareList = textCompareService.list(new LambdaQueryWrapper<TextCompare>()
+                .eq(TextCompare::getJobId, jobId).orderByAsc(TextCompare::getStartTimecode));
         if (CollectionUtils.isEmpty(compareList)) {
             return "没有查询到句段";
         }
