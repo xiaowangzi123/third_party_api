@@ -29,9 +29,11 @@ public interface FfmpegService {
     FfmpegRes mp4ToWav(String srcObsPath, String extension);
 
     /**
-     * 视频潘队截取
+     * 视频截取
      */
     int cutVideo(DownVideoSegVo downVideoSegVo);
+
+    int cutAudio(String srcPath, String targetPath, int start, int end);
 
 
     List<AudioSegDto> audioCut(String filePath);
