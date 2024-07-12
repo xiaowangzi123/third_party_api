@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface HuiyanTranscriptionService {
 
-    List<SrcLangSeg> transcribe(String audioFilePath, String lang,  String name);
+    List<SrcLangSeg> transcribe(String audioFilePath, String lang, String name);
+
+    String asr(String audioFilePath, String lang, String name);
 
 }

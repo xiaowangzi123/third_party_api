@@ -32,6 +32,7 @@ public class CompareServiceImpl implements CompareService {
     @Resource
     private HuiyanAsrService huiyanAsrService;
 
+
     @Override
     public String selectSegSave(String jobId) {
         List<SrcLangSeg> segList = srcLangSegService.list(new LambdaQueryWrapper<SrcLangSeg>()
@@ -67,7 +68,8 @@ public class CompareServiceImpl implements CompareService {
         }
 
         for (TextCompare compare : compareList) {
-
+            String wavPath = "D:\\ru_compare\\" + jobId + "\\" + compare.getId() + ".wav";
+            textCompareService.saveAsrResult(wavPath,compare);
         }
 
         return "操作成功";

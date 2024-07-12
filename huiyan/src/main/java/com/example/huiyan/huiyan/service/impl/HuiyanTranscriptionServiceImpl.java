@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * 慧言语音识别
@@ -73,6 +74,49 @@ public class HuiyanTranscriptionServiceImpl implements HuiyanTranscriptionServic
         return srcSegList;
     }
 
+    @Override
+    public String asr(String audioFilePath, String lang, String name) {
+        log.info("[{}]-慧言转写请求参数 lang：{}", name, lang);
+        try {
+            long videoDuration = VideoUtils.getVideoDuration(audioFilePath);
+            log.info("待转写视频时长：{}秒", videoDuration / 1000);
+
+            log.info("[{}]-慧言音频转写开始", name);
+            String taskId = huiyanAsrService.createTask(audioFilePath, lang);
+            log.info("创建慧言语音转写任务ID：{}", taskId);
+            if (taskId == null) {
+                return null;
+            }
+            HuiyanAsrResult asrResult = huiyanAsrService.getSubtitles(taskId);
+            log.info("[{}]-慧言转写结果：{}", name, asrResult);
+            String status = asrResult.getStatus();
+
+            while (!Objects.equals("00000", status)) {
+                SystemUtils.sleep(2000);
+                asrResult = huiyanAsrService.getSubtitles(taskId);
+                log.info("[{}]-慧言转写进度结果：{}", name, asrResult);
+                status = asrResult.getStatus();
+
+                Integer progress = asrResult.getProgress();
+                if (progress == 0) {
+                    log.info("【{}】慧言语音转写失败", name);
+                    break;
+                }
+                if (progress > 0) {
+                    int completeness = BigDecimal.valueOf((float) progress / 100).multiply(new BigDecimal(30)).setScale(0, RoundingMode.HALF_UP).intValue();
+                    log.info("[{}]-慧言字幕转写进度：{}", name, completeness);
+
+                }
+            }
+            log.info("[{}]-慧言字幕转写结束", name);
+
+            return asrResult.getSrtList().stream().map(SpeechSubtitle::getText).collect(Collectors.joining());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void dataConvert(List<SpeechSubtitle> subtitles, List<SrcLangSeg> srcSegList) {
         subtitles.forEach(seg -> {
             SrcLangSeg srcSeg = new SrcLangSeg();
@@ -87,9 +131,4 @@ public class HuiyanTranscriptionServiceImpl implements HuiyanTranscriptionServic
 
     }
 
-
-    public static void main(String[] args) {
-        int i = BigDecimal.valueOf((float) 60 / 100).multiply(new BigDecimal(30)).setScale(0, RoundingMode.HALF_UP).intValue();
-        System.out.println(i);
-    }
 }

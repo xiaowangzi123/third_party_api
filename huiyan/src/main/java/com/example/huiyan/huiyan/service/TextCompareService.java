@@ -9,5 +9,6 @@ import com.example.huiyan.huiyan.entity.table.TextCompare;
 public interface TextCompareService extends IService<TextCompare> {
 
 
+    void saveAsrResult(String wavPath,TextCompare textCompare);
 }
 

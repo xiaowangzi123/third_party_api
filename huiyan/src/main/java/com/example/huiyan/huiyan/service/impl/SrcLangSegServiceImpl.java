@@ -17,12 +17,12 @@ public class SrcLangSegServiceImpl extends ServiceImpl<SrcLangSegMapper, SrcLang
     @Async(value = "huiyanasr")
     @Override
     public void asyncTest() {
-        log.info("asyncTest start:{}", Thread.currentThread().getName());
+        log.info("开始:{}", Thread.currentThread().getName());
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        log.info("asyncTest end:{}", Thread.currentThread().getName());
+        log.info("结束:{}", Thread.currentThread().getName());
     }
 }
