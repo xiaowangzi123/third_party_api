@@ -119,10 +119,6 @@ public class SrcLangSeg implements Serializable {
      */
     @TableField(value = "is_assured")
     private Boolean isAssured;
-    /**
-     * 是否已退回
-     */
-    @TableField(value = "is_back")
-    private Boolean isBack;
+
 
 }

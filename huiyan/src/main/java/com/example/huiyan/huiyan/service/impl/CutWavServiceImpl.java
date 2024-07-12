@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.File;
 
 /**
  * 音频切割
@@ -25,7 +26,11 @@ public class CutWavServiceImpl implements CutWavService {
     @Async("production")
     @Override
     public void cutWav(String jobId, String srcWavPath, SrcLangSeg seg) {
-        String tgtPath = "D:\\ru_compare\\" + jobId + System.lineSeparator() + seg.getId() + ".wav";
+        String tgtPath = "D:\\ru_compare\\" + jobId + File.separator+ seg.getId() + ".wav";
+        File file = new File(tgtPath);
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
         int i = ffmpegService.cutAudio(srcWavPath, tgtPath, seg.getStartTimecode() - 10, seg.getStartTimecode() + 10);
         log.info("音频文件切分：{}，切分结果：{}", seg, i);
     }
