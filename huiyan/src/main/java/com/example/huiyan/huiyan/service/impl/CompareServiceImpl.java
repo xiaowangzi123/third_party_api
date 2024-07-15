@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author wyq
@@ -71,7 +72,7 @@ public class CompareServiceImpl implements CompareService {
         if (CollectionUtils.isEmpty(segList)) {
             return "句段不存在";
         }
-        String srcWavPath = "D:\\ru_compare\\src_video\\" + jobId + ".wav";
+        String srcWavPath = "D:\\ru_compare\\" + jobId + ".wav";
         if (!new File(srcWavPath).exists()) {
             log.info("源文件不存在:{}", srcWavPath);
         }
@@ -118,7 +119,7 @@ public class CompareServiceImpl implements CompareService {
             data.add(String.valueOf(compare.getEndTimecode()));
             data.add(compare.getMicroSrcText());
             data.add(compare.getHuiyanSrcText());
-            data.add(String.valueOf(compare.getSame() ? 1 : 0));
+            data.add(String.valueOf((Objects.isNull(compare.getSame()) || compare.getSame()) ? 1 : 0));
             dataList.add(data);
         }
         CsvTools.create(outFilePath, "\t", dataList);

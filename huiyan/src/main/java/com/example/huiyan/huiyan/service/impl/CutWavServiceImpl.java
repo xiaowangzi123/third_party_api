@@ -23,8 +23,8 @@ public class CutWavServiceImpl implements CutWavService {
     @Resource
     private FfmpegService ffmpegService;
 
-//    @Async("production")
-    @Async("huiyanasr")
+    @Async("production")
+//    @Async("huiyanasr")
     @Override
     public void cutWav(String jobId, String srcWavPath, TextCompare seg) {
         String tgtPath = "D:\\ru_compare\\" + jobId + File.separator+ seg.getId() + ".wav";
