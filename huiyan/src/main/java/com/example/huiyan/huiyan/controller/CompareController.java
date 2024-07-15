@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author wyq
@@ -35,6 +36,12 @@ public class CompareController {
     public String huiyanAsr(@RequestParam("jobId") String jobId) {
         log.info("huiyan asr：{}", jobId);
         return compareService.huiyanAsr(jobId);
+    }
+
+    @PostMapping("/seg/export")
+    public void segExport(HttpServletResponse response, @RequestParam("jobId") String jobId) {
+        log.info("句段导出：{}", jobId);
+        compareService.exportSeg(response, jobId);
     }
 
 }

@@ -5,9 +5,11 @@ import com.example.huiyan.huiyan.entity.table.SrcLangSeg;
 import com.example.huiyan.huiyan.entity.table.TextCompare;
 import com.example.huiyan.huiyan.service.CompareService;
 import com.example.huiyan.huiyan.service.CutWavService;
+import com.example.huiyan.huiyan.service.DownloadFileService;
 import com.example.huiyan.huiyan.service.HuiyanAsrService;
 import com.example.huiyan.huiyan.service.SrcLangSegService;
 import com.example.huiyan.huiyan.service.TextCompareService;
+import com.example.huiyan.huiyan.utils.CsvTools;
 import com.example.huiyan.huiyan.utils.StringTools;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +39,8 @@ public class CompareServiceImpl implements CompareService {
     private CutWavService cutWavService;
     @Resource
     private HuiyanAsrService huiyanAsrService;
+    @Resource
+    private DownloadFileService downloadFileService;
 
 
     @Override
@@ -93,5 +98,30 @@ public class CompareServiceImpl implements CompareService {
         }
 
         return "操作成功";
+    }
+
+    @Override
+    public void exportSeg(HttpServletResponse response, String jobId) {
+        String outFilePath = "D:\\ru_compare\\" + jobId + ".csv";
+        List<TextCompare> compareList = textCompareService.list(new LambdaQueryWrapper<TextCompare>()
+                .eq(TextCompare::getJobId, jobId).orderByAsc(TextCompare::getStartTimecode));
+        if (CollectionUtils.isEmpty(compareList)) {
+            log.info("没有数据可下载");
+            return;
+        }
+        List<List<String>> dataList = new ArrayList<>();
+        for (TextCompare compare : compareList) {
+            List<String> data = new ArrayList<>();
+            data.add(compare.getId());
+            data.add(compare.getJobId());
+            data.add(String.valueOf(compare.getStartTimecode()));
+            data.add(String.valueOf(compare.getEndTimecode()));
+            data.add(compare.getMicroSrcText());
+            data.add(compare.getHuiyanSrcText());
+            data.add(String.valueOf(compare.getSame() ? 1 : 0));
+            dataList.add(data);
+        }
+        CsvTools.create(outFilePath, "\t", dataList);
+        downloadFileService.fileDownload(response, outFilePath);
     }
 }
