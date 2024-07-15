@@ -88,11 +88,11 @@ public class AsyncConfig {
     @Bean("production")
     public ThreadPoolTaskExecutor productionExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(CORE_POOL_SIZE);
-        executor.setMaxPoolSize(MAX_POOL_SIZE);
-        executor.setQueueCapacity(QUEUE_CAPACITY);
-        executor.setKeepAliveSeconds(KEEP_ALIVE_TIME);
-        executor.setThreadNamePrefix(PRODUCTION_THREAD_NAME_PREFIX);
+        executor.setCorePoolSize(10);
+        executor.setMaxPoolSize(20);
+        executor.setQueueCapacity(100);
+        executor.setKeepAliveSeconds(60);
+        executor.setThreadNamePrefix("Async-Production-Job-");
 
         /**
          * 线程池对拒绝任务的处理策略,这里采用CallerRunsPolicy策略，
