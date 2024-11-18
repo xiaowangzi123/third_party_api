@@ -68,6 +68,7 @@ public class IsvProduceController {
     @ResponseBody
     public IMessageResp processProduceLicenseReq(@RequestBody Map<String, String> isvProduceReq,
                                                  HttpServletRequest request) throws Exception {
+        log.info("调用实例：{}", isvProduceReq);
         // 验证签名
         IMessageResp resp = IsvProduceAPI.verifySignature(isvProduceReq, request, SIGN_ACCESS_KEY);
         // 如果鉴权返回成功则进行业务处理 验证入参格式 及异常场景校验

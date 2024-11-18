@@ -1,8 +1,5 @@
 package com.huawei.service.impl;
 
-import static com.huawei.constant.IsvProduceConstant.DEBUG_TEST;
-import static com.huawei.util.ResultCodeEnum.INVALID_PARAM;
-
 import com.huawei.constant.Activity;
 import com.huawei.constant.ChangeStatus;
 import com.huawei.constant.IsvProduceConstant;
@@ -13,9 +10,8 @@ import com.huawei.model.IMessageResp;
 import com.huawei.model.InstanceInfo;
 import com.huawei.service.IsvProduceService;
 import com.huawei.util.ResultCodeEnum;
-
 import lombok.SneakyThrows;
-
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +20,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import static com.huawei.constant.IsvProduceConstant.DEBUG_TEST;
+import static com.huawei.util.ResultCodeEnum.INVALID_PARAM;
+
+
+@Slf4j
 @Component
 public class IsvProduceServiceImpl implements IsvProduceService {
 
@@ -31,7 +32,7 @@ public class IsvProduceServiceImpl implements IsvProduceService {
      * 使用Collections.unmodifiableMap修饰可变集合，保证在方法处理过程中不会对常量方法成员误删除、修改等操作
      */
     private final Map<String, Function<Map<String, String>, IMessageResp>> isvProduceConsumers =
-        Collections.unmodifiableMap(initConsumers());
+            Collections.unmodifiableMap(initConsumers());
 
     /**
      * 根据活动类型调用对应的实现方法
@@ -64,6 +65,7 @@ public class IsvProduceServiceImpl implements IsvProduceService {
      * @return 新购操作结果
      */
     private IMessageResp newInstance(Map<String, String> provisionReq) {
+        log.info("创建实例：{}", provisionReq);
         IMessageResp resp = new IMessageResp();
         resp.setResultCode(ResultCodeEnum.SUCCESS.getResultCode());
         resp.setResultMsg(ResultCodeEnum.SUCCESS.getResultMsg());
@@ -86,6 +88,7 @@ public class IsvProduceServiceImpl implements IsvProduceService {
      * @return 响应结果
      */
     private IMessageResp refreshInstance(Map<String, String> provisionReq) {
+        log.info("刷新实例：{}", provisionReq);
         IMessageResp resp = new IMessageResp();
         resp.setResultCode(ResultCodeEnum.SUCCESS.getResultCode());
         resp.setResultMsg(ResultCodeEnum.SUCCESS.getResultMsg());
@@ -122,6 +125,7 @@ public class IsvProduceServiceImpl implements IsvProduceService {
      * @return 处理结果
      */
     private IMessageResp updateInstanceStatus(Map<String, String> provisionReq) {
+        log.info("更新实例：{}", provisionReq);
         IMessageResp resp = new IMessageResp();
         resp.setResultCode(ResultCodeEnum.SUCCESS.getResultCode());
         resp.setResultMsg(ResultCodeEnum.SUCCESS.getResultMsg());
@@ -154,6 +158,7 @@ public class IsvProduceServiceImpl implements IsvProduceService {
      * @return 释放操作结果
      */
     private IMessageResp releaseInstance(Map<String, String> provisionReq) {
+        log.info("释放实例：{}", provisionReq);
         IMessageResp resp = new IMessageResp();
         resp.setResultCode(ResultCodeEnum.SUCCESS.getResultCode());
         resp.setResultMsg(ResultCodeEnum.SUCCESS.getResultMsg());
@@ -175,6 +180,7 @@ public class IsvProduceServiceImpl implements IsvProduceService {
      * @return 升级操作结果
      */
     private IMessageResp upgradeInstance(Map<String, String> isvProduceReq) {
+        log.info("升级实例：{}", isvProduceReq);
         IMessageResp resp = new IMessageResp();
         //  测试的业务代码由伙伴根据自身需求填充
         if (IsvProduceConstant.DEBUG_TEST.equals(isvProduceReq.get("testFlag"))) {
@@ -198,6 +204,7 @@ public class IsvProduceServiceImpl implements IsvProduceService {
 
     @SneakyThrows
     private IMessageResp queryInstance(Map<String, String> reqMap) {
+        log.info("查询实例：{}", reqMap);
         String instanceId = reqMap.get("instanceId");
         CheckInstanceInfo checkInstanceInfo = new CheckInstanceInfo();
         if (StringUtils.isBlank(instanceId)) {
@@ -216,9 +223,9 @@ public class IsvProduceServiceImpl implements IsvProduceService {
                     AppInfo appInfo = new AppInfo();
                     appInfo.setUserName("hwadmin");
                     appInfo.setPassword("Huawei12345");
-                    appInfo.setFrontEndUrl("http://xxxxxx");
-                    appInfo.setAdminUrl("http://xxxxx");
-                    appInfo.setMemo("备注描述");
+                    appInfo.setFrontEndUrl("http://transwai.com");
+                    appInfo.setAdminUrl("https://transwai.com");
+                    appInfo.setMemo("创建实例成功");
                     newInstanceInfo.setInstanceId(instanceIds[index]);
                     newInstanceInfo.setAppInfo(appInfo);
                     infos[index] = newInstanceInfo;
