@@ -1,29 +1,27 @@
 package com.huawei.controller;
 
-import static com.huawei.util.ResultCodeEnum.APP_SECRET_PROBLEM;
-import static com.huawei.util.ResultCodeEnum.SUCCESS;
-
 import com.huawei.constant.Activity;
 import com.huawei.model.IMessageResp;
 import com.huawei.service.IsvProduceService;
 import com.huawei.util.IsvProduceAPI;
 import com.huawei.util.KeyPairUtil;
-
-
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import static com.huawei.util.ResultCodeEnum.APP_SECRET_PROBLEM;
+import static com.huawei.util.ResultCodeEnum.SUCCESS;
 
 /**
  * SaaS类商品接入示例工程
@@ -53,17 +51,23 @@ public class IsvProduceController {
     @Value("${private_key}")
     private String PRIVATE_KEY;
 
+    @GetMapping("/test")
+    public String test() {
+        log.info("测试：{}", new Date());
+        return "success:" + new Date();
+    }
+
     /**
      * 主动通知接口请求处理
      *
      * @param isvProduceReq 请求体
-     * @param request 请求
+     * @param request       请求
      * @return response 返回
      */
     @PostMapping(value = "")
     @ResponseBody
     public IMessageResp processProduceLicenseReq(@RequestBody Map<String, String> isvProduceReq,
-        HttpServletRequest request) throws Exception {
+                                                 HttpServletRequest request) throws Exception {
         // 验证签名
         IMessageResp resp = IsvProduceAPI.verifySignature(isvProduceReq, request, SIGN_ACCESS_KEY);
         // 如果鉴权返回成功则进行业务处理 验证入参格式 及异常场景校验
@@ -90,12 +94,12 @@ public class IsvProduceController {
      */
     @PostMapping(value = "/produceAPI/v2/applicationSync")
     public IMessageResp applicationSyncV2(@RequestBody Map<String, Object> applicationSyncReq,
-        HttpServletRequest request) {
+                                          HttpServletRequest request) {
 
         try {
             // 验证私钥解密：解密后获取到的clientSecret就是页面输入的值
             String clientSecret =
-                KeyPairUtil.decrypt(String.valueOf(applicationSyncReq.get("clientSecret")), PRIVATE_KEY);
+                    KeyPairUtil.decrypt(String.valueOf(applicationSyncReq.get("clientSecret")), PRIVATE_KEY);
         } catch (Exception e) {
             IMessageResp resp = new IMessageResp();
             resp.setResultCode(APP_SECRET_PROBLEM.getResultCode());
