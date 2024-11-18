@@ -2,12 +2,9 @@
 package com.huawei.model;
 
 import com.huawei.util.ResultCodeEnum;
+import lombok.Data;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
+@Data
 public class IMessageResp {
     private String resultCode = ResultCodeEnum.SUCCESS.getResultCode();
 
