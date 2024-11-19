@@ -60,9 +60,6 @@ public class IsvProduceServiceImpl implements IsvProduceService {
 
     /**
      * 创建实例
-     *
-     * @param provisionReq 请求入参
-     * @return 新购操作结果
      */
     private IMessageResp newInstance(Map<String, String> provisionReq) {
         log.info("创建实例：{}", provisionReq);
@@ -71,12 +68,13 @@ public class IsvProduceServiceImpl implements IsvProduceService {
         resp.setResultMsg(ResultCodeEnum.SUCCESS.getResultMsg());
 
         // 测试的业务代码由伙伴根据自身需求填充，instanceId必须返回
+        resp.setInstanceId(provisionReq.get("businessId"));
+
         if (DEBUG_TEST.equals(provisionReq.get("testFlag"))) {
-            resp.setInstanceId(provisionReq.get("businessId"));
             return resp;
         }
 
-        // 真实的业务代码由伙伴根据自身业务填充，instanceId必须返回
+        // 查询用户信息，创建用户
 
         return resp;
     }
@@ -88,7 +86,7 @@ public class IsvProduceServiceImpl implements IsvProduceService {
      * @return 响应结果
      */
     private IMessageResp refreshInstance(Map<String, String> provisionReq) {
-        log.info("刷新实例：{}", provisionReq);
+        log.info("接收更新示例消息：{}", provisionReq);
         IMessageResp resp = new IMessageResp();
         resp.setResultCode(ResultCodeEnum.SUCCESS.getResultCode());
         resp.setResultMsg(ResultCodeEnum.SUCCESS.getResultMsg());
