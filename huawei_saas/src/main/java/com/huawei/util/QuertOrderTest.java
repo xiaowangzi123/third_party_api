@@ -2,9 +2,9 @@ package com.huawei.util;
 
 import com.cloud.apigateway.sdk.utils.Client;
 import com.cloud.apigateway.sdk.utils.Request;
-import com.cloudtranslation.transwai.auth.constant.Constant;
-import com.cloudtranslation.transwai.auth.model.HostName;
-import com.cloudtranslation.transwai.auth.model.SSLCipherSuiteUtil;
+import com.huawei.model.Constant;
+import com.huawei.model.HostName;
+import com.huawei.model.SSLCipherSuiteUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
