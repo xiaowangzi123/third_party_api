@@ -57,5 +57,25 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
+
+<!--        加签验签-->
+        <dependency>
+            <groupId>com.huawei.apigateway</groupId>
+            <artifactId>java-sdk-core</artifactId>
+            <version>3.2.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.12.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openeuler</groupId>
+            <artifactId>bgmprovider</artifactId>
+            <version>1.0.4</version>
+        </dependency>
     </dependencies>
 </project>
