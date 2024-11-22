@@ -18,7 +18,7 @@ import org.apache.http.util.EntityUtils;
  * @desc
  */
 @Slf4j
-public class QuertOrderTest {
+public class QueryOrderTest {
 
     public static void main(String[] args) throws Exception {
         // Create a new request.
