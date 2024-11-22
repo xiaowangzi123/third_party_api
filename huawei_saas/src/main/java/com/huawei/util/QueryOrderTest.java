@@ -2,6 +2,8 @@ package com.huawei.util;
 
 import com.cloud.apigateway.sdk.utils.Client;
 import com.cloud.apigateway.sdk.utils.Request;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.huawei.entity.OrderResponse;
 import com.huawei.model.Constant;
 import com.huawei.model.HostName;
 import com.huawei.model.SSLCipherSuiteUtil;
@@ -53,16 +55,31 @@ public class QueryOrderTest {
             HttpResponse response = client.execute(signedRequest);
             if (response.getStatusLine().getStatusCode() == 200) {
 
+
             }
             // Print the body of the response.
             HttpEntity resEntity = response.getEntity();
             if (resEntity != null) {
+                String jsonStr = EntityUtils.toString(resEntity, "UTF-8");
                 log.info("Processing Body with name: {} and value: {}", System.getProperty("line.separator"),
-                        EntityUtils.toString(resEntity, "UTF-8"));
+                        jsonStr);
+
 
                 System.out.println("--------------------------------");
                 System.out.println(resEntity.getContent());
                 System.out.println("--------------------------------");
+
+                try {
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    OrderResponse orderResponse = objectMapper.readValue(jsonStr, OrderResponse.class);
+
+                    // 打印结果
+                    System.out.println("ResultCode: " + orderResponse.getResultCode());
+                    System.out.println("ResultMsg: " + orderResponse.getResultMsg());
+                    System.out.println("OrderId: " + orderResponse.getOrderInfo().getOrderId());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } catch (Exception e) {
             log.error(e.getMessage());

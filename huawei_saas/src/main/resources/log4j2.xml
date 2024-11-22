@@ -35,5 +35,19 @@
                 </Delete>
             </DefaultRolloverStrategy>
         </RollingFile>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${log.pattern}"/>
+        </Console>
     </appenders>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="console" />
+    </root>
 </Configuration>
