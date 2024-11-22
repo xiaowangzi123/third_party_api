@@ -51,11 +51,18 @@ public class QueryOrderTest {
                 client = (CloseableHttpClient) SSLCipherSuiteUtil.createHttpClient(Constant.INTERNATIONAL_PROTOCOL);
             }
             HttpResponse response = client.execute(signedRequest);
+            if (response.getStatusLine().getStatusCode() == 200) {
+
+            }
             // Print the body of the response.
             HttpEntity resEntity = response.getEntity();
             if (resEntity != null) {
                 log.info("Processing Body with name: {} and value: {}", System.getProperty("line.separator"),
                         EntityUtils.toString(resEntity, "UTF-8"));
+
+                System.out.println("--------------------------------");
+                System.out.println(resEntity.getContent());
+                System.out.println("--------------------------------");
             }
         } catch (Exception e) {
             log.error(e.getMessage());
