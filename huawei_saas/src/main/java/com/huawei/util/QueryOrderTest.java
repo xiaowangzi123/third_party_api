@@ -1,5 +1,6 @@
 package com.huawei.util;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.cloud.apigateway.sdk.utils.Client;
 import com.cloud.apigateway.sdk.utils.Request;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,6 +73,7 @@ public class QueryOrderTest {
                 try {
                     ObjectMapper objectMapper = new ObjectMapper();
                     OrderResponse orderResponse = objectMapper.readValue(jsonStr, OrderResponse.class);
+                    OrderResponse orderResponse1 = JSONObject.parseObject(jsonStr, OrderResponse.class);
 
                     // 打印结果
                     System.out.println("ResultCode: " + orderResponse.getResultCode());
