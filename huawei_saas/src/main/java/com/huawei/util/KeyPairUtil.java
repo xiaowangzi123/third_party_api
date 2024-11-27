@@ -1,7 +1,11 @@
 package com.huawei.util;
 
+
 import org.apache.commons.codec.binary.Base64;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.OAEPParameterSpec;
+import javax.crypto.spec.PSource;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -9,16 +13,15 @@ import java.security.PrivateKey;
 import java.security.spec.MGF1ParameterSpec;
 import java.security.spec.PKCS8EncodedKeySpec;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.OAEPParameterSpec;
-import javax.crypto.spec.PSource;
-
 /**
  * 私钥解密
- *
  */
 public class KeyPairUtil {
-    /** 指定加密算法为RSA */
+
+
+    /**
+     * 指定加密算法为RSA
+     */
     private static final String ALGORITHM = "RSA";
 
     private KeyPairUtil() {
@@ -30,14 +33,19 @@ public class KeyPairUtil {
         try {
             keyFactory = KeyFactory.getInstance(ALGORITHM);
         } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
+
+
+
+
 
     /**
      * 解密
      *
      * @param cryptography 密文
-     * @param privateKey 私钥
+     * @param privateKey   私钥
      * @return 返回解密后的明文
      * @throws Exception 异常
      */
@@ -48,7 +56,7 @@ public class KeyPairUtil {
         // 得到Cipher对象对已用公钥加密的数据进行RSA解密
         Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPPadding");
         OAEPParameterSpec oaepParameterSpec = new OAEPParameterSpec("SHA-256", "MGF1",
-            new MGF1ParameterSpec("SHA-1"), PSource.PSpecified.DEFAULT);
+                new MGF1ParameterSpec("SHA-1"), PSource.PSpecified.DEFAULT);
 
         cipher.init(Cipher.DECRYPT_MODE, pk, oaepParameterSpec);
 
@@ -58,4 +66,6 @@ public class KeyPairUtil {
         byte[] b = cipher.doFinal(b1);
         return new String(b, StandardCharsets.UTF_8);
     }
+
+
 }
