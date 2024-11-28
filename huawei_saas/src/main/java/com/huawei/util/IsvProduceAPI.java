@@ -29,6 +29,8 @@ public class IsvProduceAPI {
      */
     private static final String CHARSET = "UTF-8";
 
+    private static final int AES256_CBC_PKCS5PADDING = 1;
+
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     /**
