@@ -1,19 +1,14 @@
 package com.huawei.util;
 
-import static com.huawei.constant.IsvProduceConstant.NONCE;
-import static com.huawei.constant.IsvProduceConstant.SIGNATURE;
-import static com.huawei.constant.IsvProduceConstant.TIMESTAMP;
-import static com.huawei.util.ResultCodeEnum.INVALID_PARAM;
-import static com.huawei.util.ResultCodeEnum.INVALID_TOKEN;
-import static com.huawei.util.ResultCodeEnum.SUCCESS;
-
-import com.huawei.model.IMessageResp;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.huawei.model.IMessageResp;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -21,9 +16,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
+import static com.huawei.constant.IsvProduceConstant.NONCE;
+import static com.huawei.constant.IsvProduceConstant.SIGNATURE;
+import static com.huawei.constant.IsvProduceConstant.TIMESTAMP;
+import static com.huawei.util.ResultCodeEnum.INVALID_PARAM;
+import static com.huawei.util.ResultCodeEnum.INVALID_TOKEN;
+import static com.huawei.util.ResultCodeEnum.SUCCESS;
 
 public class IsvProduceAPI {
     /**
