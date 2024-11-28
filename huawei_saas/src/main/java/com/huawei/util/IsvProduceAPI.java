@@ -35,10 +35,6 @@ public class IsvProduceAPI {
 
     /**
      * 基础接口验证签名
-     *
-     * @param temp
-     * @param request
-     * @param accessKey
      */
     public static IMessageResp verifySignature(Map<String, String> temp, HttpServletRequest request, String accessKey)
             throws Exception {
@@ -100,10 +96,6 @@ public class IsvProduceAPI {
 
     /**
      * 联营saas接口验证签名
-     *
-     * @param temp
-     * @param request
-     * @param accessKey
      */
     public static IMessageResp verifyTenantSignature(Map<String, Object> temp, HttpServletRequest request,
         String accessKey) {
