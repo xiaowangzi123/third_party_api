@@ -5,6 +5,8 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 /**
@@ -20,7 +22,7 @@ public class GeneralKey {
 
         try {
             // 指定密钥长度
-            int keySize = 2048; // 建议使用2048位或更高
+            int keySize = 3072; // 使用3072位密钥
 
             // 创建一个KeyPairGenerator对象，指定算法为"RSA"
             KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
@@ -35,13 +37,17 @@ public class GeneralKey {
             PublicKey publicKey = keyPair.getPublic();
             PrivateKey privateKey = keyPair.getPrivate();
 
+            // 将公钥和私钥转换为PKCS#8格式的字节数组
+            X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(publicKey.getEncoded());
+            PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(privateKey.getEncoded());
+
             // 将公钥和私钥转换为Base64编码的字符串，便于存储和传输
-            String publicKeyString = Base64.getEncoder().encodeToString(publicKey.getEncoded());
-            String privateKeyString = Base64.getEncoder().encodeToString(privateKey.getEncoded());
+            String publicKeyString = Base64.getEncoder().encodeToString(x509KeySpec.getEncoded());
+            String privateKeyString = Base64.getEncoder().encodeToString(pkcs8KeySpec.getEncoded());
 
             // 输出公钥和私钥
-            System.out.println("Public Key: " + publicKeyString);
-            System.out.println("Private Key: " + privateKeyString);
+            System.out.println("Public Key (Base64): " + publicKeyString);
+            System.out.println("Private Key (Base64): " + privateKeyString);
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
