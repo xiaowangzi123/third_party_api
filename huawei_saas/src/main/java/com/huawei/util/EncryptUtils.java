@@ -3,11 +3,18 @@ package com.huawei.util;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
@@ -111,5 +118,59 @@ public class EncryptUtils {
         }
 
         return randomCharsBuf.toString();
+    }
+
+
+
+    public static String decryptContent(String encryptStr, String accessKey, int encryptType) {
+        if (StringUtils.isEmpty(encryptStr)) {
+            return null;
+        }
+
+        String iv = encryptStr.substring(0, 16);
+
+        int keySize;
+
+        if (AES256_CBC_PKCS5PADDING == encryptType) {
+            keySize = 256;
+        } else {
+            keySize = 128;
+        }
+
+        String decryptBody = null;
+
+        try {
+            decryptBody = decryptAESCBCEncode(encryptStr.substring(16), accessKey, iv, keySize);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return decryptBody;
+    }
+
+    public static String decryptAESCBCEncode(String content, String key, String iv, int keySize)
+            throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException,
+            InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+
+        if (StringUtils.isEmpty(content) || StringUtils.isEmpty(key) || StringUtils.isEmpty(iv)) {
+            return null;
+        }
+
+        return new String(decryptAESCBC(Base64.decodeBase64(content.getBytes(StandardCharsets.UTF_8)),
+                key.getBytes(StandardCharsets.UTF_8), iv.getBytes(StandardCharsets.UTF_8), keySize), StandardCharsets.UTF_8);
+    }
+
+    public static byte[] decryptAESCBC(byte[] content, byte[] keyBytes, byte[] iv, int keySize)
+            throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
+            InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+        SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+        secureRandom.setSeed(keyBytes);
+        keyGenerator.init(keySize, secureRandom);
+        SecretKey key = keyGenerator.generateKey();
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
+        return cipher.doFinal(content);
     }
 }
