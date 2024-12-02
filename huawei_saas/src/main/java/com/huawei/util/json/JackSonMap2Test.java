@@ -23,6 +23,7 @@ public class JackSonMap2Test {
         dataMap.put("tenantId", "68cbc86abc2018ab880d92f36422fa0e");
         dataMap.put("flag", 1);
         dataMap.put("testFlag", 1);
+        dataMap.put("currentSyncTime", "20241202135516592");
         dataMap.put("timeStamp", "20241202135516592");
         dataMap.put("appId", "0bd452b0-58af-4b98-9bda-6bf59da68d57");
 
