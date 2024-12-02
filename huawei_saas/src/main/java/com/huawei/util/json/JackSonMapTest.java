@@ -14,7 +14,7 @@ public class JackSonMapTest {
 
     public static void main(String[] args) throws Exception {
         // 假设你的 Map 数据是这样
-        Map<String, Object> tenantSyncReqMap = new HashMap<>();
+        Map<String, String> tenantSyncReqMap = new HashMap<>();
         tenantSyncReqMap.put("instanceId", "huaiweitest123456");
         tenantSyncReqMap.put("tenantId", "68cbc86abc2018ab880d92f36422fa0e");
         tenantSyncReqMap.put("flag", "1");
