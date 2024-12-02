@@ -17,8 +17,8 @@ public class JackSonMapTest {
         Map<String, Object> tenantSyncReqMap = new HashMap<>();
         tenantSyncReqMap.put("instanceId", "huaiweitest123456");
         tenantSyncReqMap.put("tenantId", "68cbc86abc2018ab880d92f36422fa0e");
-        tenantSyncReqMap.put("flag", 1);
-        tenantSyncReqMap.put("testFlag", 1);  // 不需要在实体类中，所以可以忽略
+        tenantSyncReqMap.put("flag", "1");
+        tenantSyncReqMap.put("testFlag", "1");
         tenantSyncReqMap.put("timeStamp", "20241129134456052");
         tenantSyncReqMap.put("orderId", "CS1906666666ABCDE");
         tenantSyncReqMap.put("tenantCode", "example.com");
