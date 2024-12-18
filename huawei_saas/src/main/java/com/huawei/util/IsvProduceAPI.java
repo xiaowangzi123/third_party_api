@@ -1,19 +1,14 @@
 package com.huawei.util;
 
-import static com.huawei.constant.IsvProduceConstant.NONCE;
-import static com.huawei.constant.IsvProduceConstant.SIGNATURE;
-import static com.huawei.constant.IsvProduceConstant.TIMESTAMP;
-import static com.huawei.util.ResultCodeEnum.INVALID_PARAM;
-import static com.huawei.util.ResultCodeEnum.INVALID_TOKEN;
-import static com.huawei.util.ResultCodeEnum.SUCCESS;
-
-import com.huawei.model.IMessageResp;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.huawei.model.IMessageResp;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -21,9 +16,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
+import static com.huawei.constant.IsvProduceConstant.NONCE;
+import static com.huawei.constant.IsvProduceConstant.SIGNATURE;
+import static com.huawei.constant.IsvProduceConstant.TIMESTAMP;
+import static com.huawei.util.ResultCodeEnum.INVALID_PARAM;
+import static com.huawei.util.ResultCodeEnum.INVALID_TOKEN;
+import static com.huawei.util.ResultCodeEnum.SUCCESS;
 
 public class IsvProduceAPI {
     /**
@@ -31,14 +29,12 @@ public class IsvProduceAPI {
      */
     private static final String CHARSET = "UTF-8";
 
+    private static final int AES256_CBC_PKCS5PADDING = 1;
+
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     /**
      * 基础接口验证签名
-     *
-     * @param temp
-     * @param request
-     * @param accessKey
      */
     public static IMessageResp verifySignature(Map<String, String> temp, HttpServletRequest request, String accessKey)
             throws Exception {
@@ -100,10 +96,6 @@ public class IsvProduceAPI {
 
     /**
      * 联营saas接口验证签名
-     *
-     * @param temp
-     * @param request
-     * @param accessKey
      */
     public static IMessageResp verifyTenantSignature(Map<String, Object> temp, HttpServletRequest request,
         String accessKey) {
