@@ -20,8 +20,8 @@ public class MaryTtsDemo {
 
             Properties properties = new Properties();
 
-//            marytts.setVoice("cmu-slt-hsmm");
-            marytts.setVoice("cmu-bdl-hsmm");
+            marytts.setVoice("cmu-slt-hsmm");
+//            marytts.setVoice("cmu-bdl-hsmm");
 
             AudioInputStream audio = marytts.generateAudio("hello, this is a test.");
 
