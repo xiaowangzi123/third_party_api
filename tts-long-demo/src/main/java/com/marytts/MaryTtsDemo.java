@@ -15,7 +15,7 @@ public class MaryTtsDemo {
 
     public static void main(String[] args) {
         try {
-            String outputFileName = "E:\\github\\third_party_api\\tts-long-demo\\src\\main\\java\\com\\marytts\\test-"+StringTools.dateStr()+ ".wav ";
+            String outputFileName = "C:\\test\\en-"+StringTools.dateStr()+ ".wav ";
             LocalMaryInterface marytts = new LocalMaryInterface();
 
             Properties properties = new Properties();
