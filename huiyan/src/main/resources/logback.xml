@@ -4,7 +4,7 @@
     <springProperty scope="context" name="springAppName" source="spring.application.name"/>
     <property name="LOG_FILE" value="/data/logfile/ffmpeg/${springAppName}/logfile/daily"/>
     <property name="CONSOLE_LOG_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%level BEGIN] [%thread]:%logger{50} - [%method:%line] %replace(%throwable{full}){'\n', ' |'}  %replace(%msg){'\n', '|'}  [%level END] %nopex %n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%thread]:%logger{50} - [%method:%line] %replace(%throwable{full}){'\n', ' |'}  %replace(%msg){'\n', '|'} %nopex %n"/>
 
     <!-- Appender to log to console -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">

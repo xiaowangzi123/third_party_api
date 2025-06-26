@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<!--Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出-->
+<!--monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
+<Configuration status="INFO">
+
+    <!-- 配置日志文件输出目录，此配置将日志输出到指定文件夹 -->
+    <Properties>
+        <Property name="LOG_HOME">/opt/huawei/marketplace/logs/mock</Property>
+    </Properties>
+
+    <loggers>
+        <Logger name="com.huawei.cbu.marketplace.interface.debug" additivity="false" includeLocation="true"
+                     level="INFO">
+            <AppenderRef ref="interface_debug_log_appender"/>
+        </Logger>
+    </loggers>
+    <appenders>
+        <RollingFile name="interface_debug_log_appender"
+                     fileName="${LOG_HOME}/interface/debug/interface_debug.log"
+                     filePattern="${LOG_HOME}/interface/debug/$${date:yyyy-MM}/interface_debug_%d{yyyyMMdd}_%i.gz">
+            <PatternLayout
+                    pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} | {%m}%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1 GB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <DefaultRolloverStrategy fileIndex="nomax">
+                <Delete basePath="${LOG_HOME}/interface/debug/" maxDepth="2">
+                    <IfFileName glob="*/interface_debug_*.{gz,log}"/>
+                    <IfAny>
+                        <IfLastModified age="30d"/>
+                        <IfAccumulatedFileSize exceeds="20 GB"/>
+                    </IfAny>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${log.pattern}"/>
+        </Console>
+    </appenders>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="console" />
+    </root>
+</Configuration>

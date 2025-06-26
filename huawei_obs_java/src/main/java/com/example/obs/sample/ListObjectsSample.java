@@ -6,8 +6,8 @@ import com.obs.services.model.ListObjectsRequest;
 import com.obs.services.model.ObjectListing;
 import com.obs.services.model.ObsObject;
 
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,23 +20,19 @@ import java.util.stream.Collectors;
  */
 public class ListObjectsSample {
     private static final String endPoint = "obs.cn-south-1.myhuaweicloud.com";
-    private static final String ak = "2CNBVV3R4B1H2JZ6AHAT";
-    private static final String sk = "g9nMiK6vFqTwxGQfUkUyE9J5DO2gaqhJT8vh4HqX";
+    private static final String ak = "HPUARVBH00YJFYRXVMJE";
+    private static final String sk = "gU2KOtpfk2ROCg2gfE3oF7x0OoI42q89eCqaVFtL";
     private static ObsClient obsClient;
     private static String bucketName = "transwai-dev";
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
+    public static void main(String[] args) throws Exception {
         ObsConfiguration config = new ObsConfiguration();
         config.setSocketTimeout(30000);
         config.setConnectionTimeout(10000);
         config.setEndPoint(endPoint);
-        ObsClient obsClient = new ObsClient(ak, sk, endPoint);
-        // 使用临时AK/SK和SecurityToken初始化客户端
-        // ObsClient obsClient = new ObsClient(ak, sk, securityToken, endPoint);
 
         List<ObsObject> allList = new ArrayList<>();
-
-        try {
+        try (ObsClient obsClient = new ObsClient(ak, sk, endPoint);) {
             // 分页列举全部对象
             ListObjectsRequest request = new ListObjectsRequest(bucketName);
             // 设置每页100个对象
@@ -60,7 +56,7 @@ public class ListObjectsSample {
         }
 
         System.out.println("---------------------------------------------");
-        System.out.println(allList.size());
+        System.out.println("总数：" + allList.size());
         System.out.println("---------------------------------------------");
         Date currentDate = new Date();
         List<ObsObject> collect = allList.stream().filter(a -> {
@@ -71,18 +67,21 @@ public class ListObjectsSample {
 //            long oneYearInMillis = 2 * 365 * 24 * 60 * 60 * 1000L;
             return timeDifference > oneYearInMillis;
         }).collect(Collectors.toList());
-        System.out.println(collect.size());
+        System.out.println("超过一年的数据"+collect.size());
         System.out.println("---------------------------------------------");
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date());
-        c.add(Calendar.YEAR, -1);
-        Date y = c.getTime();
-        String year = format.format(y);
-        System.out.println("过去一年：" + year);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.YEAR, -1);
+        Date y = calendar.getTime();
+        String yearFormat = format.format(y);
+
+        System.out.println("过去一年：" + yearFormat);
 
         System.out.println(y.compareTo(currentDate));
+        LocalDateTime oneYearTime = LocalDateTime.now().minusYears(1);
+
 
         List<ObsObject> collect2 = allList.stream().filter(a -> {
             Date lastModified = a.getMetadata().getLastModified();
